@@ -1,26 +1,37 @@
 import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "/logo3.png";
-import { Link, useLocation } from "react-router-dom";
-import { FaUser } from "react-icons/fa"; // icon to user
-import Modal from "./Modal";
+import { FaUser } from "react-icons/fa";
 
 const Navbar = () => {
-  // Start to Active
-  const location = useLocation(); // once ready it returns the 'window.location' object
   const [url, setUrl] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isSticky, setSticky] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+  const navigate = useNavigate();
+
+  const location = useLocation();
   useEffect(() => {
     setUrl(location.pathname);
-  }, [location]);
 
-  // Dropdown state
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    // Check token for logged-in status
+    const token = localStorage.getItem("token");
+    if (token) {
+      setLoggedIn(true);
+      setUsername("User"); // Replace with actual username if stored
+    }
+  }, [location]);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  // Sticky navbar state
-  const [isSticky, setSticky] = useState(false);
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Clear token
+    setLoggedIn(false);
+    navigate("/login");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,50 +53,39 @@ const Navbar = () => {
   const navItems = (
     <>
       <li>
-        <Link to="/" className={url === "/" ? "text-green" : ""}>
-          Home
-        </Link>
+        <Link to="/" className={url === "/" ? "text-green" : ""}>Home</Link>
       </li>
       <li>
-        <Link to="/menu" className={url === "/menu" ? "text-green" : ""}>
-          Menu
-        </Link>
+        <Link to="/menu" className={url === "/menu" ? "text-green" : ""}>Menu</Link>
       </li>
       <li tabIndex={0}>
         <details>
           <summary>Services</summary>
           <ul className="p-2">
-            <li>
-              <a>Online Order</a>
-            </li>
-            <li>
-              <a>Table Booking</a>
-            </li>
+            <li><a>Online Order</a></li>
+            <li><a>Table Booking</a></li>
           </ul>
         </details>
       </li>
-      <li>
-        <a>Offers</a>
-      </li>
+      <li><a>Offers</a></li>
     </>
   );
 
   return (
-    <header className="max-w-screen-2xl container mx-auto fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out">
-      <div
-        className={`navbar xl:px-24 ${
-          isSticky
-            ? "shadow-md bg-base-100 transition-all duration-300 ease-in-out"
-            : ""
-        }`}
-      >
+    <header className="max-w-screen-2xl container mx-auto fixed">
+      <nav className={`navbar xl:px-24 ${isSticky
+        ? "shadow-md bg-base-100 transition-all duration-300 ease-in-out"
+        : ""
+        }`}>
         <div className="navbar-start">
-          <a href="/">
-            <img src={logo} alt="Logo" width={"90px"} />
-          </a>
+          <Link to="/" className="flex">
+            <img src={logo} alt="logo" width={90} height={80} />
+          </Link>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{navItems}</ul>
+        <div className="navbar-center">
+          <ul className="menu menu-horizontal px-1 text-lg font-bold hidden lg:flex">
+            {navItems}
+          </ul>
         </div>
         <div className="navbar-end">
           <button className="btn btn-ghost btn-circle hidden lg:flex">
@@ -107,7 +107,7 @@ const Navbar = () => {
           <Link to="cart-page">
             <label
               tabIndex={0}
-              className="btn btn-ghost btn-circle flex items-center justify-center mr-3"
+              className="btn btn-ghost btn-circle flex items-center justify-center"
             >
               <div className="indicator">
                 <svg
@@ -129,7 +129,7 @@ const Navbar = () => {
             </label>
           </Link>
 
-          <div className="dropdown justify-between me-4">
+          <div className="dropdown me-4">
             <label
               tabIndex={0}
               className="btn btn-ghost lg:hidden"
@@ -158,18 +158,50 @@ const Navbar = () => {
                 {navItems}
               </ul>
             )}
+
           </div>
-          <button
-            onClick={() => document.getElementById("my_modal_5").showModal()}
-            className="btn flex items-center gap-2 rounded-full px-6 bg-green text-white"
-          >
-            <FaUser /> Login
-          </button>
-          <Modal />
+          <div>
+            {loggedIn ? (
+              <div className="relative">
+                <button
+                  className="btn btn-ghost flex items-center space-x-1"
+                  onClick={toggleDropdown}
+                >
+                  <FaUser className="mr-2" />
+                  <span>{username}</span>
+                </button>
+                {isDropdownOpen && (
+                  <ul className="absolute right-0 top-full mt-2 w-48 bg-white shadow-md rounded-lg">
+                    <li><Link to="/profile" className="p-2">Profile</Link></li>
+                    <li><Link to="/orders" className="p-2">Orders</Link></li>
+                    <li><button onClick={handleLogout} className="p-2 w-full text-left">Logout</button></li>
+                  </ul>
+                )}
+              </div>
+
+            ) : (
+              <>
+
+                <div style={{ display: "flex" }}>
+                  <Link className="btn rounded-full  px-5 bg-green text-white " to="/signUp">
+                    SignUp
+                  </Link>
+                  <Link className="btn rounded-full ms-2 px-5 bg-green text-white" to="/login">
+                    Login
+                  </Link>
+                </div>
+
+
+              </>
+            )}
+          </div>
         </div>
-      </div>
+      </nav>
     </header>
   );
 };
 
 export default Navbar;
+
+
+
