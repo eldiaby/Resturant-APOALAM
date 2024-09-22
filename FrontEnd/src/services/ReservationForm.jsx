@@ -49,7 +49,7 @@ const ReservationPage = () => {
             const token = localStorage.getItem('token');
 
             if (!token) {
-                setStatusMessage('No token, authorization denied');
+                setStatusMessage(' No Token , You must log in');
                 setIsLoading(false);
                 return;
             }
@@ -167,7 +167,7 @@ const ReservationPage = () => {
                 </button>
 
                 {statusMessage && (
-                    <p className={`mt-4 text-center ${statusMessage.includes('successfully') ? 'text-success' : 'text-red-500'}`}>
+                    <p className={`mt-4 text-center ${statusMessage.includes('successfully') ? 'text-success' : 'text-red'}`}>
                         {statusMessage}
                     </p>
                 )}
