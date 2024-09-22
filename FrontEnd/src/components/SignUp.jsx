@@ -100,7 +100,7 @@ function SignUp() {
 
         try {
             // API request to the registration endpoint
-            const response = await axios.post('http://localhost:3000/auth/register', formData);
+            const response = await axios.post('http://localhost:5000/api/auth/register', formData);
             setSuccess('Registration successful! Redirecting to login...');
             setTimeout(() => {
                 navigate('/login');

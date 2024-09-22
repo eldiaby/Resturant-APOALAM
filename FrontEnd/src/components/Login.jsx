@@ -62,7 +62,7 @@ const Login = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:3000/auth/login', formData);
+            const response = await axios.post('http://localhost:5000/api/auth/login', formData);
             localStorage.setItem('token', response.data.token);  // Save token to localStorage
             console.log('Token:', response.data.token); // Log token
 

@@ -62,8 +62,8 @@ const Navbar = () => {
         <details>
           <summary>Services</summary>
           <ul className="p-2">
-            <li><a>Online Order</a></li>
-            <li><a>Table Booking</a></li>
+            <li><Link>Online Order</Link></li>
+            <li><Link to="/ReservationForm">Table Booking</Link></li>
           </ul>
         </details>
       </li>

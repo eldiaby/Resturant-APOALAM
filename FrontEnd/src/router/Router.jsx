@@ -5,6 +5,7 @@ import Menu from "../pages/shop/Menu";
 import SignUp from "../components/SignUp";
 import CartPage from "../pages/shop/CartPage";
 import Login from "../components/Login";
+import ReservationForm from "../services/ReservationForm";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
         path: "/cart-page",
         element: <CartPage />,
       },
+      {
+        path: "/ReservationForm",
+        element: <ReservationForm />,
+      },
     ],
   },
   {
@@ -33,6 +38,7 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
   },
+
 ]);
 
 export default router;
