@@ -132,7 +132,7 @@ const getAllOrders = async (req, res) => {
     const allOrders = await orderModel.find({ userId: req.user.id }).populate({
       path: 'mealItems.mealId',
       select: 'name price description'
-    });;
+    });
     if (allOrders && allOrders.length > 0) {
       res.status(200).json({ message: "all Orders fetched", allOrders });
     } else {
