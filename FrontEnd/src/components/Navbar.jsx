@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "/logo3.png";
 import { FaUser } from "react-icons/fa";
+// import jwtDecode from "jwt-decode";
+import { decode } from "jwt-js-decode";
+// import jwt from "jsonwebtoken";
 
 const Navbar = () => {
   const [url, setUrl] = useState(null);
@@ -18,8 +21,10 @@ const Navbar = () => {
     // Check token for logged-in status
     const token = localStorage.getItem("token");
     if (token) {
+      const decodedToken = decode(token);
+      // console.log("Decoded Token:", decodedToken.payload);
       setLoggedIn(true);
-      setUsername("User"); // Replace with actual username if stored
+      setUsername(decodedToken.payload.userName);
     }
   }, [location]);
 
@@ -28,7 +33,7 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token"); // Clear token
+    localStorage.removeItem("token");
     setLoggedIn(false);
     navigate("/login");
   };
@@ -53,30 +58,43 @@ const Navbar = () => {
   const navItems = (
     <>
       <li>
-        <Link to="/" className={url === "/" ? "text-green" : ""}>Home</Link>
+        <Link to="/" className={url === "/" ? "text-green" : ""}>
+          Home
+        </Link>
       </li>
       <li>
-        <Link to="/menu" className={url === "/menu" ? "text-green" : ""}>Menu</Link>
+        <Link to="/menu" className={url === "/menu" ? "text-green" : ""}>
+          Menu
+        </Link>
       </li>
       <li tabIndex={0}>
         <details>
           <summary>Services</summary>
           <ul className="p-2">
-            <li><Link>Online Order</Link></li>
-            <li><Link to="/ReservationForm">Table Booking</Link></li>
+            <li>
+              <Link>Online Order</Link>
+            </li>
+            <li>
+              <Link to="/ReservationForm">Table Booking</Link>
+            </li>
           </ul>
         </details>
       </li>
-      <li><a>Offers</a></li>
+      <li>
+        <a>Offers</a>
+      </li>
     </>
   );
 
   return (
     <header className="max-w-screen-2xl container mx-auto fixed">
-      <nav className={`navbar xl:px-24 ${isSticky
-        ? "shadow-md bg-base-100 transition-all duration-300 ease-in-out"
-        : ""
-        }`}>
+      <nav
+        className={`navbar xl:px-24 ${
+          isSticky
+            ? "shadow-md bg-base-100 transition-all duration-300 ease-in-out"
+            : ""
+        }`}
+      >
         <div className="navbar-start">
           <Link to="/" className="flex">
             <img src={logo} alt="logo" width={90} height={80} />
@@ -158,7 +176,6 @@ const Navbar = () => {
                 {navItems}
               </ul>
             )}
-
           </div>
           <div>
             {loggedIn ? (
@@ -172,26 +189,43 @@ const Navbar = () => {
                 </button>
                 {isDropdownOpen && (
                   <ul className="absolute right-0 top-full mt-2 w-48 bg-white shadow-md rounded-lg">
-                    <li><Link to="/profile" className="p-2">Profile</Link></li>
-                    <li><Link to="/orders" className="p-2">Orders</Link></li>
-                    <li><button onClick={handleLogout} className="p-2 w-full text-left">Logout</button></li>
+                    <li>
+                      <Link to="/profile" className="p-2">
+                        Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/orders" className="p-2">
+                        Orders
+                      </Link>
+                    </li>
+                    <li>
+                      <button
+                        onClick={handleLogout}
+                        className="p-2 w-full text-left"
+                      >
+                        Logout
+                      </button>
+                    </li>
                   </ul>
                 )}
               </div>
-
             ) : (
               <>
-
                 <div style={{ display: "flex" }}>
-                  <Link className="btn rounded-full  px-5 bg-green text-white " to="/signUp">
+                  <Link
+                    className="btn rounded-full  px-5 bg-green text-white "
+                    to="/signUp"
+                  >
                     SignUp
                   </Link>
-                  <Link className="btn rounded-full ms-2 px-5 bg-green text-white" to="/login">
+                  <Link
+                    className="btn rounded-full ms-2 px-5 bg-green text-white"
+                    to="/login"
+                  >
                     Login
                   </Link>
                 </div>
-
-
               </>
             )}
           </div>
@@ -202,6 +236,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
-

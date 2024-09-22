@@ -4,9 +4,19 @@ import Reservation from "../models/Reservation.js"; // Use 'import' instead of '
 export const createReservation = async (req, res) => {
   try {
     const { userId, date, time, tableNumber, numberOfGuests } = req.body;
-    console.log(req.body);
-    console.log(req.user);
+
+    
+    if (userId || !date || !time || !tableNumber || !numberOfGuests) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
     const { id } = req.user;
+
+    
+    const reservationTime = new Date(`${date}T${time}`);
+    if (reservationTime <= Date.now()) {
+      return res.status(400).json({ message: "Time should be in the future" });
+    }
 
     const reservation = new Reservation({
       userId: id,
@@ -15,6 +25,7 @@ export const createReservation = async (req, res) => {
       tableNumber,
       numberOfGuests,
     });
+
     await reservation.save();
     res
       .status(201)
