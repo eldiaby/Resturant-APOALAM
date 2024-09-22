@@ -9,6 +9,8 @@ import { decode } from "jwt-js-decode";
 const Navbar = () => {
   const [url, setUrl] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropdownOpen2, setIsDropdownOpen2] = useState(false);
+
   const [isSticky, setSticky] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
@@ -30,6 +32,9 @@ const Navbar = () => {
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+  const toggleDropdown2 = () => {
+    setIsDropdownOpen2(!isDropdownOpen2);
   };
 
   const handleLogout = () => {
@@ -90,8 +95,8 @@ const Navbar = () => {
     <header className="max-w-screen-2xl container mx-auto fixed">
       <nav
         className={`navbar xl:px-24 ${isSticky
-            ? "shadow-md bg-base-100 transition-all duration-300 ease-in-out"
-            : ""
+          ? "shadow-md bg-base-100 transition-all duration-300 ease-in-out"
+          : ""
           }`}
       >
         <div className="navbar-start">
@@ -150,7 +155,7 @@ const Navbar = () => {
             <label
               tabIndex={0}
               className="btn btn-ghost lg:hidden"
-              onClick={toggleDropdown} // Add toggle function here
+              onClick={toggleDropdown2} // Add toggle function here
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -167,7 +172,7 @@ const Navbar = () => {
                 />
               </svg>
             </label>
-            {isDropdownOpen && (
+            {isDropdownOpen2 && (
               <ul
                 tabIndex={0}
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-64 space-y-3"
