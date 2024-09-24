@@ -33,7 +33,7 @@ function CartPage() {
   const handleDelete = async (mealId) => {
     try {
       await axios.delete(`http://localhost:5000/api/cart/${mealId}`);
-      const updatedCart = await axios.get("/api/cart");
+      const updatedCart = await axios.get("http://localhost:5000/api/cart");
       setCart(updatedCart.data.cart);
     } catch (error) {
       console.error("Error deleting meal from cart", error);
