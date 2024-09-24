@@ -1,23 +1,29 @@
 import React, { useState } from "react";
-import { useFormContext } from "react-hook-form";
 import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
 const Cards = ({ item }) => {
-  // console.log(item)
   const [isHeartFilled, setIsHeartFilled] = useState(false);
 
   const handleHeartClick = () => {
     setIsHeartFilled(!isHeartFilled);
   };
+
+  const handleAddToCart = async () => {
+    try {
+      await axios.post(`http://localhost:5000/api/cart/${item._id}`, { quantity: 1 });
+      alert("Added to cart successfully!");
+    } catch (error) {
+      console.error("Error adding to cart", error);
+    }
+  };
+
   return (
-    <div
-      to={`/menu/${item._id}`}
-      className="card shadow-xl relative mr-5 md:my-5"
-    >
+    <div className="card shadow-xl relative mr-5 md:my-5">
       <div
-        className={`rating gap-1 absolute right-2 top-2 p-4 heartStar bg-green ${
-          isHeartFilled ? "text-rose-500" : "text-white"
-        }`}
+        className={`rating gap-1 absolute right-2 top-2 p-4 heartStar bg-green ${isHeartFilled ? "text-rose-500" : "text-white"
+          }`}
         onClick={handleHeartClick}
       >
         <FaHeart className="w-5 h-5 cursor-pointer" />
@@ -26,7 +32,7 @@ const Cards = ({ item }) => {
         <figure>
           <img
             src={item.image}
-            alt="Shoes"
+            alt={item.name}
             className="hover:scale-105 transition-all duration-300 md:h-72"
           />
         </figure>
@@ -35,12 +41,14 @@ const Cards = ({ item }) => {
         <Link to={`/menu/${item._id}`}>
           <h2 className="card-title">{item.name}!</h2>
         </Link>
-        <p>Description of the item</p>
+        <p>{item.description}</p>
         <div className="card-actions justify-between items-center mt-2">
           <h5 className="font-semibold">
             <span className="text-sm text-red">$ </span> {item.price}
           </h5>
-          <button className="btn bg-green text-white">Add to Cart </button>
+          <button className="btn bg-green text-white" onClick={handleAddToCart}>
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>
