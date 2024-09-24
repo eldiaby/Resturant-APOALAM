@@ -2,7 +2,7 @@ import orderModel from "../models/Order.js";
 import userModel from "../models/User.js";
 
 const orderMeal = async (req, res) => {
-  const userId = req.userInfo.id;
+  const userId = req.user.id;
   const { mealId } = req.params;
   const { quantity = 1 } = req.body;
 
@@ -52,7 +52,7 @@ const updateAddress = async (req, res) => {
   let order = await orderModel.findOneAndUpdate(
     {
       _id: req.params.orderId,
-      userId: req.userInfo.id,
+      userId: req.user.id,
       status: "pending",
     },
     { shippingDetails: req.body },
@@ -68,7 +68,7 @@ const updateAddress = async (req, res) => {
 const cancelOrder = async (req, res) => {
   let order = await orderModel.findOneAndDelete({
     _id: req.params.orderId,
-    userId: req.userInfo.id,
+    userId: req.user.id,
     status: "pending",
   });
   if (order) {
@@ -80,7 +80,7 @@ const cancelOrder = async (req, res) => {
 
 const removeMeal = async (req, res) => {
   let order = await orderModel.findOne({
-    userId: req.userInfo.id,
+    userId: req.user.id,
     status: "pending",
   });
   if (order) {
@@ -116,17 +116,23 @@ const updateOrderStatus = async (req, res) => {
 };
 
 const getAllOrders = async (req, res) => {
-  if (req.userInfo.role == "admin") {
+  if (req.user.role == "admin") {
     // if is an admin it will return all users orders
-    const allOrders = await orderModel.find();
+    const allOrders = await orderModel.find().populate({
+      path: 'mealItems.mealId',
+      select: 'name price description -id'
+    });;
     if (allOrders && allOrders.length > 0) {
       res.status(200).json({ message: "all users Orders fetched", allOrders });
     } else {
       res.status(404).json({ message: "there are no orders yet!" });
     }
-  } else if (req.userInfo.role == "user") {
+  } else if (req.user.role == "user") {
     // if is a user it will return all its own orders
-    const allOrders = await orderModel.find({ userId: req.userInfo.id });
+    const allOrders = await orderModel.find({ userId: req.user.id }).populate({
+      path: 'mealItems.mealId',
+      select: 'name price description'
+    });
     if (allOrders && allOrders.length > 0) {
       res.status(200).json({ message: "all Orders fetched", allOrders });
     } else {
@@ -136,7 +142,7 @@ const getAllOrders = async (req, res) => {
 };
 
 const getOrder = async (req, res) => {
-  if (req.userInfo.role == "admin") {
+  if (req.user.role == "admin") {
     // if is an admin it will return all users orders
     const order = await orderModel.findById(req.params.orderId);
     if (order && order.length > 0) {
@@ -144,11 +150,11 @@ const getOrder = async (req, res) => {
     } else {
       res.status(404).json({ message: "there are no order yet!" });
     }
-  } else if (req.userInfo.role == "user") {
+  } else if (req.user.role == "user") {
     // if is a user it will return all its own orders
     const order = await orderModel.find({
       _id: req.params.orderId,
-      userId: req.userInfo.id,
+      userId: req.user.id,
     });
     if (order && order.length > 0) {
       res.status(200).json({ message: "order fetched", order });
