@@ -6,6 +6,7 @@ import SignUp from "../components/SignUp";
 import CartPage from "../pages/shop/CartPage";
 import Login from "../components/Login";
 import ReservationForm from "../services/ReservationForm";
+import ProfileSettings from "../pages/profile/profile";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
         path: "/ReservationForm",
         element: <ReservationForm />,
       },
+      {
+        path: "/Profile",
+        element: <ProfileSettings />,
+      },
     ],
   },
   {
@@ -38,7 +43,6 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
   },
-
 ]);
 
 export default router;

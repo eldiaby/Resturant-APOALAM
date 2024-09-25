@@ -4,10 +4,10 @@ import Navbar from "../components/Navbar";
 import "../../src/App.css";
 import Footer from "../components/Footer";
 
-const Main = () => {
+const Main = ({ username, setUsername }) => {
   return (
     <div className="bg-prigmayBG">
-      <Navbar />
+      <Navbar username={username} setUsername={setUsername} />
       <div className="min-h-screen">
         <Outlet />
       </div>
