@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllUsers();
+    this.fetchRecipes(1, '');
   }
   getAllUsers() {
     this._usersService.getAllUsers().subscribe({
@@ -32,6 +33,7 @@ export class DashboardComponent implements OnInit {
       },
       error: (err) => {
         // Handle error
+        // console.log(err);
       },
     });
   }
@@ -39,8 +41,11 @@ export class DashboardComponent implements OnInit {
     this._recipesService.getAllRecipes(page, category).subscribe({
       next: (res) => {
         this.recipesLength = res.results;
+        // console.log(res);
       },
-      error: (err) => {},
+      error: (err) => {
+        // console.log(err);
+      },
     });
   }
 }

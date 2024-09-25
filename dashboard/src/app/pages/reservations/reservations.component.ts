@@ -64,6 +64,7 @@ export class ReservationsComponent implements OnInit {
   loadReservations() {
     this._reservationsService.getAllReservations().subscribe(
       (res: any) => {
+        // console.log(res.reservations);
         const calendarEvents = res.reservations.map((reservation: any) => {
           const startDateTime = new Date(
             `${reservation.date.slice(0, 11)}${reservation.time}`
