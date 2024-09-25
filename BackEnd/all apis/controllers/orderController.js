@@ -119,9 +119,9 @@ const getAllOrders = async (req, res) => {
   if (req.user.role == "admin") {
     // if is an admin it will return all users orders
     const allOrders = await orderModel.find().populate({
-      path: 'mealItems.mealId',
-      select: 'name price description -id'
-    });;
+      path: "mealItems.mealId",
+      select: "name price description",
+    });
     if (allOrders && allOrders.length > 0) {
       res.status(200).json({ message: "all users Orders fetched", allOrders });
     } else {
@@ -130,8 +130,8 @@ const getAllOrders = async (req, res) => {
   } else if (req.user.role == "user") {
     // if is a user it will return all its own orders
     const allOrders = await orderModel.find({ userId: req.user.id }).populate({
-      path: 'mealItems.mealId',
-      select: 'name price description'
+      path: "mealItems.mealId",
+      select: "name price description",
     });
     if (allOrders && allOrders.length > 0) {
       res.status(200).json({ message: "all Orders fetched", allOrders });
