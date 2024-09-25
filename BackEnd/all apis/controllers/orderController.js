@@ -1,3 +1,4 @@
+import Meal from "../models/Meal.js";
 import orderModel from "../models/Order.js";
 import userModel from "../models/User.js";
 
@@ -6,47 +7,73 @@ const orderMeal = async (req, res) => {
   const { mealId } = req.params;
   const { quantity = 1 } = req.body;
 
-  // // Check if there is an existing order for the user and that order is pending
-  const userOrders = await orderModel.findOne({
-    userId,
-    status: "pending",
-  });
-
-  if (userOrders) {
-    const mealIndex = userOrders.mealItems.findIndex(
-      (item) => item.mealId == mealId
-    );
-    if (mealIndex !== -1) {
-      userOrders.mealItems[mealIndex].quantity += quantity;
-    } else {
-      userOrders.mealItems.push({ mealId, quantity });
+  try {
+    // Fetch the meal price from Meal model
+    const meal = await Meal.findById(mealId);
+    if (!meal) {
+      return res.status(404).json({ message: "Meal not found" });
     }
-    await userOrders.save();
-    return res
-      .status(200)
-      .json({ message: "Order updated successfully", order: userOrders });
-  } else {
-    // Create a new order
-    const newOrder = new orderModel({
+
+    // Check if there is an existing order for the user that is still pending
+    let userOrder = await orderModel.findOne({
       userId,
-      mealItems: [{ mealId, quantity }],
-      shippingDetails: {
-        address: req.body.address,
-        city: req.body.city,
-        postalCode: req.body.postalCode,
-        comment: req.body.comment,
-      },
+      status: "pending",
     });
 
-    await newOrder.save();
-    await userModel.findByIdAndUpdate(userId, {
-      $push: { orders: newOrder._id },
-    });
+    if (userOrder) {
+      const mealIndex = userOrder.mealItems.findIndex(
+        (item) => item.mealId.toString() === mealId
+      );
+
+      if (mealIndex !== -1) {
+        // Update quantity if the meal is already in the order
+        userOrder.mealItems[mealIndex].quantity += quantity;
+      } else {
+        // Add a new meal to the order
+        userOrder.mealItems.push({ mealId, quantity });
+      }
+    } else {
+      // Create a new order
+      userOrder = new orderModel({
+        userId,
+        mealItems: [{ mealId, quantity }],
+        shippingDetails: {
+          address: req.body.address,
+          city: req.body.city,
+          postalCode: req.body.postalCode,
+          comment: req.body.comment,
+        },
+      });
+    }
+
+    // Recalculate the totalPrice
+    let totalPrice = 0;
+    for (const item of userOrder.mealItems) {
+      const meal = await Meal.findById(item.mealId);
+      totalPrice += meal.price * item.quantity;
+    }
+
+    userOrder.totalPrice = totalPrice;
+    await userOrder.save();
+
+    if (!userOrder._id) {
+      // Link the order to the user if it's a new order
+      await userModel.findByIdAndUpdate(userId, {
+        $push: { orders: userOrder._id },
+      });
+    }
+
     return res
-      .status(201)
-      .json({ message: "Order placed successfully", order: newOrder });
+      .status(userOrder._id ? 200 : 201)
+      .json({
+        message: userOrder._id ? "Order updated successfully" : "Order placed successfully",
+        order: userOrder,
+      });
+  } catch (error) {
+    return res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
 
 const updateAddress = async (req, res) => {
   let order = await orderModel.findOneAndUpdate(
