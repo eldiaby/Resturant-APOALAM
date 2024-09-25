@@ -6,6 +6,7 @@ import SignUp from "../components/SignUp";
 import CartPage from "../pages/shop/CartPage";
 import Login from "../components/Login";
 import ReservationForm from "../services/ReservationForm";
+import ProfileOrders from "../pages/shop/profileOrdes";
 import ProfileSettings from "../pages/profile/profile";
 
 const router = createBrowserRouter([
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/cart-page",
         element: <CartPage />,
+      },
+      {
+        path: "/orders",
+        element: <ProfileOrders />,
       },
       {
         path: "/ReservationForm",

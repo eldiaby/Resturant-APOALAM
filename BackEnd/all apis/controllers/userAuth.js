@@ -55,7 +55,7 @@ export const signIn = async (req, res) => {
     if (isUser) {
       if (bcrypt.compareSync(req.body.password, isUser.password)) {
         const token = jwt.sign(
-          { id: isUser.id, role: isUser.role },
+          { id: isUser.id, role: isUser.role,userName:isUser.userName },
           process.env.JWT_SECRET,
           {
             expiresIn: "24h",
