@@ -1,0 +1,46 @@
+<div class="signin">
+    @if(showErr){
+    <div class="signin-error">
+        {{err}}
+    </div>
+    }
+
+    @if(showSucc){
+    <div class="signin-success">
+        {{success}}
+    </div>
+    }
+    <form (ngSubmit)="login()" [formGroup]="loginForm" class="signin-box">
+        <h2>Login to your account</h2>
+        <div class="input-box">
+            <label for="email">email</label>
+            <input id="email" formControlName="email" type="email" placeholder="me@example.com">
+
+            @if(loginForm.get("email")?.errors?.['email'] && loginForm.get("email")?.touched){
+            <div class="errors">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            }@else if (loginForm.get("email")?.errors?.['required'] && loginForm.get("email")?.touched){
+            <div class="errors">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            }
+        </div>
+        <div class="input-box">
+            <label for="password">password
+            </label>
+            <input formControlName="password" id="password" type="password" placeholder="Enter your password">
+
+            @if(loginForm.get("password")?.errors?.['required'] && loginForm.get("password")?.touched){
+            <div class="errors">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            }
+        </div>
+        <a href="#" class="forget-password">forget password?</a>
+        <button (click)="login()" [disabled]="loading" class="btn-login">@if(!loading){Login now}@else {<span
+                class="loader"></span>}
+        </button>
+        <p class="new-account">Don't have an account?<a href="#">sign up</a></p>
+    </form>
+</div>

@@ -1,0 +1,48 @@
+<div class="recipe">
+    @if(deleMessage){
+    <div class="deleteConfirm">
+        <p>Want delete this item</p>
+        <button (click)="deleteConfirm()">Yes</button>
+        <button (click)="closeMaessage()">Cancel</button>
+    </div>
+    }
+    <header class="recipe-header">
+        <button routerLink="/recipes"><i class="fa-solid fa-arrow-left-long"></i></button>
+        <h2>Recipe Details</h2>
+    </header>
+    <div class="recipe-details-box">
+        <div class="img-box">
+            <img class="recipe-img" [src]="recipe.imageUrl" alt="">
+        </div>
+        <div class="recipe-details">
+            <div class="recipe-title">
+                <h3>{{recipe.name}}</h3>
+                <div class="recipe-actions">
+                    <button [routerLink]="['/recipes/update', recipe._id]" class="recipe-btn"><i
+                            class="fa-regular fa-pen-to-square"></i>
+                        edit</button>
+                    <button (click)="showDelete()" class="recipe-btn"><i class="fa-regular fa-trash-can"> </i>
+                        delete</button>
+                </div>
+            </div>
+            <p class="recipe-category">
+                {{recipe.category}}
+            </p>
+            <h4>description:</h4>
+            <p class="recipe-description">{{recipe.description}}</p>
+            <h4>ingredients:</h4>
+            <div class="recipe-tags">
+                @for(ingredient of ingredients;track $index){
+                <span class="tag">{{ingredient}}</span>
+                }
+            </div>
+            <h4>Price</h4>
+            <div class="price"><i class="fa-solid fa-dollar-sign"></i> <span>{{recipe.price}}</span></div>
+            <h4>Estimated Time</h4>
+            <div class="estimated-time"><i class="fa-regular fa-clock"></i> <span>{{recipe.estimatedTime}}</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- <i class="fa-regular fa-clock"></i>
+<i class="fa-solid fa-dollar-sign"></i> -->

@@ -1,0 +1,18 @@
+<nav [class]="openNav ? 'navbar open':'navbar'">
+    <div class="input-box">
+        <i class="search-icon fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search here...">
+    </div>
+    <ul class="navbar-list">
+        <li (click)="close()" class="close"><i class="fa-solid fa-xmark"></i></li>
+        <li><i class="fa-solid fa-gear"></i></li>
+        <li class="notification"><i class="fa-regular fa-bell"></i></li>
+        <li class="menu">
+            <p>hello, admin</p>
+            <i class="fa-solid fa-chevron-down"></i>
+        </li>
+        <img src="./assets/admin-img.jpg" alt="">
+        <li (click)="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i></li>
+    </ul>
+    <button (click)="open()" class="bars"><i class="fa-solid fa-bars"></i></button>
+</nav>

@@ -1,0 +1,9 @@
+.calendar-container {
+    max-width: 100%;
+    margin: 0 auto;
+    height: 800px;
+}
+
+.fc-header-toolbar {
+    margin-bottom: 1em;
+}

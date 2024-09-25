@@ -1,0 +1,43 @@
+<div class="user-details">
+    @if(message){
+    <div class="message">User Deleted</div>
+    }
+    <header>
+        <button routerLink="/users"><i class="fa-solid fa-arrow-left-long"></i></button>
+        <h2>User deatils</h2>
+    </header>
+    <div class="user-content">
+        <div class="user-info">
+            <h3 class="user-name">{{user.userName}}</h3>
+            <p class="user-id">#{{user._id}}</p>
+            <div class="user-info-table">
+                <div class="user">
+                    <h4>email</h4>
+                    <p>{{user.email}}</p>
+                </div>
+                <div class="user">
+                    <h4>role</h4>
+                    <p>{{user.role}}</p>
+                </div>
+                <div class="user">
+                    <h4>phone</h4>
+                    <p>{{user.phone}}</p>
+                </div>
+                <div class="user">
+                    <h4>address</h4>
+                    <p>{{user.address}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="user-activeites">
+            <h3 class="user-active">user activeites</h3>
+            <h3>Orders</h3>
+            <h3>Reservations</h3>
+        </div>
+
+    </div>
+    <div class="user-actions">
+        <!-- <button [routerLink]="['/users/update', 1]" class="user-btn">Edit</button> -->
+        <button (click)="deleteUser(user._id)" class="user-btn">Delete</button>
+    </div>
+</div>

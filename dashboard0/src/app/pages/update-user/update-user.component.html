@@ -1,0 +1,43 @@
+<div class="update-user">
+    <header>
+        <button routerLink="/users"><i class="fa-solid fa-arrow-left-long"></i></button>
+        <h2>Update User</h2>
+    </header>
+    <form [formGroup]="updateUserForm" (ngSubmit)="updateUser()" class="update-user-content">
+        <div class="update-user-left">
+            <div class="update-user-box">
+                <label for="username">Name</label>
+                <input formControlName="userName" type="text">
+            </div>
+            <div class="update-user-box">
+                <label for="email">Email</label>
+                <input formControlName="email" type="email">
+            </div>
+            <div class="update-user-box">
+                <label for="password">password</label>
+                <input disabled type="password">
+            </div>
+        </div>
+        <div class="update-user-right">
+            <div class="update-user-box">
+                <label for="phone">Phone</label>
+                <input formControlName="phone" type="text">
+            </div>
+            <div class="update-user-box">
+                <label for="role">Role</label>
+                <select formControlName="role">
+                    <option value="user">user</option>
+                    <option value="user">admin</option>
+                </select>
+            </div>
+            <div class="update-user-box">
+                <label for="address">Address</label>
+                <input formControlName="address" type="text">
+            </div>
+        </div>
+    </form>
+    <div class="user-actions">
+        <button (click)="updateUser()" class="user-btn">Save</button>
+        <button routerLink="/users" class="user-btn">Cancel</button>
+    </div>
+</div>

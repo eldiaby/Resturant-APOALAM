@@ -1,0 +1,68 @@
+<div class="customers">
+    @if(message){
+    <div class="message">User Deleted</div>
+    }
+    @if(deleMessage){
+    <div class="deleteConfirm">
+        <p>Want delete this item</p>
+        <button (click)="deleteConfirm()">Yes</button>
+        <button (click)="closeMessage()">Cancel</button>
+    </div>
+    }
+    <h2>customers</h2>
+    <nav class="customers-nav">
+        <div class="customers-filters">
+            <input [value]="searchQuery" (keyup)="search($event)" type="text" placeholder="Search for customer">
+            <!-- <select>
+                <option value="">Sort by</option>
+                <option value="">Name</option>
+                <option value="">Total Spent</option>
+                <option value="">Join Date</option>
+            </select> -->
+        </div>
+        <div class="customers-btns">
+            <button class="add-user" routerLink="/users/add">Add User</button>
+        </div>
+    </nav>
+    <div class="customers-box">
+        <table class="customers-table">
+            <thead>
+                <tr>
+                    <th>name</th>
+                    <th>role</th>
+                    <th>join data</th>
+                    <th>location</th>
+                    <th>total spent</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (user of displayedUsers; track $index) {
+                <tr>
+                    <td>{{user.userName}}</td>
+                    <td>{{user.role}}</td>
+                    <td>{{user.createdAt.slice(0,10)}}</td>
+                    <td>{{user.address}}</td>
+                    <td>BEFORE</td>
+                    <td class="customer-action">
+                        <button [routerLink]="['/users',user._id]" class="customer-btn">Details</button>
+                        <!-- <button [routerLink]="['/users/update', user._id]" class="customer-btn">Edit</button> -->
+                        <button (click)="deleteItem(user._id)" class="customer-btn">Delete</button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="customers-pagination">
+        <p>Shown 10 of {{users.length}}</p>
+        <div class="pagination">
+            <button (click)="prev()" [disabled]="page == 1" class="btn-2">Previous</button>
+            <button (click)="setPage(1)" [class]="page === 1 ? 'active btn': 'btn'" href="#">1</button>
+            <button (click)="setPage(2)" [class]="page === 2 ? 'active btn': 'btn'" href="#">2</button>
+            <button (click)="setPage(3)" [class]="page === 3 ? 'active btn': 'btn'" href="#">3</button>
+            <button (click)="setPage(4)" [class]="page === 4 ? 'active btn': 'btn'" href="#">4</button>
+            <button (click)="next()" [disabled]="page == 4" class="btn-2">Next</button>
+        </div>
+    </div>
+</div>

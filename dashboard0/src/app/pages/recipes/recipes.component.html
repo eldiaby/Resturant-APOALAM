@@ -1,0 +1,83 @@
+<div class="recipes">
+    @if(deleteDone){
+    <p class="delete-done">Item deleted</p>
+    }
+    @if(deleMessage){
+    <div class="deleteConfirm">
+        <p>Want delete this item</p>
+        <button (click)="deleteConfirm()">Yes</button>
+        <button (click)="closeMaessage()">Cancel</button>
+    </div>
+    }
+    <h2>Recipes</h2>
+    <nav class="recipes-nav">
+        <div class="recipes-filters">
+            <input [value]="searchQuery" (keyup)="search($event)" type="text" placeholder="Search by recipe name">
+            <select (change)="setSortBy($event)">
+                <option value="">Category (All)</option>
+                @for (category of categories; track $index) {
+                <option [value]="category.name">{{category.name}}</option>
+                }
+                <!-- <option value="italian">Italian</option>
+                <option value="indian">Indian</option>
+                <option value="japanese">Japanese</option>
+                <option value="salad">Salad</option>
+                <option value="mexican">Mexican</option> -->
+            </select>
+            <!-- <select (change)="setSortBy($event)">
+                <option value="">Price (All)</option>
+                <option value="low">low to high</option>
+                <option value="high">high to low</option>
+            </select> -->
+        </div>
+        <div class="recipes-btns">
+            <button class="add-user" routerLink="/recipes/add">Add Recipe</button>
+        </div>
+    </nav>
+    <div class="recipes-box">
+        @if(recipes.length ===0){
+        <h2>Sorry,No Recipes!</h2>
+        }
+        @for(recipe of recipes;track recipe._id ){
+        <div class="recipe">
+            <div class="recipe-img-box">
+                <img class="recipe-img" [src]='recipe.imageUrl' alt="">
+            </div>
+            <div class="recipe-content">
+                <header class="recipe-header">
+                    <div class="recipes-header-left">
+                        <h3 class="recipe-title">{{recipe.name}}</h3>
+
+                        <p class="recipe-category">{{recipe.category}}</p>
+                    </div>
+                    <div class="recipes-header-right">
+                        <span class="recipe-price"><i class="fa-solid fa-dollar-sign"></i>{{recipe.price}}</span>
+                        <span class="recipe-time"><i class="fa-regular fa-clock"></i>{{recipe.estimatedTime}}</span>
+                    </div>
+                </header>
+                <p class="recipe-description">{{recipe.description}}</p>
+                <div class="recipe-tags">
+                    @for(tag of recipe.ingredients; track tag){
+                    <span class="tag">{{tag}}</span>
+                    }
+                </div>
+                <div class="recipe-actions">
+                    <button [routerLink]="['/recipes',recipe._id]" class="recipe-btn"><i
+                            class="fa-solid fa-up-right-from-square"></i> details</button>
+                    <button [routerLink]="['/recipes/update', recipe._id]" class="recipe-btn"><i
+                            class="fa-regular fa-pen-to-square"></i> edit</button>
+                    <button (click)="deleteItem(recipe._id)" class="recipe-btn"><i class="fa-regular fa-trash-can"></i>
+                        delete</button>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    <div class="recipes-pagination">
+        <button (click)="prev()" [class]="page==1? 'dis':''">Previous</button>
+        @for(pageNum of pagesNum;track $index){
+        <button [class]="page == pageNum ? 'active': ''" (click)="setPage(pageNum)">{{pageNum}}</button>
+        }
+        <button (click)="next()" [class]="page==pagesNum.length ? 'dis':''">Next</button>
+    </div>
+</div>

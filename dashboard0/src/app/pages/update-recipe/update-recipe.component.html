@@ -1,0 +1,60 @@
+<div class="edit-recipe">
+    @if(showMessage){
+    <div class="message">{{message}}</div>
+    }
+    <header class="edit-recipe-header">
+        <button routerLink="/recipes"><i class="fa-solid fa-arrow-left-long"></i></button>
+        <h2>edit Recipe</h2>
+    </header>
+    <h3>Update Details</h3>
+    <form [formGroup]="addRecipeForm" class="edit-recipe-box">
+        <div class="edit-recipe-text">
+            <div class="edit-recipe-input">
+                <label for="name">name</label>
+                <input formControlName="name" type="text" id="name">
+            </div>
+            <div class="edit-recipe-input">
+                <label for="category">category</label>
+                <select id="category">
+                    <option value="">Choose category</option>
+                    @for (category of categories; track $index) {
+                    <option [value]="category.name">{{category.name}}</option>
+                    }
+                </select>
+            </div>
+            <div class="edit-recipe-input">
+                <label for="description">description</label>
+                <textarea formControlName="description" id="description"></textarea>
+            </div>
+        </div>
+        <div class="edit-recipe-text">
+            <div class="edit-recipe-input">
+                <label for="price">price</label>
+                <input formControlName="price" type="number" id="price">
+            </div>
+            <div class="edit-recipe-input">
+                <label for="estimatedTime">estimated time in minutes</label>
+                <input formControlName="estimatedTime" type="number" id="estimatedTime">
+            </div>
+            <div class="edit-recipe-input">
+                <label for="ingredients">ingredients</label>
+                <input [(ngModel)]="ingredient" type="text" id="ingredients" [ngModelOptions]="{standalone: true}">
+                <button (click)="addIngredient()" class="edit-ingredient-btn">edit ingredient</button>
+                <div class="edit-ingredient">
+                    @for(ingredient of ingredients;track ingredient;let i = $index){
+                    <span (click)="deleteIngredient(i)" class="ingredient">{{ingredient}}</span>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="edit-recipe-img">
+            <p>Update Image</p>
+            <label for="file"><span class="file-icon"><i class="fa-solid fa-cloud-arrow-up"></i></span></label>
+            <input type="file" id="file" (change)="onFileSelect($event)">
+        </div>
+    </form>
+    <div class="edit-actions">
+        <button (click)="addRecipe()"><i class="fa-regular fa-floppy-disk"></i> <span>Save</span></button>
+        <button><i class="fa-solid fa-xmark"></i> <span>Cancel</span></button>
+    </div>
+</div>

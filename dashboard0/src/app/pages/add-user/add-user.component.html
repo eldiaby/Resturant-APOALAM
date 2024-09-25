@@ -1,0 +1,73 @@
+<div class="add-user">
+    <header>
+        <button routerLink="/users"><i class="fa-solid fa-arrow-left-long"></i></button>
+        <h2>Add User</h2>
+    </header>
+    <form (ngSubmit)="addUser()" [formGroup]="addUserForm" class="add-user-content">
+        <div class="add-user-left">
+            <div class="add-user-box">
+                <label for="username">Name</label>
+                <input formControlName="userName" type="text">
+                @if(addUserForm.get("userName")?.errors?.['required'] && addUserForm.get("userName")?.touched){
+                <div class="errors">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                }
+            </div>
+            <div class="add-user-box">
+                <label for="email">Email</label>
+                <input formControlName="email" type="email">
+                @if(addUserForm.get("email")?.errors?.['required'] && addUserForm.get("email")?.touched){
+                <div class="errors">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                }
+            </div>
+            <div class="add-user-box">
+                <label for="password">password</label>
+                <input formControlName="password" type="password">
+                @if(addUserForm.get("password")?.errors?.['required'] && addUserForm.get("password")?.touched){
+                <div class="errors">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                }
+            </div>
+        </div>
+        <div class="add-user-right">
+            <div class="add-user-box">
+                <label for="phone">Phone</label>
+                <input formControlName="phone" type="text">
+                @if(addUserForm.get("phone")?.errors?.['required'] && addUserForm.get("phone")?.touched){
+                <div class="errors">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                }
+            </div>
+            <div class="add-user-box">
+                <label for="role">Role</label>
+                <select formControlName="role">
+                    <option value="user">user</option>
+                    <option value="user">admin</option>
+                </select>
+                @if(addUserForm.get("role")?.errors?.['required'] && addUserForm.get("role")?.touched){
+                <div class="errors">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                }
+            </div>
+            <div class="add-user-box">
+                <label for="address">Address</label>
+                <input formControlName="address" id="address" type="text">
+                @if(addUserForm.get("address")?.errors?.['required'] && addUserForm.get("address")?.touched){
+                <div class="errors">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                }
+            </div>
+        </div>
+    </form>
+    <div class="user-actions">
+        <button (click)="addUser()" class="user-btn">Add</button>
+        <button routerLink="/users" class="user-btn">Cancel</button>
+    </div>
+</div>

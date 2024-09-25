@@ -1,0 +1,152 @@
+.navbar {
+    background-color: #fff;
+    padding: 1.2rem 3.2rem;
+    /* display: grid;
+    grid-template-columns: 300px 1fr;
+    align-items: center; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.input-box {
+    position: relative;
+    width: 300px;
+}
+
+.input-box input {
+    display: block;
+    width: 100%;
+    padding: 1.2rem 1.2rem 1.2rem 4.8rem;
+    font-family: "poppins";
+    border: 1px solid #eee;
+    border-radius: 6px;
+    transition: all .3s;
+    outline: none;
+    background-color: #fefefe;
+}
+
+.input-box input:focus {
+    border-color: #304ddc;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 1.2rem;
+    transform: translateY(-50%);
+    font-size: 1.6rem;
+}
+
+.navbar-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 2.4rem;
+    justify-self: end;
+}
+
+.navbar-list li {
+    position: relative;
+    padding: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 11px;
+    background-color: #f4f4f4;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.navbar-list li:hover {
+    background-color: #dadada;
+
+}
+
+.navbar-list img {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 6px;
+    margin-left: -1.2rem;
+    cursor: pointer;
+}
+
+.navbar-list li i {
+    font-size: 1.8rem;
+}
+
+.navbar-list li p {
+    color: #333;
+    font-size: 1.4rem;
+    padding: .2rem;
+    text-transform: capitalize;
+}
+
+.notification::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.close {
+    display: none !important;
+}
+
+.bars {
+    width: 4.8rem;
+    height: 4.8rem;
+    background-color: #f4f4f4;
+    border: none;
+    font-size: 2.2rem;
+    cursor: pointer;
+    border-radius: 4px;
+    display: none;
+}
+
+@media (max-width:1000px) {
+    .input-box {
+        width: 200px;
+    }
+}
+
+@media (max-width:800px) {
+    .bars {
+        display: block;
+    }
+
+    .close {
+        display: block !important;
+    }
+
+    .navbar.open {
+        .navbar-list {
+            transform: translateX(0);
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    .navbar-list {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 25rem;
+        height: 100vh;
+        padding-top: 4.8rem;
+        flex-direction: column;
+        background-color: #fff;
+        z-index: 999;
+        box-shadow:
+            0px 0px 16px rgba(0, 0, 0, 0.18);
+        transition: all .4s;
+        transform: translateX(100%);
+        visibility: hidden;
+        opacity: 0;
+    }
+}

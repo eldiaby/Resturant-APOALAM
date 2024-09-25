@@ -1,0 +1,225 @@
+.customers h2 {
+    font-weight: 600;
+    font-size: 2.4rem;
+    color: #333;
+    margin-bottom: 3.2rem;
+}
+
+.message {
+    position: fixed;
+    top: 80px;
+    right: 0;
+    width: 25rem;
+    background-color: #fff;
+    text-align: center;
+    padding: 1.8rem;
+    font-size: 1.6rem;
+    border: 1px solid red;
+    border-radius: 6px 0 0 6px;
+}
+
+.message::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 4px;
+    background-color: orangered;
+    animation: fadeIn 2s linear forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        width: 100%;
+    }
+
+    100% {
+        width: 0;
+    }
+}
+
+.customers-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.4rem;
+}
+
+.customers-filters {
+    display: flex;
+    align-items: center;
+    gap: 2.4rem;
+}
+
+.customers-filters input {
+    padding: 1.2rem;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    width: 24rem;
+    border-radius: 6px;
+    border: 1px solid #f8f8f8;
+}
+
+.customers-filters select {
+    padding: 1.2rem;
+    background-color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    display: block;
+    width: 16rem;
+    color: inherit;
+    font-family: inherit;
+}
+
+.customers-filters select option {
+    padding: 1.2rem;
+}
+
+
+.add-user {
+    background-color: #233955;
+    color: #fff;
+    padding: 1.2rem 3rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
+
+.customers-box {
+    overflow-x: auto;
+}
+
+.customers-table {
+    width: 100%;
+    min-width: 110rem;
+    border-collapse: collapse;
+    background-color: #fff;
+    font-size: 1.4rem;
+    text-transform: capitalize;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 3.2rem;
+}
+
+.customers-table th {
+    text-align: left;
+    padding: 1.4rem 1rem;
+    min-width: 10rem;
+    background-color: #233955e4;
+    color: #fff;
+    font-weight: 400;
+}
+
+
+.customers-table td {
+    padding: 1.4rem 1rem;
+    border-bottom: 2px solid #f5f5f5;
+}
+
+.customers-table .customer-action {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+}
+
+.customer-btn {
+    padding: .6rem 2.4rem;
+    border: 1px solid #23395551;
+    border-radius: 6px;
+    background: none;
+    font-family: inherit;
+    color: inherit;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.customer-btn:hover {
+    color: #fff;
+    background-color: #233955;
+}
+
+.customers-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    background-color: #fff;
+    padding: 1.2rem;
+    border-radius: 6px;
+}
+
+.customers-pagination p {
+    font-size: 1.4rem;
+}
+
+.pagination .btn {
+    padding: .8rem 1.2rem;
+    display: block;
+    text-decoration: none;
+    font-size: 1.4rem;
+    background-color: #f6f6f6;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+.pagination .btn.active {
+    background-color: #233955;
+    color: #fff;
+}
+
+.pagination .btn-2 {
+    padding: .8rem 1.6rem;
+    border: none;
+    border-radius: 6px;
+    display: block;
+    cursor: pointer;
+}
+
+.deleteConfirm {
+    position: fixed;
+    top: 110px;
+    padding: 1.6rem;
+    right: 0;
+    text-align: center;
+    background-color: #fff;
+    max-width: 40rem;
+    width: 100%;
+    background-color: rgb(255, 138, 138);
+    border-radius: 6px 0 0 6px;
+}
+
+.deleteConfirm p {
+    color: #333;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.deleteConfirm button {
+    padding: .8rem 1.8rem;
+    border-radius: 6px;
+    display: inline-block;
+    border: none;
+    font-family: inherit;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.deleteConfirm button:nth-child(2) {
+    color: orangered;
+    margin-right: .6rem;
+
+}

@@ -1,0 +1,60 @@
+<div class="dashboard">
+    <h2>Dashboard</h2>
+    <div class="stats">
+        <div class="state-box">
+            <i class="state-icon fa-solid fa-pizza-slice"></i>
+            <div class="stats-info">
+                <p class="stats-number">{{recipesLength}}</p>
+                <p class="stats-text">total recipes</p>
+                <span><i class="icon-green fa-solid fa-arrow-trend-up"></i> 4% (30 days)</span>
+            </div>
+        </div>
+        <div class="state-box">
+            <i class=" state-icon fa-solid fa-dollar-sign"></i>
+            <div class="stats-info">
+                <p class="stats-number">230k</p>
+                <p class="stats-text">total revenue</p>
+                <span><i class="icon-red fa-solid fa-arrow-trend-down"></i> 26% (30 days)</span>
+            </div>
+        </div>
+        <div class="state-box">
+            <i class="state-icon fa-solid fa-cart-shopping"></i>
+            <div class="stats-info">
+                <p class="stats-number">125</p>
+                <p class="stats-text">total orders</p>
+                <span><i class="icon-green fa-solid fa-arrow-trend-up"></i> 9% (30 days)</span>
+            </div>
+        </div>
+        <div class="state-box">
+            <i class="state-icon fa-solid fa-user-group"></i>
+            <div class="stats-info">
+                <p class="stats-number">{{users.length}}</p>
+                <p class="stats-text">total customers</p>
+                <span><i class="icon-green fa-solid fa-arrow-trend-up"></i> 15% (30 days)</span>
+            </div>
+        </div>
+    </div>
+    <div class="charts">
+        <div class="chart">
+            <div class="chart-info">
+                <h2>order summary</h2>
+                <p>Statistics within a month</p>
+            </div>
+            <app-charts></app-charts>
+        </div>
+        <div class="chart">
+            <div class="chart-info">
+                <h2>revenue</h2>
+                <p>Statistics within a month</p>
+            </div>
+            <app-chart2></app-chart2>
+        </div>
+        <div class="chart charts3">
+            <div class="chart-info">
+                <h2>customer map</h2>
+                <p>Statistics within a month</p>
+            </div>
+            <app-chart3></app-chart3>
+        </div>
+    </div>
+</div>

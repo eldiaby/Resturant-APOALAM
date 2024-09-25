@@ -1,0 +1,175 @@
+.signin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    font-family: inherit;
+}
+
+.signin-box {
+    max-width: 45rem;
+    width: 100%;
+    background-color: #fff;
+    padding: 3.2rem 3.2rem;
+}
+
+.signin-box h2 {
+    font-size: 3rem;
+    font-weight: 600;
+    color: #050A24;
+    margin-bottom: 2.4rem;
+    text-align: center;
+}
+
+.input-box {
+    margin-bottom: 1.8rem;
+    position: relative;
+}
+
+.errors {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    color: red;
+    font-size: 2rem;
+}
+
+.input-box label {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    display: block;
+    text-transform: capitalize;
+    color: #050A24;
+    margin-left: 1.2rem;
+}
+
+.input-box input {
+    display: block;
+    width: 100%;
+    padding: 1.4rem;
+    border-radius: 9px;
+    border: 2px solid #d4d4d4;
+    font-family: inherit;
+    color: #333;
+    font-size: 1.6rem;
+    transition: all .2s;
+    outline: none;
+}
+
+.input-box input::placeholder {
+    color: #c0c0c0;
+}
+
+.input-box input:focus {
+    box-shadow: 0 0 0 3px #007dfa53;
+}
+
+
+.forget-password {
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    color: #007dfa;
+    text-transform: capitalize;
+    font-size: 1.4rem;
+    margin-bottom: 3.2rem;
+}
+
+.btn-login {
+    display: block;
+    font-family: inherit;
+    width: 100%;
+    padding: 1.4rem;
+    border-radius: 9px;
+    color: #fff;
+    font-size: 1.8rem;
+    transition: all .2s;
+    outline: none;
+    border: none;
+    font-weight: 600;
+    background-color: #007dfa;
+    margin-bottom: 2.4rem;
+    cursor: pointer;
+}
+
+.new-account {
+    text-align: center;
+    color: #ababab;
+    font-size: 1.6rem;
+}
+
+.new-account a {
+    color: #007dfa;
+    margin-left: 6px;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+/* 050A24 */
+/* 007dfa */
+.signin-error,
+.signin-success {
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35rem;
+    text-align: center;
+    padding: 1.8rem;
+    font-size: 1.8rem;
+    background-color: #fff;
+}
+
+.signin-error::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 4px;
+    animation: fadeIn 2s linear forwards;
+    background-color: red;
+}
+
+.signin-success::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 4px;
+    background-color: rgb(70, 209, 0);
+    animation: fadeIn 2s linear forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        width: 100%;
+    }
+
+    100% {
+        width: 0;
+    }
+}
+
+.loader {
+    width: 24px;
+    height: 24px;
+    border: 5px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

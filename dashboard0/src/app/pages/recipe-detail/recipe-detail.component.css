@@ -1,0 +1,170 @@
+.recipe .recipe-header {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    margin-bottom: 3.2rem;
+}
+
+.deleteConfirm {
+    position: fixed;
+    top: 110px;
+    padding: 1.6rem;
+    right: 0;
+    text-align: center;
+    background-color: #fff;
+    max-width: 40rem;
+    width: 100%;
+    background-color: rgb(255, 138, 138);
+    border-radius: 6px 0 0 6px;
+}
+
+.deleteConfirm p {
+    color: #333;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.deleteConfirm button {
+    padding: .8rem 1.8rem;
+    border-radius: 6px;
+    display: inline-block;
+    border: none;
+    font-family: inherit;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.deleteConfirm button:nth-child(2) {
+    color: orangered;
+    margin-right: .6rem;
+
+}
+
+.recipe .recipe-header h2 {
+    font-weight: 600;
+    font-size: 2.4rem;
+    color: #333;
+}
+
+.recipe .recipe-header button {
+    display: block;
+    padding: 1.4rem 1.6rem;
+    background-color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.8rem;
+}
+
+.recipe-details-box {
+    display: grid;
+    grid-template-columns: 45fr 55fr;
+    gap: 3.2rem;
+    align-items: center;
+}
+
+@media (max-width:900px) {
+    .recipe-details-box {
+        grid-template-columns: 1fr;
+    }
+}
+
+.recipe-img {
+    width: 100%;
+    border-radius: 9px;
+}
+
+.recipe-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: .8rem;
+}
+
+.recipe-title h3 {
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: #333;
+}
+
+.recipe-actions {
+    display: flex;
+    gap: 1.2rem;
+}
+
+.recipe-btn {
+    background-color: #dbdbdb;
+    border-radius: 6px;
+    width: 10rem;
+    cursor: pointer;
+    padding: .8rem 0;
+    border: none;
+    text-transform: capitalize;
+    transition: all .3s;
+    font-family: inherit;
+    font-size: 1.4rem;
+}
+
+.recipe-btn i {
+    margin-right: .8rem;
+}
+
+.recipe-btn:hover {
+    background-color: #233955;
+    color: #fff;
+}
+
+.recipe-category {
+    font-size: 1.4rem;
+    margin-bottom: 3.2rem;
+}
+
+h4 {
+    color: #233955;
+    font-weight: 600;
+    font-size: 1.6rem;
+    margin-bottom: 1.6rem;
+    text-transform: capitalize;
+}
+
+.recipe-description {
+    color: #5c5c5c;
+    font-size: 1.6rem;
+    line-height: 1.6;
+    margin-bottom: 3.2rem;
+
+}
+
+.recipe-tags {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    flex-wrap: wrap;
+    margin-bottom: 3.2rem;
+}
+
+.tag {
+    padding: 6px 12px;
+    border-radius: 99px;
+    background-color: #f08c00;
+    display: inline-block;
+    font-size: 1.4rem;
+    color: #000;
+    font-weight: 500;
+}
+
+.price,
+.estimated-time {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.6rem;
+    margin-bottom: 3.2rem;
+}
+
+.price i,
+.estimated-time i {
+    font-size: 2rem;
+    width: 2.4rem;
+    color: #f08c00;
+}
