@@ -1,3 +1,4 @@
+import { OrdersService } from './../../services/orders.service';
 import { UsersService } from './../../services/users.service';
 import { Router, RouterLink } from '@angular/router';
 import { Component, inject, OnInit } from '@angular/core';
@@ -17,7 +18,8 @@ export class UserDetailsComponent implements OnInit {
   message: boolean = false;
   constructor(
     private _usersService: UsersService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _ordersService: OrdersService
   ) {}
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -25,6 +27,7 @@ export class UserDetailsComponent implements OnInit {
     });
     this.getUserDetails();
   }
+
   deleteUser(id: any) {
     this._usersService.deleteUser(id).subscribe({
       next: (res) => {
@@ -40,7 +43,7 @@ export class UserDetailsComponent implements OnInit {
     });
   }
   getUserDetails() {
-    console.log(this.id);
+    // console.log(this.id);
     this._usersService.getUser(this.id).subscribe({
       next: (res) => {
         this.user = res.User;

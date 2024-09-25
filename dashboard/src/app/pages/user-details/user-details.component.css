@@ -54,13 +54,16 @@
 }
 
 .user-content {
-    display: grid;
+    display: flex;
+    justify-content: center;
+    /* display: grid;
     grid-template-columns: 40fr 60fr;
-    gap: 3.2rem;
+    gap: 3.2rem; */
 }
 
 .user-info,
 .user-activeites {
+    width: 50%;
     background-color: #fff;
     border-radius: 9px;
     padding: 2.4rem;

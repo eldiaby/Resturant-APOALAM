@@ -24,4 +24,15 @@ export class OrdersService {
       headers,
     });
   }
+  cancelOrder(orderId: any, userId: any): Observable<any> {
+    const body = { userId };
+    const headers = this.createHeaders();
+    return this._httpClient.delete(
+      `http://127.0.0.1:5000/api/order/${orderId}`,
+      {
+        headers,
+        body,
+      }
+    );
+  }
 }

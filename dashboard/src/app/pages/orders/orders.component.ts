@@ -18,6 +18,8 @@ export class OrdersComponent implements OnInit {
 
   status: any = '';
 
+  userId: any = '';
+
   constructor(private _ordersService: OrdersService) {}
 
   ngOnInit(): void {
@@ -57,13 +59,25 @@ export class OrdersComponent implements OnInit {
   getAllOrders() {
     this._ordersService.getAllOrders().subscribe({
       next: (res) => {
-        console.log(res.allOrders);
+        // console.log(res.allOrders);
+        // this.userId = res.allOrders.userId._id;
         this.orders = res.allOrders.map((order: any) => {
-          order.address = `${order.shippingDetails.address} ${order.shippingDetails.postalCode} ${order.shippingDetails.city}`;
+          order.address = ` ${order.shippingDetails.city}, ${order.shippingDetails.postalCode} ${order.shippingDetails.address},${order.shippingDetails.comment}`;
           return order;
         });
         this.totalPages = Math.ceil(this.orders.length / this.limit);
         this.paginateOrders();
+        // console.log(this.orders[0].userId._id);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+  cancelOrder(orderId: any, userId: any) {
+    this._ordersService.cancelOrder(orderId, userId).subscribe({
+      next: (res) => {
+        console.log(res);
       },
       error: (err) => {
         console.log(err);

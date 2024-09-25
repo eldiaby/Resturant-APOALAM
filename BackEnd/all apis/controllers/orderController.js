@@ -63,17 +63,18 @@ const orderMeal = async (req, res) => {
       });
     }
 
-    return res
-      .status(userOrder._id ? 200 : 201)
-      .json({
-        message: userOrder._id ? "Order updated successfully" : "Order placed successfully",
-        order: userOrder,
-      });
+    return res.status(userOrder._id ? 200 : 201).json({
+      message: userOrder._id
+        ? "Order updated successfully"
+        : "Order placed successfully",
+      order: userOrder,
+    });
   } catch (error) {
-    return res.status(500).json({ message: "Server error", error: error.message });
+    return res
+      .status(500)
+      .json({ message: "Server error", error: error.message });
   }
 };
-
 
 const updateAddress = async (req, res) => {
   let order = await orderModel.findOneAndUpdate(
