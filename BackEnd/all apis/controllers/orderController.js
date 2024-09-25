@@ -118,10 +118,16 @@ const updateOrderStatus = async (req, res) => {
 const getAllOrders = async (req, res) => {
   if (req.user.role == "admin") {
     // if is an admin it will return all users orders
-    const allOrders = await orderModel.find().populate({
-      path: "mealItems.mealId",
-      select: "name price description",
-    });
+    const allOrders = await orderModel
+      .find()
+      .populate({
+        path: "mealItems.mealId",
+        select: "name price description",
+      })
+      .populate({
+        path: "userId",
+        select: "userName",
+      });
     if (allOrders && allOrders.length > 0) {
       res.status(200).json({ message: "all users Orders fetched", allOrders });
     } else {
