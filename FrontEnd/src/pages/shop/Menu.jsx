@@ -299,35 +299,35 @@ const Menu = () => {
               All
             </button>
             <button
-              onClick={() => filterItems("salad")}
-              className={selectedCategory === "salad" ? "active" : ""}
+              onClick={() => filterItems("Pizzas")}
+              className={selectedCategory === "Pizzas" ? "active" : ""}
             >
-              Salad
+              Pizzas
             </button>
             <button
-              onClick={() => filterItems("pizza")}
-              className={selectedCategory === "pizza" ? "active" : ""}
+              onClick={() => filterItems("Vegetarian")}
+              className={selectedCategory === "Vegetarian" ? "active" : ""}
             >
-              Pizza
+              Vegetarian
             </button>
             <button
-              onClick={() => filterItems("soup")}
-              className={selectedCategory === "soup" ? "active" : ""}
+              onClick={() => filterItems("Burgers")}
+              className={selectedCategory === "Burgers" ? "active" : ""}
             >
-              Soups
+              Burgers
             </button>
             <button
-              onClick={() => filterItems("dessert")}
-              className={selectedCategory === "dessert" ? "active" : ""}
+              onClick={() => filterItems("Salads")}
+              className={selectedCategory === "Salads" ? "active" : ""}
             >
-              Desserts
+              Salads{" "}
             </button>
-            <button
+            {/* <button
               onClick={() => filterItems("drinks")}
               className={selectedCategory === "drinks" ? "active" : ""}
             >
               Drinks
-            </button>
+            </button> */}
           </div>
 
           {/* filter options */}

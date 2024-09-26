@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 const mealSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
-  ingredients: { type: [String], required: true },
+  // ingredients: { type: [String], required: true },
   category: { type: String, required: true },
   price: { type: Number, required: true },
   estimatedTime: { type: Number },

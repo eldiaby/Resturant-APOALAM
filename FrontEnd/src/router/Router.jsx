@@ -8,6 +8,8 @@ import Login from "../components/Login";
 import ReservationForm from "../services/ReservationForm";
 import ProfileOrders from "../pages/shop/profileOrdes";
 import ProfileSettings from "../pages/profile/profile";
+import EmailOtp from "../components/EmailForOtp";
+import ResetPassword from "../components/resetPassword";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +45,14 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
+  },
+  {
+    path: "/EamilOtp",
+    element: <EmailOtp />,
+  },
+  {
+    path: "/resetpassword",
+    element: <ResetPassword />,
   },
   {
     path: "/login",

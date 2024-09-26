@@ -50,6 +50,8 @@ const userSchema = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "Reservation",
     },
+    otp: String, // Add field to store OTP
+    otpExpires: Date, // Add expiration time for OTP
   },
   { versionKey: false, timestamps: true }
 );

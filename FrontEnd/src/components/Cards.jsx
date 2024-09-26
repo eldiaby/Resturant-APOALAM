@@ -11,18 +11,26 @@ const Cards = ({ item }) => {
   };
 
   const handleAddToCart = async () => {
+    console.log(item);
     try {
-      await axios.post(`http://localhost:5000/api/cart/${item._id}`, {
-        quantity: 1,
-      });
+      const token = localStorage.getItem("token");
+      await axios.post(
+        `http://localhost:5000/api/cart/${item._id}`,
+        {
+          quantity: 1,
+        },
+        {
+          headers: { token },
+        }
+      );
       alert("Added to cart successfully!");
     } catch (error) {
-      console.error("Error adding to cart", error);
+      console.error("Error adding to cart", error.message);
     }
   };
 
   return (
-    <div className="card shadow-xl relative mr-5 md:my-5">
+    <div className="card shadow-xl relative mr-5 md:my-5 overflow-hidden">
       <div
         className={`rating gap-1 absolute right-2 top-2 p-4 heartStar bg-green ${
           isHeartFilled ? "text-rose-500" : "text-white"
