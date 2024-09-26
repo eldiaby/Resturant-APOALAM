@@ -19,7 +19,7 @@ export const createReservation = async (req, res) => {
     }
 
     const reservation = new Reservation({
-      userId: _id,
+      userId: id,
       date,
       time,
       tableNumber,

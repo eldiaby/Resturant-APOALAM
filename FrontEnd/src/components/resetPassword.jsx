@@ -315,7 +315,10 @@ function ResetPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (hasErrors()) {
+      setLoading(false);
+      return;
+    }
     setSuccess("");
     setErrors({});
 
@@ -337,10 +340,6 @@ function ResetPassword() {
       return;
     }
 
-    if (hasErrors()) {
-      setLoading(false);
-      return;
-    }
     if (!sMessage) {
       try {
         const response = await axios.post(
