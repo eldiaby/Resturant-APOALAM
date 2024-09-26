@@ -19,7 +19,7 @@ const orderSchema = new mongoose.Schema(
         price: Number,
       },
     ],
-    totalAmount: Number,
+    totalPrice: Number,
     status: {
       type: String,
       enum: ["pending", "in preparation", "delivered"],

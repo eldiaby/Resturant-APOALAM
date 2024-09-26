@@ -103,7 +103,7 @@ export class CustomerComponent implements OnInit {
   getAllUsers() {
     this._usersService.getAllUsers().subscribe({
       next: (res) => {
-        // console.log(res);
+        console.log(res.allUsers);
         this.users = res.allUsers;
         this.totalPages = Math.ceil(this.users.length / this.limit);
         this.paginateUsers();

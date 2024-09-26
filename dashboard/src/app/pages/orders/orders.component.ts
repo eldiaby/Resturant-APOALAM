@@ -71,6 +71,7 @@ export class OrdersComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
+        console.log('HERERE');
       },
     });
   }

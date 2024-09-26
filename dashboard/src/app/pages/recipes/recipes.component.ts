@@ -17,6 +17,7 @@ export class RecipesComponent implements OnInit {
   categories: Category[] = [];
   router = inject(Router);
   recipes: Recipe[] = [];
+  totalRecipes: any = 0;
   ingredients: string[] = [];
   sortBy: string = '';
   page: number = 1;
@@ -36,7 +37,7 @@ export class RecipesComponent implements OnInit {
     private _categoryService: CategoryService
   ) {}
   ngOnInit(): void {
-    this.fetchRecipes(this.page, '');
+    this.fetchRecipes(this.page, '', '');
     this.categories = this._categoryService.category;
   }
   search(x: any) {
@@ -46,29 +47,31 @@ export class RecipesComponent implements OnInit {
         recipe.name.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     } else {
-      this.fetchRecipes(this.page, '');
+      this.fetchRecipes(this.page, '', '');
     }
   }
   setSortBy(e: any) {
     this.sortBy = e.target.value;
-    this.fetchRecipes(this.page, e.target.value);
+    this.fetchRecipes(this.page, '', e.target.value);
   }
+
   setPage(num: number) {
     this.page = num;
-    this.fetchRecipes(this.page, '');
+    this.fetchRecipes(this.page, '', '');
   }
 
   next() {
     this.page++;
-    this.fetchRecipes(this.page, '');
+    this.fetchRecipes(this.page, '', '');
   }
   prev() {
     this.page--;
-    this.fetchRecipes(this.page, '');
+    this.fetchRecipes(this.page, '', '');
   }
-  fetchRecipes(page: number, category: string) {
-    this._recipesService.getAllRecipes(page, category).subscribe({
+  fetchRecipes(page: number, category: string, sortBy: string) {
+    this._recipesService.getAllRecipes(page, category, sortBy).subscribe({
       next: (res) => {
+        this.totalRecipes = res.results;
         this.curPage = res.currentPage;
         this.totPages = res.totalPages;
         if (!this.fetchOne) {
@@ -78,11 +81,15 @@ export class RecipesComponent implements OnInit {
         }
         this.fetchOne = true;
         this.recipes = res.meals.map((meal: any) => {
-          if (typeof meal.ingredients === 'string') {
-            try {
-              meal.ingredients = JSON.parse(meal.ingredients);
-            } catch (error) {}
-          }
+          meal.ingredients = JSON.parse(meal.ingredients);
+
+          // if (typeof meal.ingredients === 'string') {
+          //     meal.ingredients = JSON.parse(meal.ingredients);
+          //   try {
+          //   } catch (error) {
+          //     console.error('Error parsing ingredients:', error);
+          //   }
+          // }
           return meal;
         });
       },

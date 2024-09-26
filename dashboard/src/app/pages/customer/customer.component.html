@@ -9,7 +9,7 @@
         <button (click)="closeMessage()">Cancel</button>
     </div>
     }
-    <h2>customers</h2>
+    <h2>customers ({{users.length}})</h2>
     <nav class="customers-nav">
         <div class="customers-filters">
             <input [value]="searchQuery" (keyup)="search($event)" type="text" placeholder="Search for customer">
@@ -43,7 +43,7 @@
                     <td>{{user.role}}</td>
                     <td>{{user.createdAt.slice(0,10)}}</td>
                     <td>{{user.address}}</td>
-                    <td>BEFORE</td>
+                    <td>${{user.orders.totalePrice || 0}}</td>
                     <td class="customer-action">
                         <button [routerLink]="['/users',user._id]" class="customer-btn">Details</button>
                         <!-- <button [routerLink]="['/users/update', user._id]" class="customer-btn">Edit</button> -->

@@ -178,3 +178,8 @@
     background-color: #f5f5f5;
     color: #00c053;
 }
+
+.no-data {
+    font-size: 1.8rem;
+    padding: 1.8rem;
+}

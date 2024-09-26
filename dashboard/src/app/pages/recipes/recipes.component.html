@@ -9,7 +9,7 @@
         <button (click)="closeMaessage()">Cancel</button>
     </div>
     }
-    <h2>Recipes</h2>
+    <h2>Recipes ({{totalRecipes}})</h2>
     <nav class="recipes-nav">
         <div class="recipes-filters">
             <input [value]="searchQuery" (keyup)="search($event)" type="text" placeholder="Search by recipe name">
@@ -24,11 +24,11 @@
                 <option value="salad">Salad</option>
                 <option value="mexican">Mexican</option> -->
             </select>
-            <!-- <select (change)="setSortBy($event)">
-                <option value="">Price (All)</option>
-                <option value="low">low to high</option>
-                <option value="high">high to low</option>
-            </select> -->
+            <select (change)="setSortBy($event)">
+                <!-- <option value="">Price or Name</option> -->
+                <option value="name">Name</option>
+                <option value="price">Price</option>
+            </select>
         </div>
         <div class="recipes-btns">
             <button class="add-user" routerLink="/recipes/add">Add Recipe</button>
