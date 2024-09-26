@@ -1,12 +1,12 @@
 <div class="orders">
     <h2>Orders</h2>
     <nav class="orders-nav">
-        <ul class="orders-filters">
-            <li class="active">all (128)</li>
-            <li>confirmed (40)</li>
-            <li>pending (78)</li>
-            <li>canceled (28)</li>
-        </ul>
+        <select (change)="setStatus($event)" class="orders-filters">
+            <option value="all">all ({{orders.length}})</option>
+            <option value="confirmed">confirmed (40)</option>
+            <option value="pending">pending (78)</option>
+            <option value="canceled">canceled (28)</option>
+        </select>
         <div class="orders-btns">
             <button class="filter-date"><span>📅</span>this month 🔽</button>
         </div>
@@ -15,23 +15,38 @@
         <table class="orders-table">
             <thead>
                 <tr>
-                    <th>order Id</th>
+                    <th>customer</th>
                     <th>data</th>
                     <th>time</th>
-                    <th>customer</th>
                     <th>location</th>
                     <th>amount</th>
                     <th>order status</th>
+                    <th>payment status</th>
+                    <th>action</th>
                 </tr>
             </thead>
             <tbody>
+                @for(order of orders; track order._id) {
                 <tr>
+                    <td>{{order.userId.userName}}</td>
+                    <td>{{order.createdAt.slice(0,10)}}</td>
+                    <td>{{order.createdAt.slice(11,16)}}</td>
+                    <td>{{order.address}}</td>
+                    <td>${{order.totalPrice}}</td>
+                    <td><span class="pending">{{order.status}}</span></td>
+                    <td><span class="pending">{{order.paymentStatus}}</span></td>
+                    <td><button (click)="cancelOrder(order._id, order.userId._id)" class="cancel-btn">Cancel</button>
+                    </td>
+                </tr>
+                }
+                <!-- <tr>
                     <td>#4886541656</td>
                     <td>20 may 2028</td>
                     <td>20:45</td>
                     <td>Ahmed kh.</td>
                     <td>Cairo,helwan 45 oraby st.</td>
                     <td>$1451</td>
+                    <td><span class="pending">pending</span></td>
                     <td><span class="pending">pending</span></td>
                 </tr>
                 <tr>
@@ -42,52 +57,10 @@
                     <td>Cairo,helwan 45 oraby st.</td>
                     <td>$1451</td>
                     <td><span class="confirmed">confirmed</span></td>
-                </tr>
-                <tr>
-                    <td>#4886541656</td>
-                    <td>20 may 2028</td>
-                    <td>20:45</td>
-                    <td>Ahmed kh.</td>
-                    <td>Cairo,helwan 45 oraby st.</td>
-                    <td>$1451</td>
-                    <td><span class="pending">pending</span></td>
-                </tr>
-                <tr>
-                    <td>#4886541656</td>
-                    <td>20 may 2028</td>
-                    <td>20:45</td>
-                    <td>Ahmed kh.</td>
-                    <td>Cairo,helwan 45 oraby st.</td>
-                    <td>$1451</td>
-                    <td><span class="pending">pending</span></td>
-                </tr>
-                <tr>
-                    <td>#4886541656</td>
-                    <td>20 may 2028</td>
-                    <td>20:45</td>
-                    <td>Ahmed kh.</td>
-                    <td>Cairo,helwan 45 oraby st.</td>
-                    <td>$1451</td>
                     <td><span class="confirmed">confirmed</span></td>
                 </tr>
-                <tr>
-                    <td>#4886541656</td>
-                    <td>20 may 2028</td>
-                    <td>20:45</td>
-                    <td>Ahmed kh.</td>
-                    <td>Cairo,helwan 45 oraby st.</td>
-                    <td>$1451</td>
-                    <td><span class="pending">pending</span></td>
-                </tr>
-                <tr>
-                    <td>#4886541656</td>
-                    <td>20 may 2028</td>
-                    <td>20:45</td>
-                    <td>Ahmed kh.</td>
-                    <td>Cairo,helwan 45 oraby st.</td>
-                    <td>$1451</td>
-                    <td><span class="cancelled">cancelled</span></td>
-                </tr>
+
+
                 <tr>
                     <td>#4886541656</td>
                     <td>20 may 2028</td>
@@ -96,37 +69,21 @@
                     <td>Cairo,helwan 45 oraby st.</td>
                     <td>$1451</td>
                     <td><span class="cancelled">cancelled</span></td>
-                </tr>
-                <tr>
-                    <td>#4886541656</td>
-                    <td>20 may 2028</td>
-                    <td>20:45</td>
-                    <td>Ahmed kh.</td>
-                    <td>Cairo,helwan 45 oraby st.</td>
-                    <td>$1451</td>
-                    <td><span class="pending">pending</span></td>
-                </tr>
-                <tr>
-                    <td>#4886541656</td>
-                    <td>20 may 2028</td>
-                    <td>20:45</td>
-                    <td>Ahmed kh.</td>
-                    <td>Cairo,helwan 45 oraby st.</td>
-                    <td>$1451</td>
-                    <td><span class="pending">pending</span></td>
-                </tr>
+                    <td><span class="cancelled">cancelled</span></td>
+                </tr> -->
+
             </tbody>
         </table>
     </div>
     <div class="orders-pagination">
-        <p>Shown 10 of 124</p>
+        <p>Shown 10 of {{orders.length}}</p>
         <div class="pagination">
-            <button>Previous</button>
-            <a class="active" href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <button>Next</button>
+            <button (click)="prev()" [disabled]="page == 1" class="btn-2">Previous</button>
+            <button (click)="setPage(1)" [class]="page === 1 ? 'active btn': 'btn'">1</button>
+            <!-- <button (click)="setPage(2)" [class]="page === 2 ? 'active btn': 'btn'">2</button>
+            <button (click)="setPage(3)" [class]="page === 3 ? 'active btn': 'btn'">3</button>
+            <button (click)="setPage(4)" [class]="page === 4 ? 'active btn': 'btn'">4</button> -->
+            <button (click)="next()" [disabled]="page == 4" class="btn-2">Next</button>
         </div>
     </div>
 </div>

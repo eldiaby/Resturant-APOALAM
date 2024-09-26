@@ -31,5 +31,4 @@ const sendVerfication = async (email) => {
   console.log("Message sent: %s", info.messageId);
 };
 
-
 export default sendVerfication;

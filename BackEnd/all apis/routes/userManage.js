@@ -13,7 +13,7 @@ userMangeRoute.use(authMiddleware);
 
 userMangeRoute.get("/users", isAllow("admin"), getAllUsers);
 userMangeRoute.get("/users/:id", isAllow("admin"), getUser);
-userMangeRoute.put("/users/:id", isAllow("admin"), editUser);
+userMangeRoute.put("/users/:id", editUser);
 userMangeRoute.delete("/users/:id", isAllow("admin"), removeUser);
 
 export default userMangeRoute;

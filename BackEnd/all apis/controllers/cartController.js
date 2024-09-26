@@ -3,7 +3,7 @@ import orderModel from "../models/Order.js";
 import userModel from "../models/User.js";
 
 const getCart = async (req, res) => {
-  const userCart = await cartModel.find({ userId: req.userInfo.id });
+  const userCart = await cartModel.find({ userId: req.user.id });
   if (cart) {
     return res
       .status(200)
@@ -14,9 +14,10 @@ const getCart = async (req, res) => {
 };
 
 const addToCart = async (req, res) => {
+  console.log("cart", req);
   const mealId = req.params.id;
   const quantity = req.body.quantity;
-  const userCart = await cartModel.findOne({ userId: req.userInfo.id });
+  const userCart = await cartModel.findOne({ userId: req.user.id });
 
   // if user already have cart
   if (userCart) {
@@ -36,12 +37,12 @@ const addToCart = async (req, res) => {
   } else {
     // Create a new Cart if it first time to add to cart
     const newCart = new cartModel({
-      userId: req.userInfo.id,
+      userId: req.user.id,
       mealItems: [{ mealId, quantity }],
     });
 
     await newCart.save();
-    await userModel.findByIdAndUpdate(req.userInfo.id, { cart: newCart._id });
+    await userModel.findByIdAndUpdate(req.user.id, { cart: newCart._id });
     return res
       .status(201)
       .json({ message: "Meal Added to Cart successfully", cart: newCart });
@@ -49,7 +50,7 @@ const addToCart = async (req, res) => {
 };
 
 const removeFromCart = async (req, res) => {
-  const userCart = await cartModel.findOne({ userId: req.userInfo.id });
+  const userCart = await cartModel.findOne({ userId: req.user.id });
   if (userCart) {
     const findMeal = userCart.mealItems.find(
       (meal) => meal.mealId == req.params.id
@@ -70,7 +71,7 @@ const removeFromCart = async (req, res) => {
 
 const clearCart = async (req, res) => {
   const userCart = await cartModel.findOneAndDelete({
-    userId: req.userInfo.id,
+    userId: req.user.id,
   });
   if (userCart) {
     res.status(200).json({ messgae: "Cart Removed", userCart });
@@ -80,7 +81,7 @@ const clearCart = async (req, res) => {
 };
 
 const checkOut = async (req, res) => {
-  const userCart = await cartModel.findOne({ userId: req.userInfo.id });
+  const userCart = await cartModel.findOne({ userId: req.user.id });
   if (!userCart) {
     return res.status(404).json({ message: "Cart not found" });
   }
@@ -88,13 +89,13 @@ const checkOut = async (req, res) => {
   const shippingDetails = req.body;
 
   const order = new orderModel({
-    userId: req.userInfo.id,
+    userId: req.user.id,
     mealItems: userCart.mealItems,
     shippingDetails: shippingDetails,
   });
 
   await order.save();
-  await userCart.deleteOne({ userId: req.userInfo.id }); // Clear cart after checkout
+  await userCart.deleteOne({ userId: req.user.id }); // Clear cart after checkout
   res.status(200).json({ message: "Order placed successfully", order });
 };
 

@@ -3,34 +3,81 @@ import cloudinary from "../utils/cloudinary.js";
 import sharp from "sharp";
 
 // Get all meals with pagination and filtering
+// const getMeals = async (req, res) => {
+//   try {
+//     const { page = 1, limit = 10, category, priceRange } = req.query;
+//     const query = {};
+
+//     if (category) query.category = category;
+//     if (priceRange) {
+//       const [min, max] = priceRange.split("-");
+//       query.price = { $gte: Number(min), $lte: Number(max) };
+//     }
+
+//     const [meals, count] = await Promise.all([
+//       Meal.find(query)
+//         .limit(limit * 1)
+//         .skip((page - 1) * limit)
+//         .exec(),
+//       Meal.countDocuments(query),
+//     ]);
+
+//     return res.json({
+//       meals,
+//       totalPages: Math.ceil(count / limit),
+//       currentPage: Number(page),
+//     });
+//   } catch (error) {
+//     console.error("Error fetching meals:", error);
+//     res.status(500).json({ message: error.message });
+//   }
+// };
 const getMeals = async (req, res) => {
   try {
-    const { page = 1, limit = 10, category, priceRange } = req.query;
+    const {
+      page = 1,
+      limit = 10,
+      category,
+      priceRange,
+      sortBy = "name",
+      order = "asc",
+    } = req.query;
     const query = {};
 
+    // Filtering by category
     if (category) query.category = category;
+
+    // Filtering by price range
     if (priceRange) {
       const [min, max] = priceRange.split("-");
       query.price = { $gte: Number(min), $lte: Number(max) };
     }
 
+    // Sorting logic
+    let sortQuery = {};
+    if (sortBy === "price") {
+      sortQuery.price = order === "asc" ? 1 : -1; // Ascending or descending order
+    } else if (sortBy === "name") {
+      sortQuery.name = order === "asc" ? 1 : -1; // Alphabetical order
+    }
+
+    // Fetching meals and total count
     const [meals, count] = await Promise.all([
       Meal.find(query)
+        .sort(sortQuery) // Apply sorting
         .limit(limit * 1)
         .skip((page - 1) * limit)
         .exec(),
       Meal.countDocuments(query),
     ]);
 
-    return res.json({
-      results: count,
+    res.status(200).json({
       meals,
       totalPages: Math.ceil(count / limit),
       currentPage: Number(page),
     });
   } catch (error) {
-    console.error("Error fetching meals:", error);
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 

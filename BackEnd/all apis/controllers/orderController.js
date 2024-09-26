@@ -1,4 +1,3 @@
-import Meal from "../models/Meal.js";
 import orderModel from "../models/Order.js";
 import userModel from "../models/User.js";
 
@@ -7,73 +6,47 @@ const orderMeal = async (req, res) => {
   const { mealId } = req.params;
   const { quantity = 1 } = req.body;
 
-  try {
-    // Fetch the meal price from Meal model
-    const meal = await Meal.findById(mealId);
-    if (!meal) {
-      return res.status(404).json({ message: "Meal not found" });
-    }
+  // // Check if there is an existing order for the user and that order is pending
+  const userOrders = await orderModel.findOne({
+    userId,
+    status: "pending",
+  });
 
-    // Check if there is an existing order for the user that is still pending
-    let userOrder = await orderModel.findOne({
+  if (userOrders) {
+    const mealIndex = userOrders.mealItems.findIndex(
+      (item) => item.mealId == mealId
+    );
+    if (mealIndex !== -1) {
+      userOrders.mealItems[mealIndex].quantity += quantity;
+    } else {
+      userOrders.mealItems.push({ mealId, quantity });
+    }
+    await userOrders.save();
+    return res
+      .status(200)
+      .json({ message: "Order updated successfully", order: userOrders });
+  } else {
+    // Create a new order
+    const newOrder = new orderModel({
       userId,
-      status: "pending",
+      mealItems: [{ mealId, quantity }],
+      shippingDetails: {
+        address: req.body.address,
+        city: req.body.city,
+        postalCode: req.body.postalCode,
+        comment: req.body.comment,
+      },
     });
 
-    if (userOrder) {
-      const mealIndex = userOrder.mealItems.findIndex(
-        (item) => item.mealId.toString() === mealId
-      );
-
-      if (mealIndex !== -1) {
-        // Update quantity if the meal is already in the order
-        userOrder.mealItems[mealIndex].quantity += quantity;
-      } else {
-        // Add a new meal to the order
-        userOrder.mealItems.push({ mealId, quantity });
-      }
-    } else {
-      // Create a new order
-      userOrder = new orderModel({
-        userId,
-        mealItems: [{ mealId, quantity }],
-        shippingDetails: {
-          address: req.body.address,
-          city: req.body.city,
-          postalCode: req.body.postalCode,
-          comment: req.body.comment,
-        },
-      });
-    }
-
-    // Recalculate the totalPrice
-    let totalPrice = 0;
-    for (const item of userOrder.mealItems) {
-      const meal = await Meal.findById(item.mealId);
-      totalPrice += meal.price * item.quantity;
-    }
-
-    userOrder.totalPrice = totalPrice;
-    await userOrder.save();
-
-    if (!userOrder._id) {
-      // Link the order to the user if it's a new order
-      await userModel.findByIdAndUpdate(userId, {
-        $push: { orders: userOrder._id },
-      });
-    }
-
+    await newOrder.save();
+    await userModel.findByIdAndUpdate(userId, {
+      $push: { orders: newOrder._id },
+    });
     return res
-      .status(userOrder._id ? 200 : 201)
-      .json({
-        message: userOrder._id ? "Order updated successfully" : "Order placed successfully",
-        order: userOrder,
-      });
-  } catch (error) {
-    return res.status(500).json({ message: "Server error", error: error.message });
+      .status(201)
+      .json({ message: "Order placed successfully", order: newOrder });
   }
 };
-
 
 const updateAddress = async (req, res) => {
   let order = await orderModel.findOneAndUpdate(
@@ -145,10 +118,8 @@ const updateOrderStatus = async (req, res) => {
 const getAllOrders = async (req, res) => {
   if (req.user.role == "admin") {
     // if is an admin it will return all users orders
-    const allOrders = await orderModel.find().populate({
-      path: "mealItems.mealId",
-      select: "name price description",
-    });
+    const allOrders = await orderModel.find();
+
     if (allOrders && allOrders.length > 0) {
       res.status(200).json({ message: "all users Orders fetched", allOrders });
     } else {
@@ -156,10 +127,9 @@ const getAllOrders = async (req, res) => {
     }
   } else if (req.user.role == "user") {
     // if is a user it will return all its own orders
-    const allOrders = await orderModel.find({ userId: req.user.id }).populate({
-      path: "mealItems.mealId",
-      select: "name price description",
-    });
+    const allOrders = await orderModel
+      .find({ userId: req.user.id })
+      .populate("mealId", "name price");
     if (allOrders && allOrders.length > 0) {
       res.status(200).json({ message: "all Orders fetched", allOrders });
     } else {

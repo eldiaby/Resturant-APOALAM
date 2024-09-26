@@ -5,14 +5,14 @@ export const createReservation = async (req, res) => {
   try {
     const { userId, date, time, tableNumber, numberOfGuests } = req.body;
 
-    
-    if (userId || !date || !time || !tableNumber || !numberOfGuests) {
+    // تحقق من أن جميع الحقول مطلوبة
+   /*  if (userId || !date || !time || !tableNumber || !numberOfGuests) {
       return res.status(400).json({ message: "All fields are required" });
-    }
+    } */
 
-    const { id } = req.user;
+    const { _id } = req.user;
 
-    
+    // تحقق من أن الوقت أكبر من الوقت الحالي
     const reservationTime = new Date(`${date}T${time}`);
     if (reservationTime <= Date.now()) {
       return res.status(400).json({ message: "Time should be in the future" });

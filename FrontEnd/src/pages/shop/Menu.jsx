@@ -280,9 +280,9 @@ const Menu = () => {
               Greek Salad, Lasagne, Butternut Pumpkin, Tokusen Wagyu, Olivas
               Rellenas and more for a moderate cost
             </p>
-            <button className="bg-green font-semibold btn text-white px-8 py-3 rounded-full">
+            {/* <button className="bg-green font-semibold btn text-white px-8 py-3 rounded-full">
               Order Now
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
@@ -299,35 +299,35 @@ const Menu = () => {
               All
             </button>
             <button
-              onClick={() => filterItems("salad")}
-              className={selectedCategory === "salad" ? "active" : ""}
+              onClick={() => filterItems("Pizzas")}
+              className={selectedCategory === "Pizzas" ? "active" : ""}
             >
-              Salad
+              Pizzas
             </button>
             <button
-              onClick={() => filterItems("pizza")}
-              className={selectedCategory === "pizza" ? "active" : ""}
+              onClick={() => filterItems("Vegetarian")}
+              className={selectedCategory === "Vegetarian" ? "active" : ""}
             >
-              Pizza
+              Vegetarian
             </button>
             <button
-              onClick={() => filterItems("soup")}
-              className={selectedCategory === "soup" ? "active" : ""}
+              onClick={() => filterItems("Burgers")}
+              className={selectedCategory === "Burgers" ? "active" : ""}
             >
-              Soups
+              Burgers
             </button>
             <button
-              onClick={() => filterItems("dessert")}
-              className={selectedCategory === "dessert" ? "active" : ""}
+              onClick={() => filterItems("Salads")}
+              className={selectedCategory === "Salads" ? "active" : ""}
             >
-              Desserts
+              Salads{" "}
             </button>
-            <button
+            {/* <button
               onClick={() => filterItems("drinks")}
               className={selectedCategory === "drinks" ? "active" : ""}
             >
               Drinks
-            </button>
+            </button> */}
           </div>
 
           {/* filter options */}
@@ -366,9 +366,8 @@ const Menu = () => {
           <button
             key={index + 1}
             onClick={() => paginate(index + 1)}
-            className={`mx-1 px-3 py-1 rounded-full ${
-              currentPage === index + 1 ? "bg-green text-white" : "bg-gray-200"
-            }`}
+            className={`mx-1 px-3 py-1 rounded-full ${currentPage === index + 1 ? "bg-green text-white" : "bg-gray-200"
+              }`}
           >
             {index + 1}
           </button>

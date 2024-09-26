@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { decode } from "jwt-js-decode";
 import axios from "axios";
 
@@ -137,6 +137,13 @@ const ProfileSettings = () => {
               </div>
             ))}
             <div className="flex justify-end mt-4">
+              <Link className="mr-auto" to="/EamilOtp">
+                <p className={`btn bg-red mr-auto text-white`}>
+                  {" "}
+                  Reset Password
+                </p>
+              </Link>
+
               <button
                 className={`btn ${
                   isEditing ? "btn-primary" : "bg-blue-500 text-white"
