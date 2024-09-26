@@ -78,9 +78,9 @@ export class RecipesComponent implements OnInit {
         }
         this.fetchOne = true;
         this.recipes = res.meals.map((meal: any) => {
-          if (typeof meal.ingredients[0] === 'string') {
+          if (typeof meal.ingredients === 'string') {
             try {
-              meal.ingredients = JSON.parse(meal.ingredients[0]);
+              meal.ingredients = JSON.parse(meal.ingredients);
             } catch (error) {}
           }
           return meal;

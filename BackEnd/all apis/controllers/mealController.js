@@ -72,6 +72,7 @@ const getMeals = async (req, res) => {
     ]);
 
     res.status(200).json({
+      results:count,
       meals,
       totalPages: Math.ceil(count / limit),
       currentPage: Number(page),

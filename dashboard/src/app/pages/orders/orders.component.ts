@@ -59,7 +59,7 @@ export class OrdersComponent implements OnInit {
   getAllOrders() {
     this._ordersService.getAllOrders().subscribe({
       next: (res) => {
-        // console.log(res.allOrders);
+        console.log(res.allOrders);
         // this.userId = res.allOrders.userId._id;
         this.orders = res.allOrders.map((order: any) => {
           order.address = ` ${order.shippingDetails.city}, ${order.shippingDetails.postalCode} ${order.shippingDetails.address},${order.shippingDetails.comment}`;

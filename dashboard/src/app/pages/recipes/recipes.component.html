@@ -38,7 +38,7 @@
         @if(recipes.length ===0){
         <h2>Sorry,No Recipes!</h2>
         }
-        @for(recipe of recipes;track recipe._id ){
+        @for(recipe of recipes;track $index ){
         <div class="recipe">
             <div class="recipe-img-box">
                 <img class="recipe-img" [src]='recipe.imageUrl' alt="">
@@ -57,7 +57,7 @@
                 </header>
                 <p class="recipe-description">{{recipe.description}}</p>
                 <div class="recipe-tags">
-                    @for(tag of recipe.ingredients; track tag){
+                    @for(tag of recipe.ingredients; track $index){
                     <span class="tag">{{tag}}</span>
                     }
                 </div>

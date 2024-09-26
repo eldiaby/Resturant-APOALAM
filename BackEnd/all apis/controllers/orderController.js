@@ -66,7 +66,11 @@ const updateAddress = async (req, res) => {
 };
 
 const cancelOrder = async (req, res) => {
-  let order = await orderModel.findOneAndDelete({_id: req.params.orderId,userId: req.user.id,status: "pending",});
+  let order = await orderModel.findOneAndDelete({
+    _id: req.params.orderId,
+    userId: req.user.id,
+    status: "pending",
+  });
   if (order) {
     res.status(200).json({ messgae: "Order Canceled", order });
   } else {
@@ -125,7 +129,8 @@ const getAllOrders = async (req, res) => {
     // if is a user it will return all its own orders
     const allOrders = await orderModel
       .find({ userId: req.user.id })
-      .populate("mealId", "name price");
+      .populate("mealId", "name price")
+      .populate("userId", "userName");
     if (allOrders && allOrders.length > 0) {
       res.status(200).json({ message: "all Orders fetched", allOrders });
     } else {
