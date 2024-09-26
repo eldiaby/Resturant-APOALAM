@@ -10,7 +10,8 @@ export const createReservation = async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    const { id } = req.user;
+    const use = req.user;
+    console.log(use);
 
     // تحقق من أن الوقت أكبر من الوقت الحالي
     const reservationTime = new Date(`${date}T${time}`);
@@ -19,7 +20,7 @@ export const createReservation = async (req, res) => {
     }
 
     const reservation = new Reservation({
-      userId: id,
+      userId: req.user._id,
       date,
       time,
       tableNumber,
