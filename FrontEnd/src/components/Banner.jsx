@@ -1,5 +1,6 @@
 import React from "react";
 import bannerImg from "/images/home/APOALM.png";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -104,9 +105,11 @@ const Banner = () => {
             Where Each Plate Weaves a Story of Culinary Mastery and Passionate
             Craftsmanship
           </p>
-          <button className="bg-green font-semibold btn text-white px-8 py-3 rounded-full">
+          <Link to="/menu" className="bg-green font-semibold btn text-white px-8 py-3 rounded-full">
+
             Order Now
-          </button>
+
+          </Link>
         </div>
 
       </div>

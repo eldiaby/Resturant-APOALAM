@@ -54,13 +54,13 @@ export const signIn = async (req, res) => {
     const isUser = await userModel.findOne({ email: req.body.email });
     if (isUser) {
       if (bcrypt.compareSync(req.body.password, isUser.password)) {
-        const token = jwt.sign(
-          { id: isUser.id, role: isUser.role,userName:isUser.userName },
-          process.env.JWT_SECRET,
-          {
-            expiresIn: "24h",
-          }
-        );
+        // استبعاد كلمة المرور من بيانات المستخدم
+        const { password, ...userWithoutPassword } = isUser.toObject();
+
+        // توقيع الـ token بدون كلمة المرور
+        const token = jwt.sign(userWithoutPassword, process.env.JWT_SECRET, {
+          expiresIn: "24h",
+        });
         res.json({ message: `Welcome ${isUser.userName}`, token });
       } else {
         res.status(401).json({ message: "Please check your password" });
@@ -76,7 +76,7 @@ export const signIn = async (req, res) => {
 // Get My Profile
 export const getMyProfile = async (req, res) => {
   try {
-    const findUser = await userModel.findById(req.userInfo.id);
+    const findUser = await userModel.findById(req.user._id);
     res.status(200).json(findUser);
   } catch (err) {
     res

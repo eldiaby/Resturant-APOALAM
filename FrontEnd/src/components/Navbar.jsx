@@ -325,7 +325,10 @@ const Navbar = () => {
           Menu
         </Link>
       </li>
-      <li tabIndex={0}>
+      <li>
+        <Link to="/ReservationForm" className={url === "/ReservationForm" ? "text-green" : ""}>Reserve a table</Link>
+      </li>
+      {/*  <li tabIndex={0}>
         <details>
           <summary>Services</summary>
           <ul className="p-2">
@@ -340,18 +343,17 @@ const Navbar = () => {
       </li>
       <li>
         <a>Offers</a>
-      </li>
+      </li> */}
     </>
   );
 
   return (
     <header className="max-w-screen-2xl container mx-auto fixed">
       <nav
-        className={`navbar xl:px-24 ${
-          isSticky
-            ? "shadow-md bg-base-100 transition-all duration-300 ease-in-out"
-            : ""
-        }`}
+        className={`navbar xl:px-24 ${isSticky
+          ? "shadow-md bg-base-100 transition-all duration-300 ease-in-out"
+          : ""
+          }`}
       >
         <div className="navbar-start">
           <Link to="/" className="flex">

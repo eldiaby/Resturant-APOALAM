@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import dayjs from 'dayjs';
+import React, { useState, useEffect } from "react";
+import dayjs from "dayjs";
 
 const ReservationPage = () => {
-    const [date, setDate] = useState('');
-    const [time, setTime] = useState('');
-    const [tableNumber, setTableNumber] = useState('');
-    const [numberOfGuests, setNumberOfGuests] = useState('');
-    const [statusMessage, setStatusMessage] = useState('');
+    const [date, setDate] = useState("");
+    const [time, setTime] = useState("");
+    const [tableNumber, setTableNumber] = useState("");
+    const [numberOfGuests, setNumberOfGuests] = useState("");
+    const [statusMessage, setStatusMessage] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [reservedTables, setReservedTables] = useState([]); // State to hold reserved tables
 
     // Get today's date and max reservation date (5 days from today)
     const today = dayjs();
-    const maxDate = dayjs().add(5, 'day');
+    const maxDate = dayjs().add(30, 'day');
 
     useEffect(() => {
         const fetchReservedTables = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/reserved-tables'); // Replace with your actual API endpoint
+                const response = await fetch('http://localhost:5000/api/reservations'); // reservations
                 const data = await response.json();
                 setReservedTables(data.reservedTables || []);
             } catch (error) {
@@ -33,7 +33,7 @@ const ReservationPage = () => {
         setIsLoading(true);
 
         if (reservedTables.includes(Number(tableNumber))) {
-            setStatusMessage('The table is reserved. Please choose another table.');
+            setStatusMessage("The table is reserved. Please choose another table.");
             setIsLoading(false);
             return;
         }
@@ -45,19 +45,21 @@ const ReservationPage = () => {
             numberOfGuests,
         };
 
+        console.log(reservationData);
+
         try {
-            const token = localStorage.getItem('token');
+            const token = localStorage.getItem("token");
 
             if (!token) {
-                setStatusMessage(' No Token , You must log in');
+                setStatusMessage(' You must log in');
                 setIsLoading(false);
                 return;
             }
 
-            const response = await fetch('http://localhost:5000/api/reservations', {
-                method: 'POST',
+            const response = await fetch("http://localhost:5000/api/reservations", {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                     token: token,
                 },
                 body: JSON.stringify(reservationData),
@@ -66,20 +68,22 @@ const ReservationPage = () => {
             const data = await response.json();
 
             if (response.ok) {
-                setStatusMessage('Reservation booked successfully!');
-                setDate('');
-                setTime('');
-                setTableNumber('');
-                setNumberOfGuests('');
+                setStatusMessage("Reservation booked successfully!");
+                setDate("");
+                setTime("");
+                setTableNumber("");
+                setNumberOfGuests("");
             } else {
                 if (response.status === 401) {
                     setStatusMessage(data.message);
                 } else {
-                    setStatusMessage(data.message || 'Failed to book reservation. Please try again.');
+                    setStatusMessage(
+                        data.message || "Failed to book reservation. Please try again."
+                    );
                 }
             }
         } catch (error) {
-            setStatusMessage('Error booking reservation. Please try again later.');
+            setStatusMessage("Error booking reservation. Please try again later.");
         } finally {
             setIsLoading(false);
         }
@@ -87,8 +91,8 @@ const ReservationPage = () => {
 
     // Validate time to be between 10 AM and 4 AM
     const isValidTime = (selectedTime) => {
-        const selectedHour = parseInt(selectedTime.split(':')[0], 10);
-        return (selectedHour >= 10 || selectedHour < 4); // From 10 AM to 4 AM (next day)
+        const selectedHour = parseInt(selectedTime.split(":")[0], 10);
+        return selectedHour >= 10 || selectedHour < 4; // From 10 AM to 4 AM (next day)
     };
 
     const handleTimeChange = (e) => {
@@ -96,7 +100,7 @@ const ReservationPage = () => {
         if (isValidTime(selectedTime)) {
             setTime(selectedTime);
         } else {
-            setStatusMessage('Please select a time between 10 AM and 4 AM.');
+            setStatusMessage("Please select a time between 10 AM and 4 AM.");
         }
     };
 
@@ -106,7 +110,9 @@ const ReservationPage = () => {
                 className="bg-white p-6 rounded-lg shadow-md w-full max-w-lg"
                 onSubmit={handleReservation}
             >
-                <h2 className="text-2xl font-bold mb-4 text-center">Reserve Your Table</h2>
+                <h2 className="text-2xl font-bold mb-4 text-center">
+                    Reserve Your Table
+                </h2>
 
                 <div className="mb-4">
                     <label className="block text-gray-700">Date</label>
@@ -116,8 +122,8 @@ const ReservationPage = () => {
                         value={date}
                         onChange={(e) => setDate(e.target.value)}
                         required
-                        min={today.format('YYYY-MM-DD')} // Disable past dates
-                        max={maxDate.format('YYYY-MM-DD')} // Limit to 5 days from today
+                        min={today.format("YYYY-MM-DD")} // Disable past dates
+                        max={maxDate.format("YYYY-MM-DD")} // Limit to 5 days from today
                     />
                 </div>
 
@@ -163,11 +169,16 @@ const ReservationPage = () => {
                     className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition-colors"
                     disabled={isLoading}
                 >
-                    {isLoading ? 'Booking...' : 'Reserve Now'}
+                    {isLoading ? "Booking..." : "Reserve Now"}
                 </button>
 
                 {statusMessage && (
-                    <p className={`mt-4 text-center ${statusMessage.includes('successfully') ? 'text-success' : 'text-red'}`}>
+                    <p
+                        className={`mt-4 text-center ${statusMessage.includes("successfully")
+                                ? "text-success"
+                                : "text-red"
+                            }`}
+                    >
                         {statusMessage}
                     </p>
                 )}

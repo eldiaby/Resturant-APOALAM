@@ -21,28 +21,28 @@ router.get(
 // PUT /api/reservations: Update all reservations
 router.put(
   "/reservations",
-  // authMiddleware,
+  authMiddleware,
   reservationController.getReservationsss
 );
 
 // GET /api/reservations/:id: Get reservation details by ID
 router.get(
   "/reservations/:id",
-  // authMiddleware,
+  authMiddleware,
   reservationController.getReservationById
 );
 
 // PUT /api/reservations/:id: Update a reservation by ID
 router.put(
   "/reservations/:id",
-  // authMiddleware,
+  authMiddleware,
   reservationController.updateReservation
 );
 
 // DELETE /api/reservations/:id: Cancel a reservation by ID
 router.delete(
   "/reservations/:id",
-  // authMiddleware,
+  authMiddleware,
   reservationController.cancelReservation
 );
 

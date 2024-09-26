@@ -9,8 +9,9 @@ import orderRoute from "./routes/orderRoutes.js";
 import userMangeRoute from "./routes/userManage.js";
 import cartRoute from "./routes/cartRoutes.js";
 
-// Load environment variables
+import repassword from "./routes/repasswordRoutes.js";
 
+// Load environment variables
 dotenv.config();
 
 const app = express();
@@ -18,7 +19,7 @@ const app = express();
 // Connect to the database
 connectDB();
 
-const allowedOrigins = ["http://localhost:5173", "http://localhost:4200"];
+const allowedOrigins = ["http://localhost:5173"];
 
 // Middleware
 app.use(
@@ -36,6 +37,7 @@ app.use(
 app.use(express.json());
 
 // Routes
+app.use("/api", repassword);
 app.use("/api", mealRoutes);
 app.use("/api", reservationRoutes);
 app.use("/api", userRoutes);

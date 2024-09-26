@@ -9,7 +9,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-
+  // const [forgetPassword, setForgetPassword] = useState(false);
   const [error, setError] = useState({});
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
@@ -61,6 +61,7 @@ const Login = () => {
     setSuccess("");
 
     const validationErrors = validateLogin();
+
     if (Object.keys(validationErrors).length > 0) {
       setError(validationErrors);
       return;
@@ -71,6 +72,7 @@ const Login = () => {
         "http://localhost:5000/api/auth/login",
         formData
       );
+
       console.log(response);
 
       localStorage.setItem("token", response.data.token); // Save token to localStorage
@@ -158,6 +160,12 @@ const Login = () => {
               <span className="text-red">{error.password}</span>
             )}
           </div>
+          <Link
+            className="underline text-info ml-auto  ms-auto fw-light cursor-pointer"
+            to="/EamilOtp"
+          >
+            <p>Forget Password </p>
+          </Link>
 
           {/* Error message */}
           {error.message && <p className="text-red">{error.message}</p>}
