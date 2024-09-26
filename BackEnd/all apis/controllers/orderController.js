@@ -94,11 +94,7 @@ const updateAddress = async (req, res) => {
 };
 
 const cancelOrder = async (req, res) => {
-  let order = await orderModel.findOneAndDelete({
-    _id: req.params.orderId,
-    userId: req.user.id,
-    status: "pending",
-  });
+  let order = await orderModel.findOneAndDelete({_id: req.params.orderId,userId: req.user.id,status: "pending",});
   if (order) {
     res.status(200).json({ messgae: "Order Canceled", order });
   } else {
