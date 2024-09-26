@@ -75,8 +75,8 @@ export class OrdersComponent implements OnInit {
       },
     });
   }
-  cancelOrder(orderId: any, userId: any) {
-    this._ordersService.cancelOrder(orderId, userId).subscribe({
+  updateOrder(orderId: any, status: any) {
+    this._ordersService.updateOrder(orderId, status).subscribe({
       next: (res) => {
         console.log(res);
       },

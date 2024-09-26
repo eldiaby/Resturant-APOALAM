@@ -38,7 +38,9 @@
                     <td>${{order.totalPrice}}</td>
                     <td><span class="pending">{{order.status}}</span></td>
                     <td><span class="pending">{{order.paymentStatus}}</span></td>
-                    <td><button (click)="cancelOrder(order._id, order.userId._id)" class="cancel-btn">Cancel</button>
+                    <td>
+                        <button (click)="updateOrder(order._id, 'confirm')" class="cancel-btn">Cancel</button>
+                        <button (click)="updateOrder(order._id, 'canceled')" class="cancel-btn">Cancel</button>
                     </td>
                 </tr>
                 }
