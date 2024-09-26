@@ -12,14 +12,12 @@ const ReservationPage = () => {
 
   // Get today's date and max reservation date (5 days from today)
   const today = dayjs();
-  const maxDate = dayjs().add(5, "day");
+  const maxDate = dayjs().add(30, "day");
 
   useEffect(() => {
     const fetchReservedTables = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:5000/api/reserved-tables"
-        );
+        const response = await fetch("http://localhost:5000/api/reservations"); // reservations
         const data = await response.json();
         setReservedTables(data.reservedTables || []);
       } catch (error) {
@@ -53,7 +51,7 @@ const ReservationPage = () => {
       const token = localStorage.getItem("token");
 
       if (!token) {
-        setStatusMessage(" No Token , You must log in");
+        setStatusMessage(" You must log in");
         setIsLoading(false);
         return;
       }

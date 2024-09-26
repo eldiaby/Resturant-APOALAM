@@ -32,9 +32,8 @@ const Cards = ({ item }) => {
   return (
     <div className="card shadow-xl relative mr-5 md:my-5 overflow-hidden">
       <div
-        className={`rating gap-1 absolute right-2 top-2 p-4 heartStar bg-green ${
-          isHeartFilled ? "text-rose-500" : "text-white"
-        }`}
+        className={`rating gap-1 absolute right-2 top-2 p-4 heartStar bg-green ${isHeartFilled ? "text-rose-500" : "text-white"
+          }`}
         onClick={handleHeartClick}
       >
         <FaHeart className="w-5 h-5 cursor-pointer " />
@@ -55,7 +54,7 @@ const Cards = ({ item }) => {
         <p>{item.description}</p>
         <div className="card-actions justify-between items-center mt-2">
           <h5 className="font-semibold">
-            <span className="text-sm text-red">$ </span> {item.price}
+            <span className="text-sm text-green">$ </span> {item.price}
           </h5>
           <button className="btn bg-green text-white" onClick={handleAddToCart}>
             Add to Cart
