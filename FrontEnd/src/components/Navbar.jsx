@@ -58,6 +58,7 @@ const Navbar = () => {
     localStorage.removeItem("token");
     setLoggedIn(false);
     navigate("/login");
+    window.location.reload()
   };
 
   useEffect(() => {
