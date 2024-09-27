@@ -10,7 +10,7 @@ import ProfileOrders from "../pages/shop/profileOrdes";
 import ProfileSettings from "../pages/profile/profile";
 import EmailOtp from "../components/EmailForOtp";
 import ResetPassword from "../components/resetPassword";
-import PaymentPage from "../components/CheckOutBtn";
+
 import CheckOutSuccess from "../components/CheckOutSuccess";
 
 const router = createBrowserRouter([
@@ -67,10 +67,6 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
-  },
-  {
-    path: "/paymentPage",
-    element: <PaymentPage />,
   },
 ]);
 

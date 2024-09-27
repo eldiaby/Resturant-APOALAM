@@ -86,7 +86,7 @@ const Login = () => {
       if (err.response?.data?.message === "This email does not exist") {
         setError({ email: "This email does not exist." });
       } else {
-        setError({ message: "Something went wrong." });
+        setError({ message: "Username or password is incorrect." });
       }
     }
   };
@@ -115,9 +115,9 @@ const Login = () => {
   };
 
   return (
-    <div className="max-w-md shadow w-full mx-auto flex items-center justify-center my-20">
+    <dialog className="max-w-md shadow w-full p-5 mx-auto flex items-center justify-center my-40">
       <div
-        className="modal-action flex flex-col justify-center mt-0"
+        className="modal-action flex flex-col justify-center"
         style={{ width: "450px" }}
       >
         <form onSubmit={handleSubmit} className="card-body">
@@ -134,9 +134,8 @@ const Login = () => {
               type="email"
               placeholder="Email"
               name="email"
-              className={`input input-bordered ${
-                error.email ? "input-error" : ""
-              }`}
+              className={`input input-bordered ${error.email ? "input-error" : ""
+                }`}
             />
             {error.email && <span className="text-red">{error.email}</span>}
           </div>
@@ -152,9 +151,8 @@ const Login = () => {
               type="password"
               placeholder="Password"
               name="password"
-              className={`input input-bordered ${
-                error.password ? "input-error" : ""
-              }`}
+              className={`input input-bordered ${error.password ? "input-error" : ""
+                }`}
             />
             {error.password && (
               <span className="text-red">{error.password}</span>
@@ -192,7 +190,7 @@ const Login = () => {
           {/* Close button */}
           <Link
             to="/"
-            className="btn btn-sm btn-circle btn-ghost absolute right-20 top-5"
+            className="btn btn-sm btn-circle btn-ghost absolute right-5 top-5"
           >
             ✕
           </Link>
@@ -206,7 +204,7 @@ const Login = () => {
           </button>
         </div>
       </div>
-    </div>
+    </dialog>
   );
 };
 
