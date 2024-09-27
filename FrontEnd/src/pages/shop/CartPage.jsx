@@ -168,7 +168,7 @@ function CartPage() {
                           </button>
                         </div>
                       </td>
-                      <td>${meal.mealId.price}</td>
+                      <td>${meal.mealId.price * meal.quantity}</td>
                       <td>
                         <button
                           className="btn btn-danger btn-xs"
