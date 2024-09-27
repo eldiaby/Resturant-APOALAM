@@ -11,6 +11,8 @@ import ProfileSettings from "../pages/profile/profile";
 import EmailOtp from "../components/EmailForOtp";
 import ResetPassword from "../components/resetPassword";
 
+import CheckOutSuccess from "../components/CheckOutSuccess";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,6 +31,10 @@ const router = createBrowserRouter([
         element: <CartPage />,
       },
       {
+        path: "/canceled-true",
+        element: <CartPage />,
+      },
+      {
         path: "/orders",
         element: <ProfileOrders />,
       },
@@ -41,26 +47,27 @@ const router = createBrowserRouter([
         element: <ProfileSettings />,
       },
       {
-        path: "/signup",
-        element: <SignUp />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/resetpassword",
-        element: <ResetPassword />,
+        path: "/success-true",
+        element: <CheckOutSuccess />,
       },
     ],
   },
-
+  {
+    path: "/signup",
+    element: <SignUp />,
+  },
   {
     path: "/EamilOtp",
     element: <EmailOtp />,
   },
-
-
+  {
+    path: "/resetpassword",
+    element: <ResetPassword />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
 ]);
 
 export default router;

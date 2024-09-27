@@ -8,9 +8,8 @@ const ReservationPage = () => {
   const [numberOfGuests, setNumberOfGuests] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [reservedTables, setReservedTables] = useState([]); // State to hold reserved tables
+  const [reservedTables, setReservedTables] = useState([]);
 
-  // Get today's date and max reservation date (5 days from today)
   const today = dayjs();
   const maxDate = dayjs().add(30, "day");
 
@@ -89,7 +88,6 @@ const ReservationPage = () => {
     }
   };
 
-  // Validate time to be between 10 AM and 4 AM
   const isValidTime = (selectedTime) => {
     const selectedHour = parseInt(selectedTime.split(":")[0], 10);
     return selectedHour >= 10 || selectedHour < 4; // From 10 AM to 4 AM (next day)
@@ -111,7 +109,7 @@ const ReservationPage = () => {
         onSubmit={handleReservation}
       >
         <h2 className="text-2xl font-bold mb-4 text-center">
-          Reserve Your Table
+          Reserve Your Tabl
         </h2>
 
         <div className="mb-4">
