@@ -1,11 +1,11 @@
 <div class="orders">
     <h2>Orders</h2>
     <nav class="orders-nav">
-        <select (change)="setStatus($event)" class="orders-filters">
-            <option value="all">all ({{orders.length}})</option>
-            <option value="confirmed">confirmed (40)</option>
-            <option value="pending">pending (78)</option>
-            <option value="canceled">canceled (28)</option>
+        <select (change)="setSortBy($event)" class="orders-filters">
+            <option value="">all ({{ordersLength}})</option>
+            <option value="confirm">confirmed ({{confirm.length}})</option>
+            <option value="pending">pending ({{pending.length}})</option>
+            <option value="cancel">canceled ({{cancel.length}})</option>
         </select>
         <div class="orders-btns">
             <button class="filter-date"><span>📅</span>this month 🔽</button>
@@ -14,7 +14,6 @@
     <div class="orders-box">
         @if(orders.length > 0){
         <table class="orders-table">
-
             <thead>
                 <tr>
                     <th>customer</th>
@@ -30,17 +29,26 @@
             <tbody>
                 @for(order of orders; track order._id) {
                 <tr>
-                    <td>name test</td>
-                    <!-- <td>{{order.userId.userName}}</td> -->
+                    <!-- <td>name test</td> -->
+                    <td>{{order.userId.userName}}</td>
                     <td>{{order.createdAt.slice(0,10)}}</td>
                     <td>{{order.createdAt.slice(11,16)}}</td>
                     <td>{{order.address}}</td>
                     <td>${{order.totalPrice}}</td>
-                    <td><span class="pending">{{order.status}}</span></td>
+                    <td><span
+                            [class]="order.status === 'pending' ? 'pending' :order.status == 'cancel' ? 'cancel' : 'confirm'">{{order.status}}</span>
+                    </td>
                     <td><span class="pending">{{order.paymentStatus}}</span></td>
-                    <td>
-                        <button (click)="updateOrder(order._id, 'confirm')" class="cancel-btn">Cancel</button>
-                        <button (click)="updateOrder(order._id, 'canceled')" class="cancel-btn">Cancel</button>
+                    <td class="btns">
+                        @if(order.status == "pending"){
+
+                        <button (click)="updateOrder(order._id, 'confirm')" class="confirm-btn"><i
+                                class="fa-solid fa-check"></i></button>
+                        <button (click)="updateOrder(order._id, 'cancel')" class="cancel-btn"><i
+                                class="fa-solid fa-xmark"></i></button>
+                        }@else {
+                        done
+                        }
                     </td>
                 </tr>
                 }

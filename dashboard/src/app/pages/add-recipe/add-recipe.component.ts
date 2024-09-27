@@ -41,6 +41,16 @@ export class AddRecipeComponent {
       ingredients: this.ingredients,
     });
   }
+
+  // addIngredient() {
+  //   if (!this.ingredient) return;
+  //   this.ingredients = [...this.ingredients, this.ingredient]; // Create a new array
+  //   this.ingredient = '';
+  //   this.addRecipeForm.patchValue({
+  //     ingredients: [...this.ingredients], // Use a new array
+  //   });
+  // }
+
   deleteIngredient(i: any) {
     if (i > -1) {
       this.ingredients.splice(i, 1);

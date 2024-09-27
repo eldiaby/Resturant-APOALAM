@@ -13,7 +13,7 @@
     <nav class="recipes-nav">
         <div class="recipes-filters">
             <input [value]="searchQuery" (keyup)="search($event)" type="text" placeholder="Search by recipe name">
-            <select (change)="setSortBy($event)">
+            <select (change)="setSortByCate($event)">
                 <option value="">Category (All)</option>
                 @for (category of categories; track $index) {
                 <option [value]="category.name">{{category.name}}</option>
@@ -24,7 +24,7 @@
                 <option value="salad">Salad</option>
                 <option value="mexican">Mexican</option> -->
             </select>
-            <select (change)="setSortBy($event)">
+            <select (change)="setSortByNamePrice($event)">
                 <!-- <option value="">Price or Name</option> -->
                 <option value="name">Name</option>
                 <option value="price">Price</option>
