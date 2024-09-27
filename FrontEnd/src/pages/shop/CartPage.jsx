@@ -275,13 +275,13 @@ function CartPage() {
     try {
       // Show confirmation dialog before deleting
       const result = await Swal.fire({
-        title: 'Are you sure?',
+        title: "Are you sure?",
         text: "You won't be able to revert this!",
-        icon: 'warning',
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!',
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
       });
 
       if (result.isConfirmed) {
@@ -301,13 +301,17 @@ function CartPage() {
         setCart(...updatedCart.data.cart);
 
         // Show success message
-        Swal.fire('Deleted!', 'Your meal has been removed from the cart.', 'success');
+        Swal.fire(
+          "Deleted!",
+          "Your meal has been removed from the cart.",
+          "success"
+        );
       }
     } catch (error) {
       console.error("Error deleting meal from cart", error);
 
       // Show error message if something goes wrong
-      Swal.fire('Error!', 'There was an issue deleting the meal.', 'error');
+      Swal.fire("Error!", "There was an issue deleting the meal.", "error");
     }
   };
 
@@ -345,74 +349,79 @@ function CartPage() {
         </div>
       </div>
 
-      {
-        cart?.mealItems?.length > 0 ?
-          <>
-            <div className="overflow-x-auto">
-              <table className="table">
-                <thead className="bg-green text-white rounded-sm">
-                  <tr>
-                    <th>#</th>
-                    <th>Food</th>
-                    <th>Item name</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cart?.mealItems?.map((meal, index) => (
-                    <tr key={meal.mealId._id}>
-                      <td>{index + 1}</td>
-                      <td>
-                        <div className="flex items-center gap-3">
-                          <div className="avatar">
-                            <div className="mask mask-squircle h-12 w-12">
-                              <img
-                                src={meal.mealId.imageUrl}
-                                alt={meal.mealId.name}
-                              />
-                            </div>
+      {cart?.mealItems?.length > 0 ? (
+        <>
+          <div className="overflow-x-auto">
+            <table className="table">
+              <thead className="bg-green text-white rounded-sm">
+                <tr>
+                  <th>#</th>
+                  <th>Food</th>
+                  <th>Item name</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cart?.mealItems?.map((meal, index) => (
+                  <tr key={meal.mealId._id}>
+                    <td>{index + 1}</td>
+                    <td>
+                      <div className="flex items-center gap-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle h-12 w-12">
+                            <img
+                              src={meal.mealId.imageUrl}
+                              alt={meal.mealId.name}
+                            />
                           </div>
                         </div>
-                      </td>
-                      <td>{meal.mealId.name}</td>
-                      <td>
-                        <div className="flex items-center gap-2">
-                          <button
-                            className="btn btn-xs"
-                            onClick={() =>
-                              handleQuantityChange(meal.mealId._id, meal.quantity - 1)
-                            }
-                            disabled={meal.quantity === 1}
-                          >
-                            -
-                          </button>
-                          <span>{meal.quantity}</span>
-                          <button
-                            className="btn btn-xs"
-                            onClick={() =>
-                              handleQuantityChange(meal.mealId._id, meal.quantity + 1)
-                            }
-                          >
-                            +
-                          </button>
-                        </div>
-                      </td>
-                      <td>${meal.mealId.price * meal.quantity}</td>
-                      <td>
+                      </div>
+                    </td>
+                    <td>{meal.mealId.name}</td>
+                    <td>
+                      <div className="flex items-center gap-2">
                         <button
-                          className="btn bg-red btn-xs text-white"
-                          onClick={() => handleDelete(meal.mealId._id)}
+                          className="btn btn-xs"
+                          onClick={() =>
+                            handleQuantityChange(
+                              meal.mealId._id,
+                              meal.quantity - 1
+                            )
+                          }
+                          disabled={meal.quantity === 1}
                         >
-                          Delete
+                          -
                         </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                        <span>{meal.quantity}</span>
+                        <button
+                          className="btn btn-xs"
+                          onClick={() =>
+                            handleQuantityChange(
+                              meal.mealId._id,
+                              meal.quantity + 1
+                            )
+                          }
+                        >
+                          +
+                        </button>
+                      </div>
+                    </td>
+                    <td>${meal.mealId.price * meal.quantity}</td>
+                    <td>
+                      <button
+                        className="btn bg-red btn-xs text-white"
+                        onClick={() => handleDelete(meal.mealId._id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
           <div className="py-6 flex justify-center">
             <CheckOutBtn items={cart?.mealItems} />
