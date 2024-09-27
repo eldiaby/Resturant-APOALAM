@@ -27,9 +27,26 @@ export class OrdersService {
   updateOrder(orderId: any, status: any): Observable<any> {
     const body = { status };
     const headers = this.createHeaders();
-    return this._httpClient.put(`http://127.0.0.1:5000/api/order/${orderId}`, {
-      headers,
+    return this._httpClient.patch(
+      `http://127.0.0.1:5000/api/order/${orderId}`,
       body,
-    });
+      {
+        headers,
+      }
+    );
+    // return this._httpClient.patch(
+    //   `http://127.0.0.1:5000/api/order/${orderId}`,
+    //   data,
+    //   {
+    //     header,
+    //   }
+    // );
   }
 }
+
+// updateRecipe(id: any, data: any): Observable<any> {
+//   const headers = this.createHeaders();
+//   return this._httpClient.put(`http://127.0.0.1:5000/api/meals/${id}`, data, {
+//     headers,
+//   });
+// }
