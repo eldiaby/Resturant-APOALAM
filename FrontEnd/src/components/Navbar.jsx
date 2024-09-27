@@ -75,11 +75,10 @@ const Navbar = () => {
   return (
     <header className="fixed z-50 w-screen">
       <nav
-        className={`navbar xl:px-24 transition-all duration-300 rounded-lg border border-gray-300`}
-        style={{
-          backgroundColor: isSticky ? "rgba(255, 255, 255, 0.5)" : "white",
-          backdropFilter: "blur(10px)",
-        }}
+        className={`navbar xl:px-24 ${isSticky
+          ? "shadow-md bg-base-100 transition-all duration-300 ease-in-out"
+          : ""
+          }`}
       >
         <div className="navbar-start">
           <Link to="/" className="flex">
@@ -95,9 +94,8 @@ const Navbar = () => {
               >
                 <Link
                   to={item.to}
-                  className={`hover:text-green ${
-                    url === item.to ? "text-green" : ""
-                  }`}
+                  className={`hover:text-green ${url === item.to ? "text-green" : ""
+                    }`}
                 >
                   {item.text}
                 </Link>
@@ -122,9 +120,8 @@ const Navbar = () => {
               />
             </svg>
             <span
-              className={`badge badge-sm indicator-item absolute top-0 right-0 transform translate-x-1 -translate-y-1 ${
-                cartItems > 0 ? "bg-red-600" : "bg-white"
-              } text-white`}
+              className={`badge badge-sm indicator-item absolute top-0 right-0 transform translate-x-1 -translate-y-1 ${cartItems > 0 ? "bg-red-600" : "bg-white"
+                } text-white`}
               style={{ color: cartItems > 0 ? "white" : "black" }}
             >
               {cartItems}
