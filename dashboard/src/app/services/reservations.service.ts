@@ -24,4 +24,15 @@ export class ReservationsService {
       headers,
     });
   }
+  updateReservations(reservationId: any, status: any): Observable<any> {
+    const body = { status };
+    const headers = this.createHeaders();
+    return this._httpClient.patch(
+      `http://127.0.0.1:5000/api/reservations/${reservationId}`,
+      body,
+      {
+        headers,
+      }
+    );
+  }
 }

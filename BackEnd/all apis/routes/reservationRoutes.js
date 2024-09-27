@@ -40,7 +40,7 @@ router.put(
 );
 
 // DELETE /api/reservations/:id: Cancel a reservation by ID
-router.delete(
+router.patch(
   "/reservations/:id",
   authMiddleware,
   reservationController.cancelReservation
