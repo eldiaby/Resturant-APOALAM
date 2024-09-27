@@ -127,10 +127,10 @@ const removeMeal = async (req, res) => {
 };
 
 const updateOrderStatus = async (req, res) => {
-  const userId = req.body.userId;
+  // const userId = req.body.userId;
   const newOrderStatus = req.body.status;
   let order = await orderModel.findOneAndUpdate(
-    { _id: req.params.orderId, userId },
+    { _id: req.params.orderId },
     { status: newOrderStatus },
     { new: true }
   );
@@ -145,10 +145,16 @@ const updateOrderStatus = async (req, res) => {
 const getAllOrders = async (req, res) => {
   if (req.user.role == "admin") {
     // if is an admin it will return all users orders
-    const allOrders = await orderModel.find().populate({
-      path: "mealItems.mealId",
-      select: "name price description",
-    });
+    const allOrders = await orderModel
+      .find()
+      .populate({
+        path: "mealItems.mealId",
+        select: "name price description",
+      })
+      .populate({
+        path: "userId",
+        select: "userName",
+      });
     if (allOrders && allOrders.length > 0) {
       res.status(200).json({ message: "all users Orders fetched", allOrders });
     } else {
@@ -172,8 +178,8 @@ const getOrder = async (req, res) => {
   if (req.user.role == "admin") {
     // if is an admin it will return all users orders
     const order = await orderModel.findById(req.params.orderId);
-    if (order && order.length > 0) {
-      res.status(200).json({ message: "all users Orders fetched", order });
+    if (order) {
+      res.status(200).json({ message: "Order fetched", order });
     } else {
       res.status(404).json({ message: "there are no order yet!" });
     }
@@ -183,7 +189,7 @@ const getOrder = async (req, res) => {
       _id: req.params.orderId,
       userId: req.user._id,
     });
-    if (order && order.length > 0) {
+    if (order) {
       res.status(200).json({ message: "order fetched", order });
     } else {
       res.status(404).json({ message: "there are no order!" });

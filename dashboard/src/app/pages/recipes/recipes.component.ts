@@ -19,7 +19,8 @@ export class RecipesComponent implements OnInit {
   recipes: Recipe[] = [];
   totalRecipes: any = 0;
   ingredients: string[] = [];
-  sortBy: string = '';
+  sortByCate: string = '';
+  sortByNamePrice: string = '';
   page: number = 1;
   fetchOne: boolean = false;
   searchQuery: string = '';
@@ -50,8 +51,12 @@ export class RecipesComponent implements OnInit {
       this.fetchRecipes(this.page, '', '');
     }
   }
-  setSortBy(e: any) {
-    this.sortBy = e.target.value;
+  setSortByCate(e: any) {
+    this.sortByCate = e.target.value;
+    this.fetchRecipes(this.page, e.target.value, '');
+  }
+  setSortByNamePrice(e: any) {
+    this.sortByNamePrice = e.target.value;
     this.fetchRecipes(this.page, '', e.target.value);
   }
 
