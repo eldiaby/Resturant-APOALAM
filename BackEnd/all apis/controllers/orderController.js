@@ -79,7 +79,7 @@ const updateAddress = async (req, res) => {
   let order = await orderModel.findOneAndUpdate(
     {
       _id: req.params.orderId,
-      userId: req.user.id,
+      userId: req.user._id,
       status: "pending",
     },
     { shippingDetails: req.body },
@@ -95,7 +95,7 @@ const updateAddress = async (req, res) => {
 const cancelOrder = async (req, res) => {
   let order = await orderModel.findOneAndDelete({
     _id: req.params.orderId,
-    userId: req.user.id,
+    userId: req.user._id,
     status: "pending",
   });
   if (order) {
@@ -107,7 +107,7 @@ const cancelOrder = async (req, res) => {
 
 const removeMeal = async (req, res) => {
   let order = await orderModel.findOne({
-    userId: req.user.id,
+    userId: req.user._id,
     status: "pending",
   });
   if (order) {
@@ -156,7 +156,7 @@ const getAllOrders = async (req, res) => {
     }
   } else if (req.user.role == "user") {
     // if is a user it will return all its own orders
-    const allOrders = await orderModel.find({ userId: req.user.id }).populate({
+    const allOrders = await orderModel.find({ userId: req.user._id }).populate({
       path: "mealItems.mealId",
       select: "name price description",
     });
@@ -181,7 +181,7 @@ const getOrder = async (req, res) => {
     // if is a user it will return all its own orders
     const order = await orderModel.find({
       _id: req.params.orderId,
-      userId: req.user.id,
+      userId: req.user._id,
     });
     if (order && order.length > 0) {
       res.status(200).json({ message: "order fetched", order });
@@ -205,7 +205,7 @@ export {
 // import userModel from "../models/User.js";
 // import Meal from "../models/Meal.js";
 // const orderMeal = async (req, res) => {
-//   const userId = req.user.id;
+//   const userId = req.user._id;
 //   const { mealId } = req.params;
 //   const { quantity = 1 } = req.body;
 
@@ -282,7 +282,7 @@ export {
 //   let order = await orderModel.findOneAndUpdate(
 //     {
 //       _id: req.params.orderId,
-//       userId: req.user.id,
+//       userId: req.user._id,
 //       status: "pending",
 //     },
 //     { shippingDetails: req.body },
@@ -298,7 +298,7 @@ export {
 // const cancelOrder = async (req, res) => {
 //   let order = await orderModel.findOneAndDelete({
 //     _id: req.params.orderId,
-//     userId: req.user.id,
+//     userId: req.user._id,
 //     status: "pending",
 //   });
 //   if (order) {
@@ -310,7 +310,7 @@ export {
 
 // const removeMeal = async (req, res) => {
 //   let order = await orderModel.findOne({
-//     userId: req.user.id,
+//     userId: req.user._id,
 //     status: "pending",
 //   });
 //   if (order) {
@@ -358,7 +358,7 @@ export {
 //   } else if (req.user.role == "user") {
 //     // if is a user it will return all its own orders
 //     const allOrders = await orderModel
-//       .find({ userId: req.user.id })
+//       .find({ userId: req.user._id })
 //       .populate({ path: "mealItems.mealId", select: "name price" })
 //       .populate({ path: "userId", select: "userName" });
 //     if (allOrders && allOrders.length > 0) {
@@ -382,7 +382,7 @@ export {
 //     // if is a user it will return all its own orders
 //     const order = await orderModel.find({
 //       _id: req.params.orderId,
-//       userId: req.user.id,
+//       userId: req.user._id,
 //     });
 //     if (order && order.length > 0) {
 //       res.status(200).json({ message: "order fetched", order });

@@ -3,7 +3,7 @@ import orderModel from "../models/Order.js";
 import userModel from "../models/User.js";
 
 const getCart = async (req, res) => {
-  const userCart = await cartModel.find({ userId: req.user.id }).populate({
+  const userCart = await cartModel.find({ userId: req.user._id }).populate({
     path: "mealItems.mealId",
     select: "name price description imageUrl",
   });
@@ -19,7 +19,7 @@ const getCart = async (req, res) => {
 const addToCart = async (req, res) => {
   const mealId = req.params.id;
   const quantity = req.body.quantity;
-  const userCart = await cartModel.findOne({ userId: req.user.id });
+  const userCart = await cartModel.findOne({ userId: req.user._id });
 
   // if user already have cart
   if (userCart) {
@@ -51,7 +51,7 @@ const addToCart = async (req, res) => {
   } else {
     // Create a new Cart if it first time to add to cart
     const newCart = new cartModel({
-      userId: req.user.id,
+      userId: req.user._id,
       mealItems: [{ mealId, quantity }],
     });
 
@@ -69,7 +69,7 @@ const addToCart = async (req, res) => {
     newCart.totalAmount = newTotalAmount;
 
     await newCart.save();
-    await userModel.findByIdAndUpdate(req.user.id, { cart: newCart._id });
+    await userModel.findByIdAndUpdate(req.user._id, { cart: newCart._id });
     return res
       .status(201)
       .json({ message: "Meal Added to Cart successfully", cart: newCart });
@@ -87,7 +87,7 @@ const updateCartQuantity = async (req, res) => {
 
   try {
     // Find the user's cart
-    const userCart = await cartModel.findOne({ userId: req.user.id }).populate({
+    const userCart = await cartModel.findOne({ userId: req.user._id }).populate({
       path: "mealItems.mealId",
       select: "name price description imageUrl",
     });
@@ -131,7 +131,7 @@ const updateCartQuantity = async (req, res) => {
 
 const removeFromCart = async (req, res) => {
   try {
-    const userCart = await cartModel.findOne({ userId: req.user.id }).populate({
+    const userCart = await cartModel.findOne({ userId: req.user._id }).populate({
       path: "mealItems.mealId",
       select: "price",
     });
@@ -173,7 +173,7 @@ const removeFromCart = async (req, res) => {
 
 const clearCart = async (req, res) => {
   const userCart = await cartModel.findOneAndDelete({
-    userId: req.user.id,
+    userId: req.user._id,
   });
   if (userCart) {
     res.status(200).json({ messgae: "Cart Removed", userCart });
@@ -183,7 +183,7 @@ const clearCart = async (req, res) => {
 };
 
 const checkOut = async (req, res) => {
-  const userCart = await cartModel.findOne({ userId: req.user.id });
+  const userCart = await cartModel.findOne({ userId: req.user._id });
   if (!userCart) {
     return res.status(404).json({ message: "Cart not found" });
   }
@@ -191,13 +191,13 @@ const checkOut = async (req, res) => {
   const shippingDetails = req.body;
 
   const order = new orderModel({
-    userId: req.user.id,
+    userId: req.user._id,
     mealItems: userCart.mealItems,
     shippingDetails: shippingDetails,
   });
 
   await order.save();
-  await userCart.deleteOne({ userId: req.user.id }); // Clear cart after checkout
+  await userCart.deleteOne({ userId: req.user._id }); // Clear cart after checkout
   res.status(200).json({ message: "Order placed successfully", order });
 };
 
