@@ -207,7 +207,7 @@ const Navbar = () => {
                   Sign Up
                 </Link>
                 <Link
-                  className="btn rounded-full px-5 bg-green text-white"
+                  className="btn rounded-full px-5 bg-green text-white mr-4"
                   to="/login"
                 >
                   Login

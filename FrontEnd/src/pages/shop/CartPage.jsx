@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function CartPage() {
   const [cart, setCart] = useState(null);
@@ -68,19 +69,41 @@ function CartPage() {
 
   const handleDelete = async (mealId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/cart/${mealId}`, {
-        headers: {
-          token: token,
-        },
+      // Show confirmation dialog before deleting
+      const result = await Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
       });
-      const updatedCart = await axios.get("http://localhost:5000/api/cart", {
-        headers: {
-          token: token,
-        },
-      });
-      setCart(...updatedCart.data.cart);
+
+      if (result.isConfirmed) {
+        // Proceed with deletion if confirmed
+        await axios.delete(`http://localhost:5000/api/cart/${mealId}`, {
+          headers: {
+            token: token,
+          },
+        });
+
+        // Fetch updated cart
+        const updatedCart = await axios.get("http://localhost:5000/api/cart", {
+          headers: {
+            token: token,
+          },
+        });
+        setCart(...updatedCart.data.cart);
+
+        // Show success message
+        Swal.fire('Deleted!', 'Your meal has been removed from the cart.', 'success');
+      }
     } catch (error) {
       console.error("Error deleting meal from cart", error);
+
+      // Show error message if something goes wrong
+      Swal.fire('Error!', 'There was an issue deleting the meal.', 'error');
     }
   };
 
@@ -168,7 +191,7 @@ function CartPage() {
                           </button>
                         </div>
                       </td>
-                      <td>${meal.mealId.price * meal.quantity}</td>
+                      <td>${meal.mealId.price}</td>
                       <td>
                         <button
                           className="btn bg-red btn-xs text-white"

@@ -133,11 +133,11 @@ function SignUp() {
     };
 
     return (
-        <div className="max-w-md shadow w-full mx-auto flex items-center justify-center my-10">
-            <div className="modal-action flex flex-col justify-center mt-0">
+        <dialog className="max-w-md shadow w-full mx-auto flex items-center justify-center my-40 ">
+            <div className=" flex flex-col justify-center">
                 <form
                     onSubmit={handleSubmit}
-                    className="card-body"
+                    className="card-body "
                     style={{ width: "400px" }}
                 >
                     <h3 className="font-bold text-lg">Create An Account!</h3>
@@ -246,23 +246,23 @@ function SignUp() {
                     {/* Close button */}
                     <Link
                         to="/"
-                        className="btn btn-sm btn-circle btn-ghost absolute right-20 top-5"
+                        className="btn btn-sm btn-circle btn-ghost absolute right-5 top-5"
                     >
                         ✕
                     </Link>
                 </form>
 
                 {/* Social sign-in */}
-                <div className="text-center space-x-3 mb-5">
+                {/* <div className="text-center space-x-3 mb-5">
                     <button className="btn btn-circle hover:bg-green hover:text-white">
                         <FaGoogle />
                     </button>
                     <button className="btn btn-circle hover:bg-green hover:text-white">
                         <FaFacebookF />
                     </button>
-                </div>
+                </div> */}
             </div>
-        </div>
+        </dialog>
     );
 }
 

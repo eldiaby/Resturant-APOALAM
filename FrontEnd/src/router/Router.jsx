@@ -40,24 +40,27 @@ const router = createBrowserRouter([
         path: "/Profile",
         element: <ProfileSettings />,
       },
+      {
+        path: "/signup",
+        element: <SignUp />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/resetpassword",
+        element: <ResetPassword />,
+      },
     ],
   },
-  {
-    path: "/signup",
-    element: <SignUp />,
-  },
+
   {
     path: "/EamilOtp",
     element: <EmailOtp />,
   },
-  {
-    path: "/resetpassword",
-    element: <ResetPassword />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
+
+
 ]);
 
 export default router;

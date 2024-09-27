@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Cards = ({ item }) => {
   const [isHeartFilled, setIsHeartFilled] = useState(false);
@@ -23,9 +24,21 @@ const Cards = ({ item }) => {
           headers: { token },
         }
       );
-      alert("Added to cart successfully!");
+
+      Swal.fire({
+        icon: "success",
+        title: "Added to cart successfully!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (error) {
       console.error("Error adding to cart", error.message);
+
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "You must log in first!",
+      });
     }
   };
 

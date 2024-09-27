@@ -105,9 +105,9 @@ const ReservationPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
+    <div className="flex items-center justify-center h-screen bg-gray">
       <form
-        className="bg-white p-6 rounded-lg shadow-md w-full max-w-lg"
+        className="bg-white p-10 rounded-lg shadow-md w-full max-w-lg mt-20"
         onSubmit={handleReservation}
       >
         <h2 className="text-2xl font-bold mb-4 text-center">
@@ -174,11 +174,10 @@ const ReservationPage = () => {
 
         {statusMessage && (
           <p
-            className={`mt-4 text-center ${
-              statusMessage.includes("successfully")
-                ? "text-success"
-                : "text-red"
-            }`}
+            className={`mt-4 text-center ${statusMessage.includes("successfully")
+              ? "text-success"
+              : "text-red"
+              }`}
           >
             {statusMessage}
           </p>
