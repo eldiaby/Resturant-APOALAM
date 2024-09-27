@@ -171,7 +171,7 @@ function CartPage() {
                       <td>${meal.mealId.price * meal.quantity}</td>
                       <td>
                         <button
-                          className="btn btn-danger btn-xs"
+                          className="btn bg-red btn-xs text-white"
                           onClick={() => handleDelete(meal.mealId._id)}
                         >
                           Delete
