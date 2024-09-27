@@ -10,7 +10,7 @@ import userMangeRoute from "./routes/userManage.js";
 import cartRoute from "./routes/cartRoutes.js";
 
 import repassword from "./routes/repasswordRoutes.js";
-
+import router from "./routes/stripe.js";
 // Load environment variables
 dotenv.config();
 
@@ -19,7 +19,7 @@ const app = express();
 // Connect to the database
 connectDB();
 
-const allowedOrigins = ["http://localhost:5173","http://localhost:4200"];
+const allowedOrigins = ["http://localhost:5174", "http://localhost:4200"];
 
 // Middleware
 app.use(
@@ -38,9 +38,11 @@ app.use(express.json());
 
 // Routes
 app.use("/api", repassword);
+app.use("/api", router);
+
+app.use("/api", userRoutes);
 app.use("/api", mealRoutes);
 app.use("/api", reservationRoutes);
-app.use("/api", userRoutes);
 app.use("/api", orderRoute);
 app.use("/api", userMangeRoute);
 app.use("/api", cartRoute);

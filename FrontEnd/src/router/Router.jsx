@@ -10,6 +10,8 @@ import ProfileOrders from "../pages/shop/profileOrdes";
 import ProfileSettings from "../pages/profile/profile";
 import EmailOtp from "../components/EmailForOtp";
 import ResetPassword from "../components/resetPassword";
+import PaymentPage from "../components/CheckOutBtn";
+import CheckOutSuccess from "../components/CheckOutSuccess";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,10 @@ const router = createBrowserRouter([
         element: <CartPage />,
       },
       {
+        path: "/canceled-true",
+        element: <CartPage />,
+      },
+      {
         path: "/orders",
         element: <ProfileOrders />,
       },
@@ -39,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/Profile",
         element: <ProfileSettings />,
+      },
+      {
+        path: "/success-true",
+        element: <CheckOutSuccess />,
       },
     ],
   },
@@ -57,6 +67,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/paymentPage",
+    element: <PaymentPage />,
   },
 ]);
 
