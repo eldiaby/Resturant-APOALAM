@@ -2,6 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const orderSchema = new mongoose.Schema(
   {
+    customerName: String,
     userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -27,9 +28,10 @@ const orderSchema = new mongoose.Schema(
     },
     // New: Shipping details
     shippingDetails: {
-      address: { type: String, required: true },
-      city: { type: String, required: true },
-      postalCode: { type: String, required: true },
+      phone: { type: String, require: true },
+      address: { type: Object, required: true },
+      // city: { type: String, required: true },
+      // postalCode: { type: String, required: true },
       comment: String,
     },
     paymentStatus: {

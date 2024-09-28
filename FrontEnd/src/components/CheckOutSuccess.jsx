@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CheckOutSuccess = () => {
   return (
@@ -12,18 +13,18 @@ const CheckOutSuccess = () => {
             Your order might take some time to process.
           </p>
           <p className="text-gray-700 mb-2">
-            Check your order status on your profile after about 10 minutes.
+            Check your order status on your order Page .
           </p>
           <p className="text-gray-700">
             In case of any inquiries, contact support at{" "}
             <strong className="text-blue-500">support@onlineshop.com</strong>
           </p>
-          <a
-            href="/profile"
+          <Link
+            to="/orders"
             className="mt-6 inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-full transition-colors duration-300"
           >
-            Go to Profile
-          </a>
+            Go to orders
+          </Link>
         </div>
       </div>
     </div>
