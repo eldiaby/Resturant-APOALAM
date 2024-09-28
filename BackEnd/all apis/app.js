@@ -37,12 +37,13 @@ app.use(
     },
   })
 );
+// app.use("/webhook", express.raw({ type: "application/json" }));
 
+app.use("/api", router);
 app.use(express.json());
 
 // Routes
 app.use("/api", repassword);
-app.use("/api", router);
 
 app.use("/api", userRoutes);
 app.use("/api", mealRoutes);
