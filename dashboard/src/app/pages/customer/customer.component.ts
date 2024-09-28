@@ -77,7 +77,6 @@ export class CustomerComponent implements OnInit {
   search(x: any) {
     this.searchQuery = x.target.value;
 
-    console.log(x.target.value);
     if (this.searchQuery) {
       this.displayedUsers = this.users.filter((user) =>
         user.userName.toLowerCase().includes(this.searchQuery.toLowerCase())

@@ -11,6 +11,7 @@ import { AddUserComponent } from './pages/add-user/add-user.component';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
 import { ReservationsComponent } from './pages/reservations/reservations.component';
 import { CategoryComponent } from './pages/category/category.component';
+import { OrderDetailsComponent } from './pages/order-details/order-details.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -21,6 +22,7 @@ export const routes: Routes = [
   { path: 'recipes/:id', component: RecipeDetailComponent },
   { path: 'recipes/update/:id', component: UpdateRecipeComponent },
   { path: 'orders', component: OrdersComponent },
+  { path: 'orders/:id', component: OrderDetailsComponent },
   { path: 'users', component: CustomerComponent },
   { path: 'users/add', component: AddUserComponent },
   { path: 'users/:id', component: UserDetailsComponent },

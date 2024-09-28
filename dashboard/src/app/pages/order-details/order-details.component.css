@@ -1,0 +1,162 @@
+ .order-header {
+     display: flex;
+     align-items: center;
+     gap: 1.6rem;
+     margin-bottom: 3.2rem;
+ }
+
+ .order-header h2 {
+     font-weight: 600;
+     font-size: 2.4rem;
+     color: #333;
+ }
+
+ .order-header button {
+     display: block;
+     padding: 1.4rem 1.6rem;
+     background-color: #fff;
+     border: none;
+     border-radius: 6px;
+     cursor: pointer;
+     font-size: 1.8rem;
+ }
+
+ .order-content {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: 3.2rem;
+     font-size: 1.6rem;
+ }
+
+ @media (max-width:1000px) {
+
+     .order-content {
+         grid-template-columns: 1fr;
+     }
+ }
+
+ .order-info,
+ .order-meals {
+     background-color: #fff;
+     border-radius: 9px;
+     padding: 2.4rem;
+ }
+
+ .order-box {
+     display: grid;
+     grid-template-columns: 30rem 1fr;
+     margin-bottom: 1.6rem;
+     text-transform: capitalize;
+ }
+
+ h3 {
+     font-size: 2rem;
+     margin-bottom: 3.2rem;
+     color: #333;
+     font-weight: 600;
+ }
+
+ .order-address {
+     display: flex;
+     align-items: center;
+     gap: 4px;
+ }
+
+ .order-meal {
+     display: flex;
+     flex-direction: column;
+     gap: 1.6rem;
+ }
+
+ .meal {
+     display: grid;
+     grid-template-columns: 30rem 1fr;
+ }
+
+ .quantity {
+     font-weight: bold;
+     margin-left: 2.4rem;
+     color: orangered;
+ }
+
+ .price {
+     color: orangered;
+     font-weight: bold;
+ }
+
+ .status {
+     color: rgb(0, 128, 255);
+ }
+
+ .btns {
+     display: flex;
+     align-items: center;
+     gap: .8rem;
+     background-color: #fff;
+     width: calc(50% - 1.6rem);
+     border-radius: 6px;
+     padding: 2.4rem;
+ }
+
+ .order-action {
+     margin-top: 4.6rem;
+     text-transform: capitalize;
+     font-size: 1.8rem;
+     background-color: #fff;
+     padding: 2.4rem;
+     width: calc(50% - 1.6rem);
+     border-radius: 6px;
+ }
+
+ @media (max-width:1000px) {
+     .btns {
+         width: 100%;
+     }
+
+     .order-action {
+         width: 100%;
+     }
+ }
+
+ .action-done {
+     font-size: 1.6rem;
+     /* color: rgb(20, 123, 37); */
+     font-weight: 500;
+ }
+
+ .btns button:hover {
+     color: #fff;
+     background-color: #233955;
+ }
+
+ .cancel-btn,
+ .confirm-btn {
+     display: block;
+     width: 15rem;
+     padding: 1rem 1.6rem;
+     font-size: 1.4rem;
+     background: none;
+     border: 1px solid #233955;
+     color: #233955;
+     border-radius: 4px;
+     cursor: pointer;
+     transition: all .2s;
+ }
+
+
+ .cancel-btn:hover {
+     color: orangered !important;
+ }
+
+ .pending {
+     color: rgb(0, 128, 255);
+
+ }
+
+ .cancel {
+     color: rgb(255, 51, 0);
+ }
+
+ .confirm {
+     color: #00c053;
+ }

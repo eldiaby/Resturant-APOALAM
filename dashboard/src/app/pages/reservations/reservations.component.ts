@@ -101,7 +101,7 @@ export class ReservationsComponent implements OnInit {
   updateReservatio(orderId: any, status: any) {
     this._reservationsService.updateReservations(orderId, status).subscribe({
       next: (res) => {
-        console.log(res);
+        // console.log(res);
         this.loadReservations();
       },
       error: (err) => {

@@ -41,7 +41,7 @@
                 <input [(ngModel)]="ingredient" type="text" id="ingredients" [ngModelOptions]="{standalone: true}">
                 <button (click)="addIngredient()" class="edit-ingredient-btn">edit ingredient</button>
                 <div class="edit-ingredient">
-                    @for(ingredient of ingredients;track ingredient;let i = $index){
+                    @for(ingredient of ingredients;track $index;let i = $index){
                     <span (click)="deleteIngredient(i)" class="ingredient">{{ingredient}}</span>
                     }
                 </div>

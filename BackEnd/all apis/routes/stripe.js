@@ -3,7 +3,6 @@ const stripe = new Stripe(
   "sk_test_51Q3WDVRo7iossoEVhaKcRmTp9xsWMvkqlu1Z6E7kzLavIGD3dq5kVcrIwm73WdUhCLNepb3LUzFt0Eh5fM3IDAb700Qkl8nyPP"
 );
 
-// Importing Express and creating an app instance
 import express from "express";
 // const app = express();
 
@@ -15,7 +14,6 @@ const YOUR_DOMAIN = "http://localhost:5173";
 
 const router = express.Router();
 
-// Route to create a checkout session
 router.post("/create-checkout-session", async (req, res) => {
   console.log("ascdacwefwefw", req.body.items);
   const line_items = req.body.items.map((item) => {
@@ -46,7 +44,7 @@ router.post("/create-checkout-session", async (req, res) => {
     cancel_url: `${YOUR_DOMAIN}/canceled-true`,
   });
 
-  res.send({ url: session.url }); // Redirect to the checkout session URL
+  res.send({ url: session.url });
 });
 
 export default router;

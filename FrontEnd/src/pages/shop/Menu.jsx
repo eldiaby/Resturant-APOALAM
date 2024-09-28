@@ -299,10 +299,10 @@ const Menu = () => {
               All
             </button>
             <button
-              onClick={() => filterItems("Pizzas")}
-              className={selectedCategory === "Pizzas" ? "active" : ""}
+              onClick={() => filterItems("Pizza")}
+              className={selectedCategory === "Pizza" ? "active" : ""}
             >
-              Pizzas
+              Pizza
             </button>
             <button
               onClick={() => filterItems("Vegetarian")}
@@ -311,23 +311,23 @@ const Menu = () => {
               Vegetarian
             </button>
             <button
-              onClick={() => filterItems("Burgers")}
-              className={selectedCategory === "Burgers" ? "active" : ""}
+              onClick={() => filterItems("burger")}
+              className={selectedCategory === "burger" ? "active" : ""}
             >
-              Burgers
+              Burger
             </button>
             <button
-              onClick={() => filterItems("Salads")}
-              className={selectedCategory === "Salads" ? "active" : ""}
+              onClick={() => filterItems("salad")}
+              className={selectedCategory === "salad" ? "active" : ""}
             >
-              Salads{" "}
+              Salad
             </button>
-            {/* <button
-              onClick={() => filterItems("drinks")}
-              className={selectedCategory === "drinks" ? "active" : ""}
+            <button
+              onClick={() => filterItems("Pasta")}
+              className={selectedCategory === "Pasta" ? "active" : ""}
             >
-              Drinks
-            </button> */}
+              Pasta
+            </button>
           </div>
 
           {/* filter options */}
@@ -366,8 +366,9 @@ const Menu = () => {
           <button
             key={index + 1}
             onClick={() => paginate(index + 1)}
-            className={`mx-1 px-3 py-1 rounded-full ${currentPage === index + 1 ? "bg-green text-white" : "bg-gray-200"
-              }`}
+            className={`mx-1 px-3 py-1 rounded-full ${
+              currentPage === index + 1 ? "bg-green text-white" : "bg-gray-200"
+            }`}
           >
             {index + 1}
           </button>

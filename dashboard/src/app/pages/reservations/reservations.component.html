@@ -1,6 +1,6 @@
 <div class="reservations">
     <h2>Reservatios ({{reservationsLength}})</h2>
-    <div class="calendar-container">
+    @if(reservationsLength > 0){<div class="calendar-container">
         <full-calendar [options]="calendarOptions"></full-calendar>
     </div>
     <div class="reservations-box">
@@ -41,15 +41,7 @@
                 }
             </tbody>
         </table>
-    </div>
+    </div>}@else {
+    <h3 class="no-data">No Reservations Yet</h3>
+    }
 </div>
-
-
-<!-- createdAt"2024-09-24T19:33:44.677Z"
-date:"2024-09-25T00:00:00.000Z"
-numberOfGuests:2
-status:"booked"
-tableNumber:2
-time:"22:00"
-updatedAt:"2024-09-24T19:33:44.677Z"
-userId:id: '66f3111d3461fcf8ceb1196f', userName: 'alimohamed', email: 'ali2511@gmail.com', phone: '01234567890' -->

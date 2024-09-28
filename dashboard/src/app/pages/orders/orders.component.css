@@ -139,6 +139,11 @@
     gap: .8rem;
 }
 
+.btns button:hover {
+    color: #fff;
+    background-color: #233955;
+}
+
 .cancel-btn,
 .confirm-btn {
     display: block;
@@ -154,7 +159,7 @@
 
 
 .cancel-btn:hover {
-    color: orangered;
+    color: orangered !important;
 }
 
 .pagination .btn.active {

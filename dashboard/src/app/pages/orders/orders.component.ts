@@ -1,10 +1,11 @@
+import { RouterLink } from '@angular/router';
 import { OrdersService } from './../../services/orders.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css',
 })
@@ -93,8 +94,8 @@ export class OrdersComponent implements OnInit {
         // console.log(this.orders[0].userId._id);
       },
       error: (err) => {
-        console.log(err);
-        console.log('HERERE');
+        // console.log(err);
+        // console.log('HERERE');
       },
     });
   }
