@@ -24,6 +24,12 @@ export class OrdersService {
       headers,
     });
   }
+  getOrder(id: any): Observable<any> {
+    const headers = this.createHeaders();
+    return this._httpClient.get(`http://127.0.0.1:5000/api/order/${id}`, {
+      headers,
+    });
+  }
   updateOrder(orderId: any, status: any): Observable<any> {
     const body = { status };
     const headers = this.createHeaders();
@@ -34,6 +40,7 @@ export class OrdersService {
         headers,
       }
     );
+
     // return this._httpClient.patch(
     //   `http://127.0.0.1:5000/api/order/${orderId}`,
     //   data,

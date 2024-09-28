@@ -9,7 +9,7 @@
         <button (click)="closeMessage()">Cancel</button>
     </div>
     }
-    <h2>customers ({{users.length}})</h2>
+    <h2>users ({{users.length}})</h2>
     <nav class="customers-nav">
         <div class="customers-filters">
             <input [value]="searchQuery" (keyup)="search($event)" type="text" placeholder="Search for customer">
@@ -24,7 +24,7 @@
             <button class="add-user" routerLink="/users/add">Add User</button>
         </div>
     </nav>
-    <div class="customers-box">
+    @if(users.length > 0){ <div class="customers-box">
         <table class="customers-table">
             <thead>
                 <tr>
@@ -64,5 +64,7 @@
             <button (click)="setPage(4)" [class]="page === 4 ? 'active btn': 'btn'" href="#">4</button>
             <button (click)="next()" [disabled]="page == 4" class="btn-2">Next</button>
         </div>
-    </div>
+    </div>}@else{
+    <h3 class="no-data">No Users</h3>
+    }
 </div>

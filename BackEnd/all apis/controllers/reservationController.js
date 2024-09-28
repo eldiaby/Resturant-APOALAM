@@ -6,7 +6,7 @@ export const createReservation = async (req, res) => {
     const { userId, date, time, tableNumber, numberOfGuests } = req.body;
 
     // تحقق من أن جميع الحقول مطلوبة
-   /*  if (userId || !date || !time || !tableNumber || !numberOfGuests) {
+    /*  if (userId || !date || !time || !tableNumber || !numberOfGuests) {
       return res.status(400).json({ message: "All fields are required" });
     } */
 
@@ -142,10 +142,11 @@ export const updateReservation = async (req, res) => {
 export const cancelReservation = async (req, res) => {
   try {
     const { id } = req.params;
+    const newOrderStatus = req.body.status;
 
     const canceledReservation = await Reservation.findByIdAndUpdate(
       id,
-      { status: "canceled", updatedAt: Date.now() },
+      { status: newOrderStatus, updatedAt: Date.now() },
       { new: true }
     );
 
@@ -154,7 +155,7 @@ export const cancelReservation = async (req, res) => {
     }
 
     res.status(200).json({
-      message: "Reservation canceled successfully",
+      message: "Reservation Updated successfully",
       canceledReservation,
     });
   } catch (err) {

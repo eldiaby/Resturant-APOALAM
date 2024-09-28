@@ -1,4 +1,10 @@
 <div class="add-user">
+    @if(showMessage){
+
+    <div class="message">
+        {{message}}
+    </div>
+    }
     <header>
         <button routerLink="/users"><i class="fa-solid fa-arrow-left-long"></i></button>
         <h2>Add User</h2>

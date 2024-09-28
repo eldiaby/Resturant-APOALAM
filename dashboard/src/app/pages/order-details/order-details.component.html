@@ -1,0 +1,74 @@
+<div class="order-details">
+    <header class="order-header">
+        <button routerLink="/orders"><i class="fa-solid fa-arrow-left-long"></i></button>
+        <h2>Order Details</h2>
+    </header>
+    <div class="order-content">
+        <div class="order-info">
+            <h3>Order Info</h3>
+            <div class="order-box">
+                <p>User Name:</p> {{order?.userId?.userName}}
+            </div>
+            <div class="order-box">
+                <p>User Address:</p>
+                <div class="order-address">
+                    <p>{{order?.shippingDetails?.city}}</p>
+                    <p>{{order?.shippingDetails?.postalCode}}</p>
+                    <p>{{order?.shippingDetails?.address}}</p>
+                    <p>{{order?.shippingDetails?.comment}}</p>
+                </div>
+            </div>
+            <div class="order-box">
+                <p>Total Price:</p> <span class="price">${{order.totalPrice}}</span>
+            </div>
+            <div class="order-box">
+                <p>paymentStatus:</p> <span class="status">{{order.paymentStatus}}</span>
+            </div>
+            <div class="order-box">
+                <p>Order Status:</p>
+                <span
+                    [class]="order.status === 'pending' ? 'pending' :order.status == 'cancel' ? 'cancel' : 'confirm'">{{order.status}}</span>
+            </div>
+        </div>
+        <div class="order-meals">
+            <h3>Meals in the Order</h3>
+            <div class="order-meal">
+                <div class="meal">
+                    <p>Meal Name</p>
+                    <span>Quantity</span>
+                </div>
+                @for(meal of order.mealItems;track $index){
+                <div class="meal">
+                    <p>{{meal.mealId.name}}</p>
+                    <span class="quantity">{{meal.quantity}}</span>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+    <h3 class="order-action">Do you want accept or cancel the order</h3>
+    <div class="btns">
+        @if(order.status == "pending"){
+        <button (click)="updateOrder(order._id, 'confirm')" class="confirm-btn"><i
+                class="fa-solid fa-check"></i></button>
+        <button (click)="updateOrder(order._id, 'cancel')" class="cancel-btn"><i class="fa-solid fa-xmark"></i></button>
+        }@else {
+        <p class="action-done">Action Done &nbsp;&nbsp;==> <span
+                [class]="order.status === 'pending' ? 'pending' :order.status == 'cancel' ? 'cancel' : 'confirm'">{{order.status}}</span>
+        </p>
+        }
+    </div>
+</div>
+
+<!-- mealItems
+(3) [{…}, {…}, {…}] name 
+paymentStatus
+"pending"
+shippingDetails
+{address: 'address', city: 'city', postalCode: '15', comment: 'comment'}
+status
+"pending"
+totalPrice
+420
+userId
+{_id: '66f729a89d56773b4a962db1', userName: 'alimohamed'} -->

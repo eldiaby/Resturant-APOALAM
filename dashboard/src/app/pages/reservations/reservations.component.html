@@ -1,3 +1,47 @@
-<div class="calendar-container">
-    <full-calendar [options]="calendarOptions"></full-calendar>
+<div class="reservations">
+    <h2>Reservatios ({{reservationsLength}})</h2>
+    @if(reservationsLength > 0){<div class="calendar-container">
+        <full-calendar [options]="calendarOptions"></full-calendar>
+    </div>
+    <div class="reservations-box">
+        <table class="reservations-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Table Number</th>
+                    <th>Guests Number</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(reservation of reservations ;track $index){
+                <tr>
+                    <td>{{reservation?.userId?.userName || "Guest"}}</td>
+                    <td>{{reservation.date.slice(0,10)}}</td>
+                    <td>{{reservation.time}}</td>
+                    <td>{{reservation.tableNumber}}</td>
+                    <td>{{reservation.numberOfGuests}}</td>
+                    <td
+                        [class]="reservation.status == 'booked' ? 'booked' : reservation.status == 'completed'? 'completed': 'canceled'">
+                        {{reservation.status}}</td>
+                    <td class="reservations-action">
+                        @if(reservation.status == "booked"){
+                        <button (click)="updateReservatio(reservation._id, 'completed')" class="reservations-btn"><i
+                                class="fa-solid fa-check"></i></button>
+                        <button (click)="updateReservatio(reservation._id, 'canceled')" class="reservations-btn"><i
+                                class="fa-solid fa-xmark"></i></button>
+                        }@else {
+                        done
+                        }
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>}@else {
+    <h3 class="no-data">No Reservations Yet</h3>
+    }
 </div>

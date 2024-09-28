@@ -34,7 +34,6 @@ export class DashboardComponent implements OnInit {
     this.totalRevenue = this.orders.reduce((acc: number, cur: any) => {
       return Number(acc) + Number(cur.totalPrice);
     }, 0);
-    // console.log(this.totalRevenue);
   }
   getAllUsers() {
     this._usersService.getAllUsers().subscribe({
@@ -42,28 +41,21 @@ export class DashboardComponent implements OnInit {
         this.users = res.allUsers;
         this.fetchRecipes(1, '');
       },
-      error: (err) => {
-        // Handle error
-        // console.log(err);
-      },
+      error: (err) => {},
     });
   }
   fetchRecipes(page: number, category: string) {
     this._recipesService.getAllRecipes(page, category).subscribe({
       next: (res) => {
         this.recipesLength = res.results;
-        // console.log(res);
       },
-      error: (err) => {
-        // console.log(err);
-      },
+      error: (err) => {},
     });
   }
 
   getAllOrders() {
     this._ordersService.getAllOrders().subscribe({
       next: (res) => {
-        // console.log(res.allOrders);
         this.orders = res.allOrders;
         this.getTotalRevenue();
       },

@@ -1,5 +1,5 @@
 <div class="orders">
-    <h2>Orders</h2>
+    <h2>Orders ({{ordersLength}})</h2>
     <nav class="orders-nav">
         <select (change)="setSortBy($event)" class="orders-filters">
             <option value="">all ({{ordersLength}})</option>
@@ -42,11 +42,15 @@
                     <td class="btns">
                         @if(order.status == "pending"){
 
+                        <button [routerLink]="['/orders',order._id]" class="confirm-btn"><i
+                                class="fa-solid fa-info"></i></button>
                         <button (click)="updateOrder(order._id, 'confirm')" class="confirm-btn"><i
                                 class="fa-solid fa-check"></i></button>
                         <button (click)="updateOrder(order._id, 'cancel')" class="cancel-btn"><i
                                 class="fa-solid fa-xmark"></i></button>
                         }@else {
+                        <button [routerLink]="['/orders',order._id]" class="confirm-btn"><i
+                                class="fa-solid fa-info"></i></button>
                         done
                         }
                     </td>
@@ -63,10 +67,10 @@
         <div class="pagination">
             <button (click)="prev()" [disabled]="page == 1" class="btn-2">Previous</button>
             <button (click)="setPage(1)" [class]="page === 1 ? 'active btn': 'btn'">1</button>
-            <!-- <button (click)="setPage(2)" [class]="page === 2 ? 'active btn': 'btn'">2</button>
-            <button (click)="setPage(3)" [class]="page === 3 ? 'active btn': 'btn'">3</button>
+            <button (click)="setPage(2)" [class]="page === 2 ? 'active btn': 'btn'">2</button>
+            <!-- <button (click)="setPage(3)" [class]="page === 3 ? 'active btn': 'btn'">3</button>
             <button (click)="setPage(4)" [class]="page === 4 ? 'active btn': 'btn'">4</button> -->
-            <button (click)="next()" [disabled]="page == 4" class="btn-2">Next</button>
+            <button (click)="next()" [disabled]="page == 2" class="btn-2">Next</button>
         </div>
     </div>
 </div>

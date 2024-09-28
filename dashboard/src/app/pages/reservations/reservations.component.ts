@@ -15,6 +15,8 @@ import interactionPlugin from '@fullcalendar/interaction'; // For interaction (e
   styleUrl: './reservations.component.css',
 })
 export class ReservationsComponent implements OnInit {
+  reservationsLength: any = 0;
+  reservations: any = [];
   calendarOptions: any = {
     initialView: 'timeGridWeek',
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
@@ -44,7 +46,7 @@ export class ReservationsComponent implements OnInit {
     ],
     dateClick: this.handleDateClick.bind(this),
     slotMinTime: '10:00:00',
-    slotMaxTime: '22:00:00',
+    slotMaxTime: '27:00:00',
   };
 
   constructor(private _reservationsService: ReservationsService) {}
@@ -64,7 +66,14 @@ export class ReservationsComponent implements OnInit {
   loadReservations() {
     this._reservationsService.getAllReservations().subscribe(
       (res: any) => {
+        this.reservations = res.reservations;
         // console.log(res.reservations);
+        this.reservationsLength = res.reservations.length;
+
+        const sortedReservations = res.reservations.sort((a: any, b: any) => {
+          return new Date(a.date).getTime() - new Date(b.date).getTime();
+        });
+
         const calendarEvents = res.reservations.map((reservation: any) => {
           const startDateTime = new Date(
             `${reservation.date.slice(0, 11)}${reservation.time}`
@@ -74,7 +83,7 @@ export class ReservationsComponent implements OnInit {
           );
 
           return {
-            title: reservation.name || 'Guest',
+            title: reservation?.userId?.userName || 'Guest',
             start: startDateTime.toISOString(),
             end: endDateTime.toISOString(),
           };
@@ -87,5 +96,17 @@ export class ReservationsComponent implements OnInit {
         // console.error('Error fetching reservations:', error);
       }
     );
+  }
+
+  updateReservatio(orderId: any, status: any) {
+    this._reservationsService.updateReservations(orderId, status).subscribe({
+      next: (res) => {
+        // console.log(res);
+        this.loadReservations();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

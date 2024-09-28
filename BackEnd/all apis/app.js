@@ -19,7 +19,11 @@ const app = express();
 // Connect to the database
 connectDB();
 
-const allowedOrigins = ["http://localhost:5173", "http://localhost:4200"];
+const allowedOrigins = [
+  "http://localhost:5174",
+  "http://localhost:4200",
+  "http://localhost:5173",
+];
 
 // Middleware
 app.use(

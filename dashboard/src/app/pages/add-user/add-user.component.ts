@@ -17,6 +17,8 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class AddUserComponent {
   router = inject(Router);
+  showMessage: any = false;
+  message: any = '';
   constructor(private _usersService: UsersService) {}
 
   addUser() {
@@ -25,10 +27,23 @@ export class AddUserComponent {
     } else {
       this._usersService.addUser(this.addUserForm.value).subscribe({
         next: (res) => {
-          this.router.navigate(['/users']);
+          // console.log(res);
+          this.message = 'user added successfuly';
+          this.showMessage = true;
+          setTimeout(() => {
+            this.showMessage = false;
+            this.message = '';
+            this.router.navigate(['/users']);
+          }, 2000);
         },
         error: (err) => {
-          console.log(err);
+          console.log(err.error.message);
+          this.message = err.error.message;
+          this.showMessage = true;
+          setTimeout(() => {
+            this.showMessage = false;
+            this.message = '';
+          }, 2000);
         },
       });
     }
