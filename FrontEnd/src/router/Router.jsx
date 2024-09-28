@@ -12,6 +12,7 @@ import EmailOtp from "../components/EmailForOtp";
 import ResetPassword from "../components/resetPassword";
 
 import CheckOutSuccess from "../components/CheckOutSuccess";
+import VerifyEmail from "../pages/profile/verifyEmail";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
   },
+  {
+    path: "/verifyEmail/:email",
+    element: <VerifyEmail />
+  }
 ]);
 
 export default router;

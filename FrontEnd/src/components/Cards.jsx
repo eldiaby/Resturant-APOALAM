@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { CartContext } from "../context/cartContext";
 
 const Cards = ({ item }) => {
   const [isHeartFilled, setIsHeartFilled] = useState(false);
+  const { setCartLength } = useContext(CartContext); // Use the context
+
 
   const handleHeartClick = () => {
     setIsHeartFilled(!isHeartFilled);
@@ -15,7 +18,7 @@ const Cards = ({ item }) => {
     console.log(item);
     try {
       const token = localStorage.getItem("token");
-      await axios.post(
+      const cart = await axios.post(
         `http://localhost:5000/api/cart/${item._id}`,
         {
           quantity: 1,
@@ -24,6 +27,10 @@ const Cards = ({ item }) => {
           headers: { token },
         }
       );
+
+      console.log(cart.data.cart.mealItems.length);
+      setCartLength(cart.data.cart.mealItems.length); // Update the cart length in context
+
 
       Swal.fire({
         icon: "success",

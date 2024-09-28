@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react"; // Ensure this is only imported once
+import React, { useContext, useEffect, useState } from "react"; // Ensure this is only imported once
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "/logo3.png";
 import { FaUser } from "react-icons/fa";
 import axios from "axios";
+import { CartContext } from "../context/cartContext";
 
 const Navbar = () => {
   const [url, setUrl] = useState(null);
@@ -14,6 +15,8 @@ const Navbar = () => {
   const [cartItems, setCartItems] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
+  const { cartLength } = useContext(CartContext); // Access the cart length from context
+  const { setCartLength } = useContext(CartContext); // Use the context
 
   useEffect(() => {
     setUrl(location.pathname);
@@ -50,6 +53,28 @@ const Navbar = () => {
       fetchCartItems();
     }
   }, [location, loggedIn]);
+
+  useEffect(() => {
+    const getCart = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const cart = await axios.get(
+          `http://localhost:5000/api/cart`,
+          {
+            headers: { token },
+          }
+        );
+
+        setCartLength(cart.data?.cart[0]?.mealItems.length); // Update the cart length in context
+
+      } catch (error) {
+        console.error("Error adding to cart", error.message);
+      }
+    }
+
+    getCart();
+
+  }, [cartLength])
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
   const toggleDropdown2 = () => setIsDropdownOpen2(!isDropdownOpen2);
@@ -125,7 +150,7 @@ const Navbar = () => {
                 } text-white`}
               style={{ color: cartItems > 0 ? "white" : "black" }}
             >
-              {cartItems}
+              {cartLength}
             </span>
           </Link>
 

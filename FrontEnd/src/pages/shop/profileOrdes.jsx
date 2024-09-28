@@ -2,9 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import Swal from 'sweetalert2'; // Import SweetAlert
+import Loader from "./loader/loader";
 
 function ProfileOrders() {
     const [orders, setOrders] = useState([]);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         // Fetch the orders data from the API
         const fetchOrders = async () => {
@@ -16,8 +18,10 @@ function ProfileOrders() {
                     },
                 });
                 setOrders(response.data.allOrders); // Set the orders state with the fetched data
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching orders:', error);
+                setLoading(false);
             }
         };
 
@@ -58,6 +62,10 @@ function ProfileOrders() {
     };
 
 
+
+    if (loading) {
+        return <Loader />
+    }
 
     return (
         <div className="section-container">
