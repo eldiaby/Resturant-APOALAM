@@ -22,6 +22,7 @@ const DetailsPage = () => {
         fetchProduct();
     }, [id]);
 
+
     const handleAddToCart = async () => {
         try {
             const token = localStorage.getItem("token");
@@ -48,6 +49,11 @@ const DetailsPage = () => {
         }
     };
 
+    //ingredients
+    const divided = () => {
+        return ("[ " + product.ingredients + " ]")
+    }
+
     if (!product) {
         return <div>Loading...</div>;
     }
@@ -64,12 +70,20 @@ const DetailsPage = () => {
                         style={{ width: "600px", height: "400px" }}
                     />
                 </div>
-                <div className="details-wrapper mt-10">
+                <div className="details-wrapper mt-5">
                     <h1 className="text-4xl font-bold mb-4">{product.name}</h1>
                     <p className="text-gray-600 mb-4">{product.description}</p>
                     <div className="mb-4">
                         <span className="text-gray-800 font-semibold">Category: </span>
                         <span className="text-gray-600">{product.category}</span>
+                    </div>
+                    <div className="mb-4">
+                        <span className="text-gray-800 font-semibold">Ingredients: </span>
+                        <span className="text-gray-600">{divided()}</span>
+                    </div>
+                    <div className="mb-4">
+                        <span className="text-gray-800 font-semibold">EstimatedTime: </span>
+                        <span className="text-gray-600">{product.estimatedTime} minutes</span>
                     </div>
                     <div className="mb-6">
                         <span className="text-green-600 text-2xl font-semibold"><span className=" text-green">$</span>{product.price}</span>
