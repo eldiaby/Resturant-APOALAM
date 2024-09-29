@@ -134,7 +134,7 @@ function SignUp() {
 
     return (
         <dialog className="max-w-md shadow w-full mx-auto flex items-center justify-center my-40 ">
-            <div className=" flex flex-col justify-center">
+            <div className="modal-action flex flex-col justify-center">
                 <form
                     onSubmit={handleSubmit}
                     className="card-body "

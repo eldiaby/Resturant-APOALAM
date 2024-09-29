@@ -115,7 +115,7 @@ const Login = () => {
   };
 
   return (
-    <dialog className="max-w-md shadow w-full p-5 mx-auto flex items-center justify-center my-40">
+    <dialog className="max-w-md shadow w-full mx-auto flex items-center justify-center my-40">
       <div
         className="modal-action flex flex-col justify-center"
         style={{ width: "450px" }}
