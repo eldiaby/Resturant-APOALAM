@@ -17,7 +17,7 @@ export const signUp = async (req, res) => {
 
     req.body.password = bcrypt.hashSync(req.body.password, 8);
     const newUser = await userModel.create(req.body); // Changed insertMany to create for a single document
-    sendVerfication(req.body.email);
+    sendVerfication(req.body.email, req.body.userName);
     return res
       .status(201)
       .json({ message: "Signed up successfully!", user: newUser });
@@ -52,21 +52,21 @@ export const verifyEmail = async (req, res) => {
 export const signIn = async (req, res) => {
   try {
     const isUser = await userModel.findOne({ email: req.body.email });
-    if (isUser) {
-      if (bcrypt.compareSync(req.body.password, isUser.password)) {
-        // استبعاد كلمة المرور من بيانات المستخدم
-        const { password, ...userWithoutPassword } = isUser.toObject();
+    if (isUser && bcrypt.compareSync(req.body.password, isUser.password)) {
 
-        // توقيع الـ token بدون كلمة المرور
-        const token = jwt.sign(userWithoutPassword, process.env.JWT_SECRET, {
-          expiresIn: "24h",
-        });
-        res.json({ message: `Welcome ${isUser.userName}`, token });
-      } else {
-        res.status(401).json({ message: "Please check your password" });
-      }
+      if (!isUser.isEmailVerified)
+        return res.status(403).json({ message: "Please Verify Your Account... Check Your Inbox Mail!" });
+
+      // استبعاد كلمة المرور من بيانات المستخدم
+      const { password, ...userWithoutPassword } = isUser.toObject();
+
+      // توقيع الـ token بدون كلمة المرور
+      const token = jwt.sign(userWithoutPassword, process.env.JWT_SECRET, {
+        expiresIn: "24h",
+      });
+      res.json({ message: `Welcome ${isUser.userName}`, token });
     } else {
-      res.status(401).json({ message: "Please check your email" });
+      res.status(401).json({ message: "Please Check Your Email Or Passwrod" });
     }
   } catch (err) {
     res.status(500).json({ message: "Failed to sign in", error: err.message });

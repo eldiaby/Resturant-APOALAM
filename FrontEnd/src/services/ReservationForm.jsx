@@ -109,7 +109,7 @@ const ReservationPage = () => {
         onSubmit={handleReservation}
       >
         <h2 className="text-2xl font-bold mb-4 text-center">
-          Reserve Your Tabl
+          Reserve Your <span className="text-green">Table</span>
         </h2>
 
         <div className="mb-4">

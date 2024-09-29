@@ -83,10 +83,10 @@ const Login = () => {
         navigate("/");
       }, 2000); // Redirect to home after 2 seconds
     } catch (err) {
-      if (err.response?.data?.message === "This email does not exist") {
-        setError({ email: "This email does not exist." });
+      if (err.response?.data?.status === 403) {
+        setError({ message: err.response?.data?.message });
       } else {
-        setError({ message: "Username or password is incorrect." });
+        setError({ message: err.response?.data?.message });
       }
     }
   };
@@ -115,7 +115,7 @@ const Login = () => {
   };
 
   return (
-    <dialog className="max-w-md shadow w-full p-5 mx-auto flex items-center justify-center my-40">
+    <dialog className="max-w-md shadow w-full mx-auto flex items-center justify-center my-40">
       <div
         className="modal-action flex flex-col justify-center"
         style={{ width: "450px" }}
@@ -195,14 +195,6 @@ const Login = () => {
             ✕
           </Link>
         </form>
-        <div className="text-center space-x-3 mb-5">
-          <button className="btn btn-circle hover:bg-green hover:text-white">
-            <FaGoogle />
-          </button>
-          <button className="btn btn-circle hover:bg-green hover:text-white">
-            <FaFacebookF />
-          </button>
-        </div>
       </div>
     </dialog>
   );

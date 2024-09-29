@@ -95,9 +95,9 @@ const EmailOtp = () => {
   };
 
   return (
-    <div className="max-w-md   shadow w-full mx-auto flex items-center justify-center my-20">
+    <dialog className="max-w-md   shadow w-full mx-auto flex items-center justify-center my-40">
       <div
-        className="modal-action flex flex-col justify-center mt-0"
+        className="modal-action flex flex-col justify-center"
         style={{ width: "450px" }}
       >
         <form onSubmit={handleSubmit} className="card-body">
@@ -128,9 +128,8 @@ const EmailOtp = () => {
                 type="email"
                 placeholder="Email"
                 name="email"
-                className={`input input-bordered ${
-                  error.email ? "input-error" : ""
-                }`}
+                className={`input input-bordered ${error.email ? "input-error" : ""
+                  }`}
               />
               {error.email && <span className="text-red">{error.email}</span>}
             </div>
@@ -150,9 +149,8 @@ const EmailOtp = () => {
               onClick={() => setLoding(true)}
               type="submit"
               value="Send Code"
-              className={`${
-                sMessage ? " disabled:*:" : ""
-              } btn bg-green text-white`}
+              className={`${sMessage ? " disabled:*:" : ""
+                } btn bg-green text-white`}
             />
           </div>
 
@@ -172,7 +170,7 @@ const EmailOtp = () => {
           {/* Close button */}
           <Link
             to="/"
-            className="btn btn-sm btn-circle btn-ghost absolute right-20 top-5"
+            className="btn btn-sm btn-circle btn-ghost absolute right-5 top-5"
           >
             ✕
           </Link>
@@ -186,7 +184,7 @@ const EmailOtp = () => {
           </button>
         </div>
       </div>
-    </div>
+    </dialog>
   );
 };
 

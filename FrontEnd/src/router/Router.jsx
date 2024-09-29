@@ -12,7 +12,9 @@ import EmailOtp from "../components/EmailForOtp";
 import ResetPassword from "../components/resetPassword";
 
 import CheckOutSuccess from "../components/CheckOutSuccess";
-
+import VerifyEmail from "../pages/profile/verifyEmail";
+import DetailsPage from "../components/Details";
+import Cards from "../components/Cards";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -50,24 +52,34 @@ const router = createBrowserRouter([
         path: "/success-true",
         element: <CheckOutSuccess />,
       },
+      {
+        path: "/signup",
+        element: <SignUp />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/menu/:id",
+        element: <DetailsPage />
+      },
+      {
+        path: "/EamilOtp",
+        element: <EmailOtp />,
+      },
+      {
+        path: "/resetpassword",
+        element: <ResetPassword />,
+      },
     ],
   },
+
   {
-    path: "/signup",
-    element: <SignUp />,
+    path: "/verifyEmail/:email",
+    element: <VerifyEmail />
   },
-  {
-    path: "/EamilOtp",
-    element: <EmailOtp />,
-  },
-  {
-    path: "/resetpassword",
-    element: <ResetPassword />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
+
 ]);
 
 export default router;
