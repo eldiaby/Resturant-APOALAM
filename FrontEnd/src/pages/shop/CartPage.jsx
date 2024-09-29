@@ -33,26 +33,6 @@ function CartPage() {
     fetchCart();
   }, []);
 
-  // const handleQuantityChange = async (mealId, newQuantity) => {
-  //   try {
-  //     console.log(newQuantity);
-  //     let updatedCart = await axios.post(`http://localhost:5000/api/cart/${mealId}`, { quantity: newQuantity }, {
-  //       headers: {
-  //         token: token,
-  //       },
-  //     });
-  //     // const updatedCart = await axios.get("http://localhost:5000/api/cart", {
-  //     //   headers: {
-  //     //     token: token,
-  //     //   },
-  //     // });
-  //     setCart(updatedCart.data.cart);
-  //     // console.log(updatedCart);
-  //   } catch (error) {
-  //     console.error("Error updating quantity", error);
-  //   }
-  // };
-
   const handleQuantityChange = async (mealId, newQuantity) => {
     console.log(mealId);
     try {
