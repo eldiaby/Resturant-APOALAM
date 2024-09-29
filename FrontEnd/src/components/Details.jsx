@@ -64,7 +64,7 @@ const DetailsPage = () => {
                         style={{ width: "600px", height: "400px" }}
                     />
                 </div>
-                <div className="details-wrapper">
+                <div className="details-wrapper mt-10">
                     <h1 className="text-4xl font-bold mb-4">{product.name}</h1>
                     <p className="text-gray-600 mb-4">{product.description}</p>
                     <div className="mb-4">
