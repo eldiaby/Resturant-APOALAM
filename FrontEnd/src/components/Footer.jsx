@@ -3,7 +3,7 @@ import logo from "/logo3.png";
 const Footer = () => {
   return (
     <div className="mt-40">
-      <footer className="footer xl:px-24 py-10 px-4 text-base-content bg-base-100">
+      {/* <footer className="footer xl:px-24 py-10 px-4 text-base-content bg-base-100">
         <img src={logo} alt="logo" className="w-24" />
         <nav>
           <header className="footer-title text-black">Useful links</header>
@@ -19,7 +19,7 @@ const Footer = () => {
           <header className="footer-title">Contact Us</header>
           <a className="link link-hover">MA_Coding@email.com</a>
         </nav>
-      </footer>
+      </footer> */}
       <hr />
       <footer className="footer items-center xl:px-24 px-4 py-4 mt-2">
         <aside className="items-center grid-flow-col">

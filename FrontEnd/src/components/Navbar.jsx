@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"; // Ensure this is only imported once
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "/logo3.png";
 import { FaUser } from "react-icons/fa";
@@ -10,13 +10,13 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpen2, setIsDropdownOpen2] = useState(false);
   const [isSticky, setSticky] = useState(false);
+  const [opacity, setOpacity] = useState(1);
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
   const [cartItems, setCartItems] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
-  const { cartLength } = useContext(CartContext); // Access the cart length from context
-  const { setCartLength } = useContext(CartContext); // Use the context
+  const { cartLength, setCartLength } = useContext(CartContext);
 
   useEffect(() => {
     setUrl(location.pathname);
@@ -58,23 +58,16 @@ const Navbar = () => {
     const getCart = async () => {
       try {
         const token = localStorage.getItem("token");
-        const cart = await axios.get(
-          `http://localhost:5000/api/cart`,
-          {
-            headers: { token },
-          }
-        );
-
-        setCartLength(cart.data?.cart[0]?.mealItems.length); // Update the cart length in context
-
+        const cart = await axios.get(`http://localhost:5000/api/cart`, {
+          headers: { token },
+        });
+        setCartLength(cart.data?.cart[0]?.mealItems.length);
       } catch (error) {
         console.error("Error adding to cart", error.message);
       }
-    }
-
+    };
     getCart();
-
-  }, [cartLength])
+  }, [cartLength]);
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
   const toggleDropdown2 = () => setIsDropdownOpen2(!isDropdownOpen2);
@@ -83,11 +76,14 @@ const Navbar = () => {
     localStorage.removeItem("token");
     setLoggedIn(false);
     navigate("/login");
-    window.location.reload()
+    window.location.reload();
   };
 
   useEffect(() => {
-    const handleScroll = () => setSticky(window.scrollY > 0);
+    const handleScroll = () => {
+      setSticky(window.scrollY > 0);
+      setOpacity(Math.max(0.9, 1 - window.scrollY / 200)); // Set min opacity to 0.9
+    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -101,10 +97,12 @@ const Navbar = () => {
   return (
     <header className="fixed z-50 w-screen">
       <nav
-        className={`navbar xl:px-24 ${isSticky
-          ? "shadow-md bg-base-100 transition-all duration-300 ease-in-out"
-          : ""
-          }`}
+        className={`navbar xl:px-24 ${
+          isSticky
+            ? "shadow-md bg-base-100 transition-all duration-300 ease-in-out"
+            : ""
+        }`}
+        style={{ opacity }} // Set opacity based on scroll
       >
         <div className="navbar-start">
           <Link to="/" className="flex">
@@ -120,8 +118,9 @@ const Navbar = () => {
               >
                 <Link
                   to={item.to}
-                  className={`hover:text-green ${url === item.to ? "text-green" : ""
-                    }`}
+                  className={`hover:text-green ${
+                    url === item.to ? "text-green" : ""
+                  }`}
                 >
                   {item.text}
                 </Link>
@@ -146,8 +145,9 @@ const Navbar = () => {
               />
             </svg>
             <span
-              className={`badge badge-sm indicator-item absolute top-0 right-0 transform translate-x-1 -translate-y-1 ${cartItems > 0 ? "bg-red-600" : "bg-white"
-                } text-white`}
+              className={`badge badge-sm indicator-item absolute top-0 right-0 transform translate-x-1 -translate-y-1 ${
+                cartItems > 0 ? "bg-red-600" : "bg-white"
+              } text-white`}
               style={{ color: cartItems > 0 ? "white" : "black" }}
             >
               {cartLength}

@@ -12,20 +12,33 @@ const Testimonials = () => {
         <div className="md:w-1/2">
           <div className="text-left md:w-4/5">
             {/* <p className="subtitle">Testimonials</p> */}
-            <h2 className="title">About Us</h2>
-            <blockquote className=" my-5 text-secondary leading-[30px]">
-              Welcome to apoallam restaurant , we believe that great food brings
-              people together. Our passion for culinary excellence is reflected
-              in every dish we serve, crafted with love and care using the
-              finest, locally sourced ingredients. Founded in 2010, our mission
-              is to create a welcoming atmosphere where friends and families can
-              gather to enjoy delicious meals and create lasting memories.
-              Whether you’re indulging in our signature dishes or exploring new
-              flavors from our seasonal menu, we aim to provide an unforgettable
-              dining experience. Join us and discover the heart of
-              <br />
-              apoallam—where every meal is a celebration!
-            </blockquote>
+            <div className="max-w-3xl mx-auto px-6 py-10 bg-gray-50 shadow-xl rounded-lg">
+              <h2 className="text-4xl font-extrabold text-center text-green-600 mb-6">
+                About Us
+              </h2>
+              <h1 className="text-3xl font-bold text-center text-gray-800 mb-4">
+                Welcome to Apoallam Restaurant
+              </h1>
+              <blockquote className="text-lg text-gray-700 mb-6 leading-relaxed text-center">
+                We believe that great food brings people together. Our passion
+                for culinary excellence is reflected in every dish we serve,
+                crafted with love and care using the finest, locally sourced
+                ingredients. Founded in 2010, our mission is to create a
+                welcoming atmosphere where friends and families can gather to
+                enjoy delicious meals and create lasting memories. Whether
+                you’re indulging in our signature dishes or exploring new
+                flavors from our seasonal menu, we aim to provide an
+                unforgettable dining experience.
+                <br />
+                <span className="font-semibold text-green-600 mt-4 block">
+                  Join us and discover the heart of Apoallam <br />
+                  where every meal is a celebration!
+                </span>
+              </blockquote>
+              <p className="text-sm text-gray-500 italic text-center">
+                Experience the flavors, enjoy the moments!
+              </p>
+            </div>
 
             {/* avater */}
             {/* 
@@ -55,8 +68,8 @@ const Testimonials = () => {
                   <span className="font-medium">4.9</span>{" "}
                   <span className="text-[#807E7E]">(18.6k Reviews)</span>
                 </div>
-              </div> */}
-            {/* </div> */}
+              </div>
+             </div> */}
           </div>
         </div>
       </div>
