@@ -123,7 +123,7 @@ import bodyParser from "body-parser";
 import orderModel from "../models/Order.js";
 
 const stripe = new Stripe(
-  "sk_test_51Q3WDVRo7iossoEVhaKcRmTp9xsWMvkqlu1Z6E7kzLavIGD3dq5kVcrIwm73WdUhCLNepb3LUzFt0Eh5fM3IDAb700Qkl8nyPP"
+  "sk_test_51Q3fJALeOpdS2Q5F4jZRZI2kCKt2bs6lruN3np10TPVLYDBStF7KHtspe9MpPJKv3pFA1pkB7NqXoCTM1VdVI7NJ00fZm8iVGG"
 );
 
 // Define the domain where your app is running
@@ -203,7 +203,7 @@ const createOrder = async (customer, data) => {
     // customerName: String,
     customerName: data.customer_details.name,
     mealItems: products,
-    totalPrice: data.amount_total,
+    totalPrice: Number(data.amount_total) / 100,
     shippingDetails: {
       phone: customer.phone,
 
@@ -244,7 +244,7 @@ router.post(
     let eventType;
 
     const webhookSecret =
-      "whsec_7e8ea00c19c84e59c2298289c40ffc56646f6e65bbc4249c391cb866368df497"; // Your webhook secret
+      "whsec_6384b780cc408dc55466e2e9aa8879c4399aea72ac5ef53bab856e97a7d96abb"; // Your webhook secret
     const signature = req.headers["stripe-signature"];
 
     try {

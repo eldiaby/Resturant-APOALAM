@@ -27,7 +27,7 @@ export class OrderDetailsComponent implements OnInit {
   getOrder(id: any) {
     this._ordersService.getOrder(id).subscribe({
       next: (res) => {
-        // console.log(res.order);
+        console.log(res.order);
         this.order = res.order;
       },
       error: (err) => {

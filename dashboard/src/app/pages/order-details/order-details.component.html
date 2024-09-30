@@ -10,19 +10,29 @@
                 <p>User Name:</p> {{order?.userId?.userName}}
             </div>
             <div class="order-box">
+                <p>User Phone:</p> {{order.shippingDetails?.phone}}
+            </div>
+            <div class="order-box">
                 <p>User Address:</p>
                 <div class="order-address">
-                    <p>{{order?.shippingDetails?.city}}</p>
+                    <!-- <p>{{order?.shippingDetails?.city}}</p>
                     <p>{{order?.shippingDetails?.postalCode}}</p>
                     <p>{{order?.shippingDetails?.address}}</p>
-                    <p>{{order?.shippingDetails?.comment}}</p>
+                    <p>{{order?.shippingDetails?.comment}}</p> -->
+
+                    <p>{{order.shippingDetails?.address?.state}}</p>
+                    <p>{{order.shippingDetails?.address?.city}}</p>
+                    <p>{{order.shippingDetails?.address?.postal_code}}</p>
+                    <p>{{order.shippingDetails?.address?.line1}}</p>
+                    <p>{{order.shippingDetails?.address?.line2}}</p>
                 </div>
             </div>
             <div class="order-box">
                 <p>Total Price:</p> <span class="price">${{order.totalPrice}}</span>
             </div>
             <div class="order-box">
-                <p>paymentStatus:</p> <span class="status">{{order.paymentStatus}}</span>
+                <p>paymentStatus:</p> <span
+                    [class]="order.paymentStatus === 'pending' ? 'pending' : 'confirm'">{{order.paymentStatus}}</span>
             </div>
             <div class="order-box">
                 <p>Order Status:</p>
@@ -59,6 +69,7 @@
         }
     </div>
 </div>
+
 
 <!-- mealItems
 (3) [{…}, {…}, {…}] name 

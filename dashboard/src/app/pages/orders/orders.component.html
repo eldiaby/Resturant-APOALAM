@@ -19,6 +19,7 @@
                     <th>customer</th>
                     <th>data</th>
                     <th>time</th>
+                    <!-- <th>phone</th> -->
                     <th>location</th>
                     <th>amount</th>
                     <th>order status</th>
@@ -33,7 +34,24 @@
                     <td>{{order.userId.userName}}</td>
                     <td>{{order.createdAt.slice(0,10)}}</td>
                     <td>{{order.createdAt.slice(11,16)}}</td>
-                    <td>{{order.address}}</td>
+                    <!-- <td>{{order.shippingDetails.phone}}</td> -->
+                    <td>
+                        {{order.shippingDetails.address.state}}
+                        {{order.shippingDetails.address.city}}
+                        {{order.shippingDetails.address.postal_code}}
+                        {{order.shippingDetails.address.line1}}
+                        {{order.shippingDetails.address.line2}}
+                    </td>
+
+
+
+                    <!-- city "asdas"
+                    country "EG"
+                    line1 "asdasd" 
+                    line2 "asdasd"
+                    postal_code "52"
+                    state "المنيا" -->
+
                     <td>${{order.totalPrice}}</td>
                     <td><span
                             [class]="order.status === 'pending' ? 'pending' :order.status == 'cancel' ? 'cancel' : 'confirm'">{{order.status}}</span>
