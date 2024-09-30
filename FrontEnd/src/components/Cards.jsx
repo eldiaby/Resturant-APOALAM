@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -7,7 +7,25 @@ import { CartContext } from "../context/cartContext";
 
 const Cards = ({ item }) => {
   const [isHeartFilled, setIsHeartFilled] = useState(false);
-  const { setCartLength } = useContext(CartContext); // Use the context
+  const { cartLength, setCartLength } = useContext(CartContext); // Use the context
+  const [cartMeals, setCartMeals] = useState([]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    axios.get(
+      `http://localhost:5000/api/cart`, {
+      headers: {
+        token: token,
+      },
+    }
+    ).then((res) => {
+      setCartMeals(res.data.cart[0].mealItems);
+    })
+  }, [cartLength]);
+
+
+
+  const isAdded = cartMeals.find((ele) => ele.mealId._id == item._id)
 
 
   const handleHeartClick = () => {
@@ -15,7 +33,6 @@ const Cards = ({ item }) => {
   };
 
   const handleAddToCart = async () => {
-    console.log(item);
     try {
       const token = localStorage.getItem("token");
       const cart = await axios.post(
@@ -28,7 +45,6 @@ const Cards = ({ item }) => {
         }
       );
 
-      console.log(cart.data.cart.mealItems.length);
       setCartLength(cart.data.cart.mealItems.length); // Update the cart length in context
 
 
@@ -76,9 +92,15 @@ const Cards = ({ item }) => {
           <h5 className="font-semibold">
             <span className="text-sm text-green">$ </span> {item.price}
           </h5>
-          <button className="btn bg-green text-white" onClick={handleAddToCart}>
-            Add to Cart
-          </button>
+
+          {
+            isAdded ? <button className="btn bg-green text-white" disabled>
+              Added
+            </button> : <button className="btn bg-green text-white" onClick={handleAddToCart}>
+              Add to Cart
+            </button>
+          }
+
         </div>
       </div>
     </div>
