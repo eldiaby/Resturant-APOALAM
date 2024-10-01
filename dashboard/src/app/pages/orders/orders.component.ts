@@ -74,7 +74,7 @@ export class OrdersComponent implements OnInit {
           order.address = ` ${order.shippingDetails.city}, ${order.shippingDetails.postalCode} ${order.shippingDetails.address},${order.shippingDetails.comment}`;
           return order;
         });
-        console.log(this.orders);
+        // console.log(this.orders);
         if (this.status) {
           this.orders = this.orders.filter(
             (order: any) => order.status === this.status

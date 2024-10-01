@@ -144,3 +144,7 @@
         width: 100%;
     }
 }
+
+input:not(:valid) {
+    border-color: red !important;
+}

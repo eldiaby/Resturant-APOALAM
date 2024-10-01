@@ -251,3 +251,11 @@ h3 {
         transform: rotate(360deg);
     }
 }
+
+input:not(:valid) {
+    border-color: orangered !important;
+}
+
+textarea:not(:valid) {
+    border-color: orangered !important;
+}

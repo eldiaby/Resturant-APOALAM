@@ -9,11 +9,12 @@
         <button routerLink="/users"><i class="fa-solid fa-arrow-left-long"></i></button>
         <h2>Add User</h2>
     </header>
-    <form (ngSubmit)="addUser()" [formGroup]="addUserForm" class="add-user-content">
+    <form autocomplete="on" (ngSubmit)="addUser()" [formGroup]="addUserForm" class="add-user-content">
         <div class="add-user-left">
             <div class="add-user-box">
                 <label for="username">Name</label>
-                <input formControlName="userName" type="text">
+                <input id="username" minlength="5" pattern="^[A-Za-z][A-Za-z0-9]{2,}$"
+                    title="At least 3 characters, cannot start with a number" formControlName="userName" type="text">
                 @if(addUserForm.get("userName")?.errors?.['required'] && addUserForm.get("userName")?.touched){
                 <div class="errors">
                     <i class="fa-solid fa-xmark"></i>
@@ -22,7 +23,8 @@
             </div>
             <div class="add-user-box">
                 <label for="email">Email</label>
-                <input formControlName="email" type="email">
+                <input id="email" pattern="^[a-zA-Z0-9._%+-]{5}@(gmail|yahoo)\.[a-zA-Z]{3}$" formControlName="email"
+                    type="email">
                 @if(addUserForm.get("email")?.errors?.['required'] && addUserForm.get("email")?.touched){
                 <div class="errors">
                     <i class="fa-solid fa-xmark"></i>
@@ -31,7 +33,7 @@
             </div>
             <div class="add-user-box">
                 <label for="password">password</label>
-                <input formControlName="password" type="password">
+                <input id="password" minlength="6" formControlName="password" type="password">
                 @if(addUserForm.get("password")?.errors?.['required'] && addUserForm.get("password")?.touched){
                 <div class="errors">
                     <i class="fa-solid fa-xmark"></i>
@@ -42,7 +44,7 @@
         <div class="add-user-right">
             <div class="add-user-box">
                 <label for="phone">Phone</label>
-                <input formControlName="phone" type="text">
+                <input id="phone" formControlName="phone" type="number" minlength="11">
                 @if(addUserForm.get("phone")?.errors?.['required'] && addUserForm.get("phone")?.touched){
                 <div class="errors">
                     <i class="fa-solid fa-xmark"></i>
@@ -51,9 +53,9 @@
             </div>
             <div class="add-user-box">
                 <label for="role">Role</label>
-                <select formControlName="role">
+                <select id="role" formControlName="role">
                     <option value="user">user</option>
-                    <option value="user">admin</option>
+                    <option value="admin">admin</option>
                 </select>
                 @if(addUserForm.get("role")?.errors?.['required'] && addUserForm.get("role")?.touched){
                 <div class="errors">
@@ -63,7 +65,7 @@
             </div>
             <div class="add-user-box">
                 <label for="address">Address</label>
-                <input formControlName="address" id="address" type="text">
+                <input minlength="6" formControlName="address" id="address" type="text">
                 @if(addUserForm.get("address")?.errors?.['required'] && addUserForm.get("address")?.touched){
                 <div class="errors">
                     <i class="fa-solid fa-xmark"></i>
