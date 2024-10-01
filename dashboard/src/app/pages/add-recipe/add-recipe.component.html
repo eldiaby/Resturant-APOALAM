@@ -2,7 +2,7 @@
     @if(showMessage){
     <div class="message">{{message}}</div>
     }
-    
+
     <header class="add-recipe-header">
         <button routerLink="/recipes"><i class="fa-solid fa-arrow-left-long"></i></button>
         <h2>add Recipe</h2>
@@ -12,7 +12,7 @@
         <div class="add-recipe-text">
             <div class="add-recipe-input">
                 <label for="name">name</label>
-                <input formControlName="name" type="text" id="name">
+                <input minlength="5" formControlName="name" type="text" id="name">
             </div>
             <div class="add-recipe-input">
                 <label for="category">category</label>
@@ -25,17 +25,17 @@
             </div>
             <div class="add-recipe-input">
                 <label for="description">description</label>
-                <textarea formControlName="description" id="description"></textarea>
+                <textarea minlength="10" formControlName="description" id="description"></textarea>
             </div>
         </div>
         <div class="add-recipe-text">
             <div class="add-recipe-input">
                 <label for="price">price</label>
-                <input formControlName="price" type="number" id="price">
+                <input min="0" max="100" formControlName="price" type="number" id="price">
             </div>
             <div class="add-recipe-input">
                 <label for="estimatedTime">estimated time in minutes</label>
-                <input formControlName="estimatedTime" type="number" id="estimatedTime">
+                <input min="0" max="120" formControlName="estimatedTime" type="number" id="estimatedTime">
             </div>
             <div class="add-recipe-input">
                 <label for="ingredients">ingredients</label>
@@ -52,7 +52,7 @@
         <div class="add-recipe-img">
             <p>Upload Image</p>
             <label for="file"><span class="file-icon"><i class="fa-solid fa-cloud-arrow-up"></i></span></label>
-            <input type="file" id="file" (change)="onFileSelect($event)">
+            <input required type="file" id="file" (change)="onFileSelect($event)">
         </div>
     </form>
     <div class="add-actions">
