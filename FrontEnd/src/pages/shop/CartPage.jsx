@@ -9,7 +9,6 @@ import Loader from "./loader/loader";
 function CartPage() {
   const [cart, setCart] = useState(null);
   const [loading, setLoading] = useState(true);
-  // const [quantity, setQuantity] = useState(1);
   const { setCartLength } = useContext(CartContext); // Use the context
   const token = localStorage.getItem("token"); // Get token from localStorage
 
@@ -57,7 +56,6 @@ function CartPage() {
 
   const handleDelete = async (mealId) => {
     try {
-      // Show confirmation dialog before deleting
       const result = await Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -69,14 +67,12 @@ function CartPage() {
       });
 
       if (result.isConfirmed) {
-        // Proceed with deletion if confirmed
         await axios.delete(`http://localhost:5000/api/cart/${mealId}`, {
           headers: {
             token: token,
           },
         });
 
-        // Fetch updated cart
         const updatedCart = await axios.get("http://localhost:5000/api/cart", {
           headers: {
             token: token,
@@ -86,7 +82,6 @@ function CartPage() {
 
         setCartLength((prevCartLength) => prevCartLength - 1);
 
-        // Show success message
         Swal.fire(
           "Deleted!",
           "Your meal has been removed from the cart.",
@@ -95,32 +90,46 @@ function CartPage() {
       }
     } catch (error) {
       console.error("Error deleting meal from cart", error);
-
-      // Show error message if something goes wrong
       Swal.fire("Error!", "There was an issue deleting the meal.", "error");
     }
   };
 
-  const handleCheckout = async () => {
+  const handleClearAll = async () => {
     try {
-      await axios.post(
-        "http://localhost:5000/api/cart",
-        { shippingDetails: { address: "Your address" } },
-        {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "You will clear all items from your cart!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, clear all!",
+      });
+
+      if (result.isConfirmed) {
+        await axios.delete(`http://localhost:5000/api/cart/`, {
           headers: {
             token: token,
           },
-        }
-      );
-      alert("Order placed successfully!");
-      setCart(null);
+        });
+        setCart(null);
+        setCartLength(0);
+        Swal.fire("Cleared!", "All items have been removed from the cart.", "success");
+      }
     } catch (error) {
-      console.error("Error during checkout", error);
+      console.error("Error clearing the cart", error);
+      Swal.fire("Error!", "There was an issue clearing the cart.", "error");
     }
   };
 
+  const calculateTotalPrice = () => {
+    return cart?.mealItems?.reduce((total, meal) => {
+      return total + meal.mealId.price * meal.quantity;
+    }, 0);
+  };
+
   if (loading) {
-    return <Loader />
+    return <Loader />;
   }
 
   return (
@@ -203,15 +212,32 @@ function CartPage() {
                         Delete
                       </button>
                     </td>
+
                   </tr>
+
                 ))}
               </tbody>
+
             </table>
+
+            <hr />
+
+            <div className="flex justify-between items-center mt-5">
+              <div className="text-xl font-semibold">
+                <div className="mb-5">
+                  Total Price: ${calculateTotalPrice()}
+                </div>
+                <CheckOutBtn items={cart?.mealItems} />
+              </div>
+              <div className="">
+                <button className="btn bg-red text-white" onClick={handleClearAll}>
+                  Clear All
+                </button>
+              </div>
+            </div>
           </div>
 
-          <div className="py-6 flex justify-center">
-            <CheckOutBtn items={cart?.mealItems} />
-          </div>
+
         </>
       ) : (
         <h6 className="md:text-5xl text-center text-4xl font-bold md:leading-snug leading-snug">

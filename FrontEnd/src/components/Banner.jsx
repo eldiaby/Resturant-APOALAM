@@ -8,10 +8,10 @@ const Banner = () => {
       <div className="py-24 flex flex-col md:flex-row-reverse items-center justify-between gap-8">
 
         {/* img */}
-        <div className="md:w-1/2">
+        <div className="md:w-1/2 mt-20">
           <img src={bannerImg} alt="" />
-          <div className="flex flex-col md:flex-row items-center justify-around -mt-14 gap-4">
-            <div className="bg-white px-3 py-2 rounded-2xl flex items-center gap-3 shadow-sm w-64">
+          {/*  <div className="flex flex-col md:flex-row items-center justify-around -mt-14 gap-4">
+             <div className="bg-white px-3 py-2 rounded-2xl flex items-center gap-3 shadow-sm w-64">
               <img src="/images/home/b-food1.png" alt="" className="rounded-2xl" />
               <div className="space-y-1">
                 <h5>Spicy noodles</h5>
@@ -56,7 +56,7 @@ const Banner = () => {
               <img src="/images/home/b-food1.png" alt="" className="rounded-2xl" />
               <div className="space-y-1">
                 <h5>Spicy noodles</h5>
-                <div className="rating rating-sm">
+                 <div className="rating rating-sm">
                   <input
                     type="radio"
                     name="rating-6"
@@ -93,7 +93,7 @@ const Banner = () => {
                 <p className="text-red">$18.00</p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* texts */}

@@ -5,16 +5,16 @@ import { FaStar } from "react-icons/fa";
 const Testimonials = () => {
   return (
     <div className="section-container">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-12">
-        <div className="md:w-1/2">
-          <img src="/images/home/testimonials/testimonials.png" alt="" />
+      <div className="flex flex-col md:flex-row items-center justify-center gap-36">
+        <div className="md:w-1/3">
+          <img src="/public/images/home/22.png" alt="" className="rounded-xl" />
         </div>
         <div className="md:w-1/2">
           <div className="text-left md:w-4/5">
             {/* <p className="subtitle">Testimonials</p> */}
             <div className="max-w-3xl mx-auto px-6 py-10 bg-white shadow-xl rounded-lg">
               <h2 className="text-4xl font-extrabold text-center text-green-700 mb-6">
-                A Message from Our Chef
+                A Message from Our <span className="text-green">Chef</span>
               </h2>
               <blockquote className="text-lg text-gray-800 mb-6 leading-relaxed text-center italic">
                 "Dear Valued Guests,

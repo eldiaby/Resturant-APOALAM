@@ -28,7 +28,7 @@ const Login = () => {
     if (name === "email") {
       if (!value) {
         errors.email = "Email is required.";
-      } else if (!/^[a-zA-Z][a-zA-Z0-9]*@gmail\.com$/.test(value)) {
+      } else if (!/^[a-zA-Z][a-zA-Z0-9]*[a-zA-Z0-9]@(gmail|yahoo)\.com$/.test(value)) {
         errors.email =
           "Email must start with a letter and end with @gmail.com.";
       } else {
@@ -96,7 +96,7 @@ const Login = () => {
 
     if (!formData.email) {
       errors.email = "Email is required.";
-    } else if (!/^[a-zA-Z][a-zA-Z0-9]*@gmail\.com$/.test(formData.email)) {
+    } else if (!/^[a-zA-Z][a-zA-Z0-9]*[a-zA-Z0-9]@(gmail|yahoo)\.com$/.test(formData.email)) {
       errors.email = "Email must start with a letter and end with @gmail.com.";
     }
 

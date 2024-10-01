@@ -19,7 +19,7 @@ function SignUp() {
     const navigate = useNavigate();
 
     const validateEmail = (email) => {
-        const emailRegex = /^[a-zA-Z][a-zA-Z0-9]*[a-zA-Z0-9]@gmail\.com$/;
+        const emailRegex = /^[a-zA-Z][a-zA-Z0-9]*[a-zA-Z0-9]@(gmail|yahoo)\.com$/;
         return emailRegex.test(email);
     };
 
@@ -66,7 +66,7 @@ function SignUp() {
                     ...errors,
                     phone: validatePhone(value)
                         ? ""
-                        : "Phone must start with 01 and be 11 digits long",
+                        : "Phone must start with 010 or 011 or 012 or 015 and be 11 digits long",
                 });
                 break;
             case "password":
