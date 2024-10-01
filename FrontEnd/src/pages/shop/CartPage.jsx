@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import CheckOutBtn from "../../components/CheckOutBtn";
 import { CartContext } from "../../context/cartContext";
 import Loader from "./loader/loader";
+import { FaTrash } from "react-icons/fa";
 
 function CartPage() {
   const [cart, setCart] = useState(null);
@@ -206,10 +207,10 @@ function CartPage() {
                     <td>${meal.mealId.price * meal.quantity}</td>
                     <td>
                       <button
-                        className="btn bg-red btn-xs text-white"
+                        className="btn text-white"
                         onClick={() => handleDelete(meal.mealId._id)}
                       >
-                        Delete
+                        <FaTrash className="text-red text-lg" />
                       </button>
                     </td>
 
