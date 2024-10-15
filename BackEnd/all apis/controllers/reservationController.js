@@ -62,7 +62,9 @@ export const createReservation = async (req, res) => {
 export const getReservations = async (req, res) => {
   // console.log(req);
   try {
-    const { id: userId, role } = req.user; // Assuming userInfo contains userId and role
+    const { _id: userId, role } = req.user;
+    console.log("sssssss", userId, role);
+    // Assuming userInfo contains userId and role
     let reservations;
 
     if (role === "admin") {
@@ -73,10 +75,10 @@ export const getReservations = async (req, res) => {
       );
     } else if (role === "user") {
       // Users fetch their own reservations
-      reservations = await Reservation.find({ userId });
+      reservations = await Reservation.find({ userId: userId });
     }
 
-    if (reservations && reservations.length > 0) {
+    if (reservations) {
       res
         .status(200)
         .json({ message: "Reservations fetched successfully", reservations });
@@ -144,11 +146,9 @@ export const cancelReservation = async (req, res) => {
     const { id } = req.params;
     const newOrderStatus = req.body.status;
 
-    const canceledReservation = await Reservation.findByIdAndUpdate(
-      id,
-      { status: newOrderStatus, updatedAt: Date.now() },
-      { new: true }
-    );
+    const canceledReservation = await Reservation.findByIdAndDelete({
+      _id: id,
+    });
 
     if (!canceledReservation) {
       return res.status(404).json({ message: "Reservation not found" });
