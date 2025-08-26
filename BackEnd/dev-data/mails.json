@@ -1,0 +1,53 @@
+[
+	{
+		"name": "Classic Pancakes",
+		"description": "Fluffy pancakes served with maple syrup and butter.",
+		"ingredients": ["Flour", "Eggs", "Milk", "Sugar", "Butter"],
+		"category": "breakfast",
+		"price": 5.99,
+		"estimatedTime": 15,
+		"imageUrl": "https://example.com/images/pancakes.jpg"
+	},
+	{
+		"name": "Grilled Chicken Salad",
+		"description": "Fresh salad with grilled chicken breast, lettuce, tomatoes, and vinaigrette.",
+		"ingredients": [
+			"Chicken Breast",
+			"Lettuce",
+			"Tomatoes",
+			"Cucumber",
+			"Vinaigrette"
+		],
+		"category": "lunch",
+		"price": 9.5,
+		"estimatedTime": 20,
+		"imageUrl": "https://example.com/images/chicken-salad.jpg"
+	},
+	{
+		"name": "Beef Burger",
+		"description": "Juicy beef patty with cheddar cheese, lettuce, tomato, and special sauce.",
+		"ingredients": ["Beef", "Cheddar", "Lettuce", "Tomato", "Burger Bun"],
+		"category": "lunch",
+		"price": 11.0,
+		"estimatedTime": 25,
+		"imageUrl": "https://example.com/images/beef-burger.jpg"
+	},
+	{
+		"name": "Margherita Pizza",
+		"description": "Classic Italian pizza topped with fresh mozzarella, basil, and tomato sauce.",
+		"ingredients": ["Pizza Dough", "Mozzarella", "Tomato Sauce", "Basil"],
+		"category": "dinner",
+		"price": 13.75,
+		"estimatedTime": 30,
+		"imageUrl": "https://example.com/images/margherita-pizza.jpg"
+	},
+	{
+		"name": "Chocolate Brownie",
+		"description": "Rich and fudgy chocolate brownie topped with walnuts.",
+		"ingredients": ["Cocoa", "Butter", "Sugar", "Eggs", "Walnuts"],
+		"category": "snack",
+		"price": 3.25,
+		"estimatedTime": 10,
+		"imageUrl": "https://example.com/images/chocolate-brownie.jpg"
+	}
+]
