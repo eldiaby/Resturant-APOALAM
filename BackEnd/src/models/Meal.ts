@@ -57,10 +57,10 @@ const mealSchema = new Schema<IMeal>(
 			type: String,
 			required: [true, "Image URL is required"],
 			trim: true,
-			match: [
-				/^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$/i,
-				"Image URL must be a valid link to an image",
-			],
+			// match: [
+			// 	/^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$/i,
+			// 	"Image URL must be a valid link to an image",
+			// ],
 		},
 	},
 	{

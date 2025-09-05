@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import path from "node:path";
 dotenv.config({ path: path.resolve(__dirname, "..", "config.env") });
 
+import multer from "multer";
+
 import morgan from "morgan";
 
 import mailsRouter from "./routes/mealRoutes";
@@ -49,9 +51,12 @@ const allowedOrigins = [
 // app.use("/api", router);
 // app.use(express.json());
 
-// // Routes
 app.use(morgan("dev"));
-app.use("/api/v1/mails", mailsRouter);
+const multerConfig = multer({ dest: path.resolve(__dirname, "uploads") });
+app.use(multerConfig.single("image"));
+
+// // Routes
+app.use("/api/v1/meals", mailsRouter);
 
 // app.use("/api", repassword);
 

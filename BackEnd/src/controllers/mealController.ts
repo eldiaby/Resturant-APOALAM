@@ -201,3 +201,41 @@ export const getAllMeals = catchAsync(
 			.json({ message: ReasonPhrases.OK, length: meals.length, data: meals });
 	},
 );
+
+export const addMeal = catchAsync(
+	async (req: Request, res: Response, _: NextFunction) => {
+		try {
+			const { name, description, ingredients, category, price, estimatedTime } =
+				req.body;
+
+			if (!req.file) {
+				return res.status(400).json({ message: "Image is required" });
+			}
+
+			const imageUrl = `/uploads/${req.file.filename}`;
+			const meal = new Meal({
+				name,
+				description,
+				ingredients: Array.isArray(ingredients)
+					? ingredients
+					: ingredients.split(","),
+				category,
+				price,
+				estimatedTime,
+				imageUrl,
+			});
+
+			const savedMeal = await meal.save();
+
+			res.status(201).json({
+				message: "Meal created successfully",
+				data: savedMeal,
+			});
+		} catch (error: any) {
+			res.status(400).json({
+				message: "Failed to create meal",
+				error: error.message,
+			});
+		}
+	},
+);

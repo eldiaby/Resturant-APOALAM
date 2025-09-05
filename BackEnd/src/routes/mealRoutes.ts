@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllMeals } from "../controllers/mealController";
+import { getAllMeals, addMeal } from "../controllers/mealController";
 
 // import authMiddleware from "../middlewares/authMiddleware.js";
 // import upload from "../middlewares/multer.js"; // Import multer configuration
@@ -7,7 +7,7 @@ import { getAllMeals } from "../controllers/mealController";
 const router = express.Router();
 
 // Meal routes
-router.get("/", getAllMeals);
+router.route("/").get(getAllMeals).post(addMeal);
 // router.get("/meals/:id", mealController.getMealById);
 // router.post(
 //   "/meals",
