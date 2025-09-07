@@ -9,6 +9,7 @@ import multer from "multer";
 import morgan from "morgan";
 
 import mailsRouter from "./routes/mealRoutes";
+import userRouter from "./routes/userManage";
 
 // import mealRoutes from "./routes/mealRoutes.js";
 // import reservationRoutes from "./routes/reservationRoutes.js";
@@ -49,7 +50,7 @@ const allowedOrigins = [
 // app.use("/webhook", express.raw({ type: "application/json" }));
 
 // app.use("/api", router);
-// app.use(express.json());
+app.use(express.json());
 
 app.use(morgan("dev"));
 const multerConfig = multer({ dest: path.resolve(__dirname, "uploads") });
@@ -57,6 +58,7 @@ app.use(multerConfig.single("image"));
 
 // // Routes
 app.use("/api/v1/meals", mailsRouter);
+app.use(`/api/v1/users`, userRouter);
 
 // app.use("/api", repassword);
 

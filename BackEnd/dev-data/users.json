@@ -1,0 +1,444 @@
+[
+	{
+		"userName": "Ahmed User",
+		"email": "ahmed@example.com",
+		"password": "User1234",
+		"confirmPassword": "User1234",
+		"phone": "+201001234567",
+		"address": "Cairo, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "Sara Ali",
+		"email": "sara@example.com",
+		"password": "Sara1234",
+		"confirmPassword": "Sara1234",
+		"phone": "+201112223344",
+		"address": "Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "Admin Master",
+		"email": "admin@example.com",
+		"password": "Admin1234",
+		"confirmPassword": "Admin1234",
+		"phone": "+201223344556",
+		"address": "Giza, Egypt",
+		"role": "admin",
+		"isEmailVerified": true
+	},
+	{
+		"userName": "Mohamed Hassan",
+		"email": "mohamed@example.com",
+		"password": "Mohamed123",
+		"confirmPassword": "Mohamed123",
+		"phone": "+201334455667",
+		"address": "Mansoura, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "Layla Samir",
+		"email": "layla@example.com",
+		"password": "Layla1234",
+		"confirmPassword": "Layla1234",
+		"phone": "+201445566778",
+		"address": "Tanta, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "Omar Nasser",
+		"email": "omar@example.com",
+		"password": "Omar12345",
+		"confirmPassword": "Omar12345",
+		"phone": "+201556677889",
+		"address": "Aswan, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "Mona Adel",
+		"email": "mona@example.com",
+		"password": "Mona1234",
+		"confirmPassword": "Mona1234",
+		"phone": "+201667788990",
+		"address": "Luxor, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "Youssef Tarek",
+		"email": "youssef@example.com",
+		"password": "Youssef123",
+		"confirmPassword": "Youssef123",
+		"phone": "+201778899001",
+		"address": "Zagazig, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "Hana Ibrahim",
+		"email": "hana@example.com",
+		"password": "Hana12345",
+		"confirmPassword": "Hana12345",
+		"phone": "+201889900112",
+		"address": "Ismailia, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "Karim Fathy",
+		"email": "karim@example.com",
+		"password": "Karim1234",
+		"confirmPassword": "Karim1234",
+		"phone": "+201990011223",
+		"address": "Port Said, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "Nour Mohamed",
+		"email": "nour@example.com",
+		"password": "Nour12345",
+		"confirmPassword": "Nour12345",
+		"phone": "+201101112233",
+		"address": "Sharm El-Sheikh, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "Fady Gerges",
+		"email": "fady@example.com",
+		"password": "Fady1234",
+		"confirmPassword": "Fady1234",
+		"phone": "+201212223344",
+		"address": "Hurghada, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "Salma Kamal",
+		"email": "salma@example.com",
+		"password": "Salma1234",
+		"confirmPassword": "Salma1234",
+		"phone": "+201323334455",
+		"address": "Fayoum, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "Tamer Said",
+		"email": "tamer@example.com",
+		"password": "Tamer1234",
+		"confirmPassword": "Tamer1234",
+		"phone": "+201434445566",
+		"address": "Suez, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "Nadia Lotfy",
+		"email": "nadia@example.com",
+		"password": "Nadia1234",
+		"confirmPassword": "Nadia1234",
+		"phone": "+201545556677",
+		"address": "Minya, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "Mostafa Reda",
+		"email": "mostafa@example.com",
+		"password": "Mostafa123",
+		"confirmPassword": "Mostafa123",
+		"phone": "+201656667788",
+		"address": "Beni Suef, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "Rania Magdy",
+		"email": "rania@example.com",
+		"password": "Rania12345",
+		"confirmPassword": "Rania12345",
+		"phone": "+201767778899",
+		"address": "Damietta, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser1",
+		"email": "alex1@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000001",
+		"address": "Smouha, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser2",
+		"email": "alex2@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000002",
+		"address": "Miami, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser3",
+		"email": "alex3@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000003",
+		"address": "Asafra, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser4",
+		"email": "alex4@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000004",
+		"address": "Sidi Bishr, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser5",
+		"email": "alex5@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000005",
+		"address": "Mandara, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser6",
+		"email": "alex6@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000006",
+		"address": "Montazah, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser7",
+		"email": "alex7@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000007",
+		"address": "Agamy, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser8",
+		"email": "alex8@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000008",
+		"address": "Gleem, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser9",
+		"email": "alex9@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000009",
+		"address": "Stanley, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser10",
+		"email": "alex10@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000010",
+		"address": "Kafr Abdou, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser11",
+		"email": "alex11@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000011",
+		"address": "Victoria, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser12",
+		"email": "alex12@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000012",
+		"address": "Sporting, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser13",
+		"email": "alex13@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000013",
+		"address": "Laurent, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser14",
+		"email": "alex14@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000014",
+		"address": "San Stefano, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser15",
+		"email": "alex15@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000015",
+		"address": "Cleopatra, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser16",
+		"email": "alex16@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000016",
+		"address": "Bolkly, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser17",
+		"email": "alex17@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000017",
+		"address": "Camp Caesar, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser18",
+		"email": "alex18@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000018",
+		"address": "Roushdy, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser19",
+		"email": "alex19@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000019",
+		"address": "Louran, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser20",
+		"email": "alex20@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000020",
+		"address": "El Ibrahimeya, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser21",
+		"email": "alex21@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000021",
+		"address": "Azarita, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser22",
+		"email": "alex22@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000022",
+		"address": "Bahary, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser23",
+		"email": "alex23@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000023",
+		"address": "Anfoushi, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser24",
+		"email": "alex24@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000024",
+		"address": "Dekhela, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser25",
+		"email": "alex25@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000025",
+		"address": "Amreya, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser26",
+		"email": "alex26@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000026",
+		"address": "El Hadara, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser27",
+		"email": "alex27@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000027",
+		"address": "El Attarin, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser28",
+		"email": "alex28@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000028",
+		"address": "Karmouz, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser29",
+		"email": "alex29@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000029",
+		"address": "El Max, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser30",
+		"email": "alex30@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000030",
+		"address": "Mansheya, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser31",
+		"email": "alex31@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000031",
+		"address": "Shatby, Alexandria, Egypt",
+		"role": "user"
+	},
+	{
+		"userName": "AlexUser32",
+		"email": "alex32@example.com",
+		"password": "Alex1234",
+		"confirmPassword": "Alex1234",
+		"phone": "+201800000032",
+		"address": "El Mandara, Alexandria, Egypt",
+		"role": "user"
+	}
+]

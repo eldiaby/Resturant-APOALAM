@@ -1,8 +1,7 @@
-import { StatusCodes, ReasonPhrases } from "http-status-codes";
-
+import { apiResponse } from "../utils/apiResponse";
+import { StatusCodes } from "http-status-codes";
 import Meal from "../models/Meal";
 import { catchAsync } from "../utils/catchAsync";
-import { apiResponse } from "../utils/apiResponse";
 
 export const getAllMeals = catchAsync(async (req, res) => {
 	const meals = await Meal.find({}).lean();
@@ -51,11 +50,6 @@ export const addMeal = catchAsync(async (req, res) => {
 		savedMeal,
 	);
 });
-
-import { apiResponse } from "../utils/apiResponse";
-import { StatusCodes } from "http-status-codes";
-import Meal from "../models/Meal";
-import { catchAsync } from "../utils/catchAsync";
 
 export const updateMeal = catchAsync(async (req, res) => {
 	const { mealId } = req.params;
