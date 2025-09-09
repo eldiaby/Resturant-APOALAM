@@ -19,10 +19,18 @@
 // export default userMangeRoute;
 
 import { Router } from "express";
-import { createUser, getAllUsers } from "../controllers/userManage";
+import {
+	createUser,
+	deleteUser,
+	getAllUsers,
+	getUser,
+	updateUser,
+} from "../controllers/userManage";
 
 const router = Router();
 
 router.route("/").get(getAllUsers).post(createUser);
+
+router.route("/:id").get(getUser).delete(deleteUser).patch(updateUser);
 
 export default router;
